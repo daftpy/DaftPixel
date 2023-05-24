@@ -4,12 +4,9 @@
 
 class IDrawable {
 public:
-    IDrawable(RenderManager& renderManager) : renderManager(renderManager) {}
+    IDrawable() {}
     virtual ~IDrawable() = default;
 
     // Renders the object using the provided renderer.
-    virtual void render() const = 0;
-
-protected:
-    RenderManager& renderManager;
+    virtual void render(SDL_Renderer* renderer) const = 0;
 };

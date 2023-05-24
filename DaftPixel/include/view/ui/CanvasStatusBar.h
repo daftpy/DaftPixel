@@ -6,9 +6,9 @@
 
 class CanvasStatusBar {
 public:
-	CanvasStatusBar(TTF_Font* font, RenderManager& renderManager) : font(font), renderManager(renderManager) {}
+	CanvasStatusBar(TTF_Font* font) : font(font) {}
 	~CanvasStatusBar() {}
-	void render() const {
+	void render(SDL_Renderer* renderer) const {
         std::string canvasSize = "Hello, World!";
 
         int textWidth, textHeight;
@@ -23,13 +23,13 @@ public:
         SDL_Surface* surface = TTF_RenderText_Solid(font, "Hello, world!", color);
 
         // Create an SDL_Texture from the SDL_Surface
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderManager.getRenderer(), surface);
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
         // The position on the screen to render the text
-        SDL_Rect dstrect = { 500, 400, textWidth, textHeight };  // replace with appropriate values
+        SDL_Rect dstrect = { 10, 10, textWidth, textHeight };  // replace with appropriate values
 
         // Render the texture on the screen
-        SDL_RenderCopy(renderManager.getRenderer(), texture, NULL, &dstrect);
+        SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
         // Clean up
         SDL_FreeSurface(surface);
@@ -38,5 +38,4 @@ public:
 
 private:
 	TTF_Font* font;
-	RenderManager& renderManager;
 };

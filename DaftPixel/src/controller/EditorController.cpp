@@ -17,12 +17,13 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 
 	canvas = std::make_unique<Canvas>(800, 600, font, renderManager);
 
-	// TODO: Initialization
+	/*
+		Debug code below
+	*/
 	std::cout << "EditorController initialized." << std::endl;
 	Pixel p1;
 	Pixel p2(200, 180, 180, 255);
 	std::cout << p1 << std::endl;
-
 	PixelBuffer pixelBuffer(32, 32, p2);
 	std::cout << pixelBuffer.at(1, 1);
 };
@@ -53,7 +54,7 @@ void EditorController::run() {
 		handleEvents();
 		renderManager.clear();
 		if (canvas) {
-			canvas->render();
+			canvas->render(renderManager.getRenderer());
 		}
 		renderManager.present();
 	}

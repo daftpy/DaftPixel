@@ -8,17 +8,16 @@
 class Canvas : public IDrawable {
 public:
 	Canvas(uint16_t width, uint16_t height, TTF_Font* font, RenderManager& renderManager)
-		: IDrawable(renderManager),
-		canvasWidth(width),
+		: canvasWidth(width),
 		canvasHeight(height),
 		font(font),
 		renderManager(renderManager),
-		statusBar(font, renderManager) {}
+		statusBar(font) {}
 
 
 	~Canvas() {}
-	void render() const override {
-		statusBar.render();
+	void render(SDL_Renderer* renderer) const override {
+		statusBar.render(renderer);
 	}
 
 
