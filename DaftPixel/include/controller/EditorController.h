@@ -19,7 +19,7 @@ public:
 private:
 	std::string editorName;
 	bool running;
-	std::unique_ptr<Canvas> canvas;  // here is your smart pointer
+	std::shared_ptr<Canvas> canvas;  // here is your smart pointer
 	RenderManager renderManager;
 	TTF_Font* font;
 };

@@ -15,7 +15,8 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 		// handle error
 	}
 
-	canvas = std::make_unique<Canvas>(800, 600, font, renderManager);
+	canvas = std::make_shared<Canvas>(800, 600, font, renderManager);
+	renderManager.addDrawable(canvas);
 
 	/*
 		Debug code below
@@ -53,9 +54,7 @@ void EditorController::run() {
 	while (running) {
 		handleEvents();
 		renderManager.clear();
-		if (canvas) {
-			canvas->render(renderManager.getRenderer());
-		}
+		renderManager.render();
 		renderManager.present();
 	}
 }

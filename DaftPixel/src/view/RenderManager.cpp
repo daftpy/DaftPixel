@@ -38,6 +38,10 @@ void RenderManager::render() {
 	// Clear the current rendering target with the drawing color.
 	SDL_RenderClear(renderer);
 
+	for (const auto& drawable : drawables) {
+		drawable->render(renderer);
+	}
+
 	// Update the screen with any rendering performed since the previous call.
 	SDL_RenderPresent(renderer);
 }
@@ -53,6 +57,10 @@ void RenderManager::clear() {
 void RenderManager::present() {
 	// Update the screen with any rendering performed since the previous call.
 	SDL_RenderPresent(renderer);
+}
+
+void RenderManager::addDrawable(std::shared_ptr<IDrawable> drawable) {
+	drawables.push_back(drawable);
 }
 
 RenderManager::~RenderManager() {
