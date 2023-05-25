@@ -3,12 +3,13 @@
 #include <SDL_ttf.h>
 #include <string>
 #include "view/RenderManager.h"
+#include "view/IDrawable.h"
 
-class CanvasStatusBar {
+class CanvasStatusBar : public IDrawable {
 public:
 	CanvasStatusBar(TTF_Font* font) : font(font) {}
 	~CanvasStatusBar() {}
-	void render(SDL_Renderer* renderer) const {
+	void render(SDL_Renderer* renderer) const override {
         std::string canvasSize = "Hello, World!";
 
         int textWidth, textHeight;
