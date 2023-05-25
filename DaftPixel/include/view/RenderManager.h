@@ -55,9 +55,15 @@ public:
     void present();
 
     /**
-    * @brief Adds a drawable object to the RenderManager.
+    * @brief Adds a drawable object to the RenderManager's drawing queue.
     *
-    * @param drawable The drawable object to add.
+    * This method allows the RenderManager to keep track of all drawable objects
+    * that need to be rendered in the scene. When the RenderManager's `render`
+    * method is called, it will iterate over this list and call each object's
+    * `render` method.
+    *
+    * @param drawable The drawable object to add. This should be an object of a
+    * class that implements the IDrawable interface.
     */
     void addDrawable(std::shared_ptr<IDrawable> drawable);
 
@@ -83,7 +89,11 @@ private:
     uint16_t windowHeight;
 
     /**
-    * @brief Vector of drawable objects.
-    */
+     * @brief A vector containing shared pointers to objects implementing the IDrawable interface.
+     *
+     * This vector serves as a drawing queue for the RenderManager. When the RenderManager's `render`
+     * method is called, it will iterate over this list and call each object's `render` method.
+     * Drawable objects can be added to this list through the `addDrawable` method.
+     */
     std::vector<std::shared_ptr<IDrawable>> drawables;
 };
