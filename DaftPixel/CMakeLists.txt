@@ -11,7 +11,21 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
 # Add source to this project's executable.
-add_executable (DaftPixel "src/main.cpp" "src/controller/EditorController.cpp" "include/model/Pixel.h" "src/model/Pixel.cpp" "include/model/PixelBuffer.h" "src/model/PixelBuffer.cpp" "include/view/RenderManager.h" "src/view/RenderManager.cpp" "include/view/ui/CanvasStatusBar.h" "include/model/Canvas.h" "include/view/IDrawable.h")
+add_executable (DaftPixel 
+"src/main.cpp" 
+"src/controller/EditorController.cpp" 
+"include/model/Pixel.h"
+"src/model/Pixel.cpp" 
+"include/model/PixelBuffer.h" 
+"src/model/PixelBuffer.cpp" 
+"include/view/RenderManager.h" 
+"src/view/RenderManager.cpp" 
+"include/view/ui/CanvasStatusBar.h" 
+"include/model/Canvas.h" 
+"include/view/IDrawable.h" 
+"src/controller/CanvasController.cpp" 
+"include/controller/CanvasController.h"
+"src/model/Canvas.cpp")
 
 # Add include directories
 target_include_directories(DaftPixel PRIVATE include)
