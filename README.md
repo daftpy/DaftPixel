@@ -6,11 +6,35 @@ DaftPixel is an application that serves as a basic pixel editor, allowing users 
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
+## Prerequisites
 
-- SDL2
-- SDL2_ttf
-- A C++17 compatible compiler
+Before you begin, ensure you have met the following requirements:
+
+- You have installed the latest version of [CMake](https://cmake.org/download/).
+- You have downloaded [SDL2 version 2.26.5](https://libsdl.org/download-2.0.php) and [SDL2_ttf version 2.20.2](https://www.libsdl.org/projects/SDL_ttf/) libraries.
+
+After downloading and extracting the SDL2 and SDL2_ttf libraries, move them to a directory named `deps` in the root of your project. The resulting directory structure should look like this:
+
+* deps
+	* SDL2_ttf-2.20.2
+	* SDL2-2.26.5
+
+This project's CMake configuration is set up to look for the SDL2 and SDL2_ttf libraries inside these directories.
+
+### Building
+
+To build DaftPixel, follow these steps:
+
+1. Install CMake: [https://cmake.org/download/](https://cmake.org/download/)
+2. Clone the repository: `git clone https://github.com/username/DaftPixel.git`
+3. Navigate to the directory: `cd DaftPixel`
+4. Generate the build files:
+   - On Unix (Linux, macOS, etc.), run: `cmake .`
+   - On Windows, run: `cmake -G "Visual Studio 17 2022" .`
+5. Build the project:
+   - On Unix, run: `make`
+   - On Windows, open the generated `.sln` file in Visual Studio and build the project.
+
 
 ## Project Progress
 
@@ -27,3 +51,4 @@ We are in the process of implementing the primary functionalities of these compo
 ## Acknowledgments
 
 - SDL2 and SDL2_ttf for providing the tools to build this application.
+- [Vmenezio](https://twitter.com/vmenezio) for creating and distributing monogram.ttf freely.
