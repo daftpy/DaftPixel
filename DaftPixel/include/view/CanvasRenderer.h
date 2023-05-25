@@ -4,12 +4,12 @@
 
 class CanvasRenderer : public IDrawable {
 public:
-	explicit CanvasRenderer(Canvas& canvas, TTF_Font* font);
+	explicit CanvasRenderer(std::shared_ptr<Canvas> canvas, TTF_Font* font);
 
 	void render(SDL_Renderer* renderer) const override;
 
 private:
 	TTF_Font* font;
-	Canvas& canvas;
+	std::shared_ptr<Canvas> canvas;
 	CanvasStatusBar statusBar;
 };

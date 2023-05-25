@@ -19,9 +19,9 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	/*canvas = std::make_shared<Canvas>(800, 600, font, renderManager);*/
 	/*renderManager.addDrawable(canvas);*/
 
-	Canvas newCanvas =  Canvas(800, 600);
+	std::shared_ptr<Canvas> canvas = std::make_shared<Canvas>(800, 600);
 
-	std::shared_ptr<CanvasRenderer> canvasRenderer = std::make_shared<CanvasRenderer>(newCanvas, font);
+	std::shared_ptr<CanvasRenderer> canvasRenderer = std::make_shared<CanvasRenderer>(canvas, font);
 
 	renderManager.addDrawable(canvasRenderer);
 
