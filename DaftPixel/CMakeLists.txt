@@ -25,7 +25,7 @@ add_executable (DaftPixel
 "include/view/IDrawable.h" 
 "src/controller/CanvasController.cpp" 
 "include/controller/CanvasController.h"
-"src/model/Canvas.cpp")
+"src/model/Canvas.cpp" "src/view/CanvasRenderer.cpp" "include/view/CanvasRenderer.h")
 
 # Add include directories
 target_include_directories(DaftPixel PRIVATE include)

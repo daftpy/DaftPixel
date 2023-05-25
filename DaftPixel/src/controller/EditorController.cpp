@@ -1,5 +1,6 @@
 #include "controller/EditorController.h"
-#include <memory> // for std::unique_ptr
+#include <memory>
+#include "view/CanvasRenderer.h"
 
 EditorController::EditorController() : editorName("DaftPixel"), running(false), canvas(nullptr) {
 	// Initialize SDL_ttf library
@@ -15,8 +16,14 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 		// handle error
 	}
 
-	canvas = std::make_shared<Canvas>(800, 600, font, renderManager);
-	renderManager.addDrawable(canvas);
+	/*canvas = std::make_shared<Canvas>(800, 600, font, renderManager);*/
+	/*renderManager.addDrawable(canvas);*/
+
+	Canvas newCanvas =  Canvas(800, 600, font, renderManager);
+
+	std::shared_ptr<CanvasRenderer> canvasRenderer = std::make_shared<CanvasRenderer>(newCanvas, font);
+
+	renderManager.addDrawable(canvasRenderer);
 
 	/*
 		Debug code below
