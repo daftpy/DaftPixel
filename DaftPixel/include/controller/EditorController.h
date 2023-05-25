@@ -3,9 +3,9 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <memory> // for std::unique_ptr
+#include <memory>
 #include "view/RenderManager.h"
-#include "view/Canvas.h"
+#include "model/Canvas.h"
 #include "model/PixelBuffer.h"
 #include "model/Pixel.h"
 
@@ -19,7 +19,7 @@ public:
 private:
 	std::string editorName;
 	bool running;
-	std::shared_ptr<Canvas> canvas;  // here is your smart pointer
+	std::shared_ptr<Canvas> canvas;
 	RenderManager renderManager;
 	TTF_Font* font;
 };
