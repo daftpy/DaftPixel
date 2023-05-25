@@ -35,7 +35,6 @@ To build DaftPixel, follow these steps:
    - On Unix, run: `make`
    - On Windows, open the generated `.sln` file in Visual Studio and build the project.
 
-
 ## Project Progress
 
 The project is in the early stages of development. We have defined the primary components of the application and their roles. These components include the `EditorController`, `Canvas`, `Pixel`, `PixelBuffer`, and `CanvasRenderer`.
@@ -47,6 +46,10 @@ We are in the process of implementing the primary functionalities of these compo
 ## Authors
 
 - [Daftpy](https://github.com/Daftpy)
+
+## License
+
+TBD.
 
 ## Acknowledgments
 
