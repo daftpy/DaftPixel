@@ -16,15 +16,6 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 		// handle error
 	}
 
-	/*canvas = std::make_shared<Canvas>(800, 600, font, renderManager);*/
-	/*renderManager.addDrawable(canvas);*/
-
-	std::shared_ptr<Canvas> canvas = std::make_shared<Canvas>(800, 600);
-
-	std::shared_ptr<CanvasRenderer> canvasRenderer = std::make_shared<CanvasRenderer>(canvas, font);
-
-	renderManager.addDrawable(canvasRenderer);
-
 	/*
 		Debug code below
 	*/
@@ -34,6 +25,11 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	std::cout << p1 << std::endl;
 	PixelBuffer pixelBuffer(32, 32, p2);
 	std::cout << pixelBuffer.at(1, 1);
+
+	// More debug code
+	std::shared_ptr<Canvas> canvas = std::make_shared<Canvas>(800, 600);
+	std::shared_ptr<CanvasRenderer> canvasRenderer = std::make_shared<CanvasRenderer>(canvas, font);
+	renderManager.addDrawable(canvasRenderer);
 };
 
 EditorController::~EditorController() {
