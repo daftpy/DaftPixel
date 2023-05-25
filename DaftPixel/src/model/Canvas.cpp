@@ -1,9 +1,5 @@
 #include "model/Canvas.h"
 
-void Canvas::render(SDL_Renderer* renderer) const {
-	statusBar.render(renderer);
-}
-
 void Canvas::setWidth(uint16_t width) {
 	canvasWidth = width;
 }

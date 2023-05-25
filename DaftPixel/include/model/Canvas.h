@@ -4,18 +4,11 @@
 #include "view/RenderManager.h"
 #include "view/IDrawable.h"
 
-class Canvas : public IDrawable {
+class Canvas {
 public:
-	Canvas(uint16_t width, uint16_t height, TTF_Font* font, RenderManager& renderManager)
+	Canvas(uint16_t width, uint16_t height)
 		: canvasWidth(width),
-		canvasHeight(height),
-		font(font),
-		renderManager(renderManager),
-		statusBar(font) {}
-
-	~Canvas() = default;
-
-	void render(SDL_Renderer* renderer) const override;
+		canvasHeight(height) {}
 
 	void setWidth(uint16_t width);
 	uint16_t getWidth() const;
@@ -24,9 +17,6 @@ public:
 	uint16_t getHeight() const;
 
 private:
-	TTF_Font* font;
-	RenderManager& renderManager;
-	CanvasStatusBar statusBar;
 	uint16_t canvasWidth;
 	uint16_t canvasHeight;
 };
