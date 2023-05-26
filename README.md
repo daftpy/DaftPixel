@@ -26,7 +26,7 @@ This project's CMake configuration is set up to look for the SDL2 and SDL2_ttf l
 To build DaftPixel, follow these steps:
 
 1. Install CMake: [https://cmake.org/download/](https://cmake.org/download/)
-2. Clone the repository: `git clone https://github.com/username/DaftPixel.git`
+2. Clone the repository: `git clone https://github.com/daftpy/DaftPixel.git`
 3. Navigate to the directory: `cd DaftPixel`
 4. Generate the build files:
    - On Unix (Linux, macOS, etc.), run: `cmake .`
@@ -49,7 +49,7 @@ We are in the process of implementing the primary functionalities of these compo
 
 ## License
 
-TBD.
+This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgments
 
