@@ -22,3 +22,4 @@ set(SDL2_TTF_VERSION "SDL2_ttf-2.20.2")
 
 # Include sub-projects.
 add_subdirectory ("DaftPixel")
+add_subdirectory("tests")
