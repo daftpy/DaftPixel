@@ -22,13 +22,16 @@ find_package(SDL2_ttf REQUIRED)
 # Define the source files for the test executable
 set(TEST_SOURCES 
   test_main.cpp 
-  model/test_PixelBuffer.cpp 
+  model/test_PixelBuffer.cpp
+  model/test_Canvas.cpp
+
   ${CMAKE_SOURCE_DIR}/DaftPixel/src/model/Pixel.cpp
   ${CMAKE_SOURCE_DIR}/DaftPixel/src/model/PixelBuffer.cpp
+  ${CMAKE_SOURCE_DIR}/DaftPixel/src/model/Canvas.cpp
 )
 
 # Add test executable
-add_executable(DaftPixelTests ${TEST_SOURCES})
+add_executable(DaftPixelTests ${TEST_SOURCES} "")
 
 # Define the include directories for the test executable
 set(TEST_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/DaftPixel/include)

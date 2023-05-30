@@ -17,6 +17,8 @@
 
 class Canvas {
 public:
+    Canvas();
+
     /**
     * @brief Constructs a new Canvas instance with specified width and height.
     *
