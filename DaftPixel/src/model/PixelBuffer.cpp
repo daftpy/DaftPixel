@@ -16,7 +16,8 @@ pixelData(bufferWidth* bufferHeight, defaultPixel) {
 	}
 }
 
-// Get reference to pixel at specified coordinates. Throw an exception if coordinates are out of bounds.
+// Get reference to pixel at specified coordinates. 
+// Throw an exception if coordinates are out of bounds.
 Pixel& PixelBuffer::at(uint16_t x, uint16_t y) {
 	if (x >= bufferWidth || y >= bufferHeight) {
 		std::ostringstream message;

@@ -1,7 +1,6 @@
 /**
- * \file test_Canvas.cpp
- *
- * \brief This file contains the unit tests for the Canvas class.
+ * @file test_Canvas.cpp
+ * @brief This file contains the unit tests for the Canvas class.
  *
  * Each TEST in this file corresponds to a particular functionality of the Canvas class.
  * Here's a quick guide for adding tests to this file:
@@ -17,7 +16,7 @@
 #include <model/Canvas.h>
 
  /*
-  * TEST: DefaultConstructor
+  * TEST: Default Constructor
   * DESCRIPTION:
   * This test verifies that the default Canvas constructor creates a canvas of size 32x32.
   */
@@ -25,10 +24,12 @@ TEST(CanvasTest, DefaultConstructor) {
     Canvas canvas;
     EXPECT_EQ(canvas.getWidth(), 32);
     EXPECT_EQ(canvas.getHeight(), 32);
+    EXPECT_EQ(canvas._testGetPixelBufferDimensions().first, 32);
+    EXPECT_EQ(canvas._testGetPixelBufferDimensions().second, 32);
 }
 
 /*
- * TEST: SetAndGetValidWidthAndHeight
+ * TEST: Set And Get Valid Width An dHeight
  * DESCRIPTION:
  * This test verifies that we can set and get valid width and height for the Canvas.
  */
@@ -41,12 +42,25 @@ TEST(CanvasTest, SetAndGetValidWidthAndHeight) {
 }
 
 /*
- * TEST: SetInvalidWidthAndHeight
+ * TEST: Set Invalid Width And Height
  * DESCRIPTION:
- * This test verifies that attempting to set an invalid width or height (0 in this case) results in an exception.
+ * This test verifies that attempting to set an invalid width or height (0 in this case) results 
+ * in an exception.
  */
 TEST(CanvasTest, SetInvalidWidthAndHeight) {
     Canvas canvas;
     EXPECT_THROW(canvas.setWidth(0), std::invalid_argument);
     EXPECT_THROW(canvas.setHeight(0), std::invalid_argument);
+}
+
+/*
+ * TEST: Verify Pixel Buffer Dimensions
+ * DESCRIPTION:
+ * This test verifies the internal dimensions of a Canvas' pixel buffer are equal to the dimensions of
+ * the canvas object.
+ */
+TEST(CanvasTest, VerifyPixelBufferDimensions) {
+    Canvas canvas;
+    EXPECT_EQ(canvas.getWidth(), canvas._testGetPixelBufferDimensions().first);
+    EXPECT_EQ(canvas.getHeight(), canvas._testGetPixelBufferDimensions().second);
 }

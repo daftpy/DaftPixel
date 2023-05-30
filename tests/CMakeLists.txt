@@ -31,7 +31,7 @@ set(TEST_SOURCES
 )
 
 # Add test executable
-add_executable(DaftPixelTests ${TEST_SOURCES} "")
+add_executable(DaftPixelTests ${TEST_SOURCES})
 
 # Define the include directories for the test executable
 set(TEST_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/DaftPixel/include)
@@ -41,6 +41,9 @@ target_include_directories(DaftPixelTests PRIVATE ${TEST_INCLUDE_DIRS})
 
 # Link SDL2, SDL2_ttf, and GTest to the target
 target_link_libraries(DaftPixelTests PRIVATE SDL2::SDL2 SDL2_ttf::SDL2_ttf gtest_main)
+
+# Add the TESTING definition
+target_compile_definitions(DaftPixelTests PRIVATE TESTING)
 
 # Print out the paths for debugging purposes
 message(STATUS "SDL2_ttf_DIR: ${SDL2_ttf_DIR}")

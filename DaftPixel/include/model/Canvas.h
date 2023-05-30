@@ -10,10 +10,8 @@
 */
 
 #pragma once
-#include <SDL_ttf.h>
-#include "view/ui/CanvasStatusBar.h"
-#include "view/RenderManager.h"
-#include "view/IDrawable.h"
+#include <memory>
+#include "model/PixelBuffer.h"
 
 class Canvas {
 public:
@@ -25,9 +23,10 @@ public:
     * @param width Width of the Canvas.
     * @param height Height of the Canvas.
     */
-    Canvas(uint16_t width, uint16_t height)
+    Canvas(uint16_t width, uint16_t height, std::shared_ptr<PixelBuffer> pixelBuffer)
         : canvasWidth(width),
-        canvasHeight(height) {}
+        canvasHeight(height),
+        pixelBuffer(std::move(pixelBuffer)) {}
 
     /**
     * @brief Set the width of the Canvas.
@@ -57,6 +56,14 @@ public:
     */
     uint16_t getHeight() const;
 
+    // In the Canvas class:
+    #ifdef TESTING
+        std::pair<int, int> _testGetPixelBufferDimensions() const {
+            return std::make_pair(pixelBuffer->getWidth(), pixelBuffer->getHeight());
+        }
+    #endif
+
+
 private:
     /**
     * @brief Width of the Canvas.
@@ -67,4 +74,9 @@ private:
     * @brief Height of the Canvas.
     */
     uint16_t canvasHeight;
+
+    /**
+    * @brief a smart pointer to the pixelBuffer data.
+    */
+    std::shared_ptr<PixelBuffer> pixelBuffer;
 };
