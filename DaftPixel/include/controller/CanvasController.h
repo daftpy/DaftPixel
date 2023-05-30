@@ -1,13 +1,12 @@
 /**
 * @file CanvasController.h
-* @brief Header file for the CanvasController class
+* @brief Header file for the CanvasController class. This class controls a Canvas instance, allowing for the setting of its dimensions and providing access to the Canvas instance.
 */
 
 /**
 * @class CanvasController
 *
-* @brief This class controls a Canvas instance. It allows to set the dimensions of the Canvas
-* and retrieve the shared pointer to the current Canvas instance.
+* @brief This class controls a Canvas instance. It allows the setting of the Canvas's dimensions and provides access to the Canvas instance.
 */
 
 #pragma once
@@ -17,11 +16,11 @@
 class CanvasController {
 public:
     /**
-    * @brief Constructs a new CanvasController instance with a shared pointer to a Canvas.
+    * @brief Constructs a new CanvasController instance with a reference to a Canvas.
     *
-    * @param canvas Shared pointer to a Canvas instance.
+    * @param canvas Reference to a Canvas instance.
     */
-    explicit CanvasController(std::shared_ptr<Canvas> canvas);
+    explicit CanvasController(Canvas& canvas);
 
     /**
     * @brief Set the dimensions of the Canvas.
@@ -32,17 +31,15 @@ public:
     void setDimensions(uint16_t width, uint16_t height);
 
     /**
-    * @brief Get the shared pointer to the Canvas instance.
+    * @brief Get a reference to the Canvas instance.
     *
-    * @return std::shared_ptr<Canvas> Shared pointer to the Canvas instance.
+    * @return Canvas& Reference to the Canvas instance.
     */
-    std::shared_ptr<Canvas> getCanvas() {
-        return canvas;
-    }
+    Canvas& getCanvas();
 
 private:
     /**
-    * @brief Shared pointer to a Canvas instance.
+    * @brief Reference to a Canvas instance.
     */
-    std::shared_ptr<Canvas> canvas;
+    Canvas& canvas;
 };

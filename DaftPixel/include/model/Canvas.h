@@ -17,6 +17,8 @@ class Canvas {
 public:
     Canvas();
 
+    Canvas(uint16_t width, uint16_t height);
+
     /**
     * @brief Constructs a new Canvas instance with specified width and height.
     *

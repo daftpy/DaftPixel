@@ -2,7 +2,7 @@
 #include <memory>
 #include "view/CanvasRenderer.h"
 
-EditorController::EditorController() : editorName("DaftPixel"), running(false), canvas(nullptr) {
+EditorController::EditorController() : editorName("DaftPixel"), running(false) {
 	// Initialize SDL_ttf library
 	if (TTF_Init() == -1) {
 		std::cerr << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << std::endl;
@@ -27,8 +27,10 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	std::cout << pixelBuffer.at(1, 1);
 
 	// More debug code
-	std::shared_ptr<Canvas> canvas = std::make_shared<Canvas>(800, 600);
-	std::shared_ptr<CanvasRenderer> canvasRenderer = std::make_shared<CanvasRenderer>(canvas, font);
+	createNewCanvas(800, 600);
+
+	CanvasController controller(*canvases.front());
+	std::shared_ptr<CanvasRenderer> canvasRenderer = std::make_shared<CanvasRenderer>(*canvases.front(), font);
 	renderManager.addDrawable(canvasRenderer);
 };
 
@@ -38,6 +40,14 @@ EditorController::~EditorController() {
 	font = nullptr;
 
 	TTF_Quit();
+}
+
+void EditorController::createNewCanvas(uint16_t width, uint16_t height) {
+	// Create the new Canvas
+	std::unique_ptr<Canvas> newCanvas = std::make_unique<Canvas>(width, height);
+
+	// Add the new Canvas to the list of canvases
+	canvases.push_back(std::move(newCanvas));
 }
 
 void EditorController::handleEvents() {

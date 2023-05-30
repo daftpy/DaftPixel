@@ -1,10 +1,30 @@
 #include "controller/CanvasController.h"
 
-CanvasController::CanvasController(std::shared_ptr<Canvas> canvas) : canvas(std::move(canvas)) {
+/**
+* @brief Constructs a new CanvasController instance with a reference to a Canvas.
+*
+* @param canvas Reference to a Canvas instance.
+*/
+CanvasController::CanvasController(Canvas& canvas) : canvas(canvas) {
 	// Initialization if needed
 }
 
+/**
+* @brief Set the dimensions of the Canvas.
+*
+* @param width Width of the Canvas.
+* @param height Height of the Canvas.
+*/
 void CanvasController::setDimensions(uint16_t width, uint16_t height) {
-	canvas->setWidth(width);
-	canvas->setHeight(height);
+	canvas.setWidth(width);
+	canvas.setHeight(height);
+}
+
+/**
+* @brief Get a reference to the Canvas instance.
+*
+* @return Canvas& Reference to the Canvas instance.
+*/
+Canvas& CanvasController::getCanvas() {
+	return canvas;
 }

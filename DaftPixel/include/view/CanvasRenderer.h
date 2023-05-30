@@ -16,12 +16,12 @@
 class CanvasRenderer : public IDrawable {
 public:
     /**
-    * @brief Constructs a new CanvasRenderer instance with a shared pointer to a Canvas and a TTF_Font.
+    * @brief Constructs a new CanvasRenderer instance with a reference to a Canvas and a TTF_Font.
     *
-    * @param canvas Shared pointer to a Canvas instance.
+    * @param canvas Reference to a Canvas instance.
     * @param font TTF_Font used for rendering.
     */
-    explicit CanvasRenderer(std::shared_ptr<Canvas> canvas, TTF_Font* font);
+    explicit CanvasRenderer(Canvas& canvas, TTF_Font* font);
 
     /**
     * @brief Renders the Canvas using the provided SDL_Renderer.
@@ -37,9 +37,9 @@ private:
     TTF_Font* font;
 
     /**
-    * @brief Shared pointer to a Canvas instance.
+    * @brief Reference to a Canvas instance.
     */
-    std::shared_ptr<Canvas> canvas;
+    Canvas& canvas;
 
     /**
     * @brief CanvasStatusBar instance for rendering the status bar.
