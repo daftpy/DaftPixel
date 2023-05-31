@@ -67,6 +67,8 @@ public:
     */
     void addDrawable(std::shared_ptr<IDrawable> drawable);
 
+    SDL_Window* getWindow() const;
+
 private:
     /**
     * @brief The SDL_Renderer instance.

@@ -6,8 +6,8 @@
 * @param canvas Reference to a Canvas instance.
 * @param font TTF_Font used for rendering.
 */
-CanvasRenderer::CanvasRenderer(Canvas& canvas, TTF_Font* font) :
-	canvas(canvas), statusBar(font, canvas), font(font) {}
+CanvasRenderer::CanvasRenderer(Canvas& canvas, TTF_Font* font, RenderManager& renderManager) :
+    canvas(canvas), statusBar(font, canvas), font(font), renderManager(renderManager) {}
 
 /**
 * @brief Renders the Canvas using the provided SDL_Renderer.
@@ -20,8 +20,8 @@ void CanvasRenderer::render(SDL_Renderer* renderer) const {
     auto& pixelBuffer = canvas.getPixelBuffer();
     int pixelSize = 10; // Set this to the size of each pixel
 
-    int windowWidth = 800;
-    int windowHeight = 600;
+    int windowWidth, windowHeight;
+    SDL_GetWindowSize(renderManager.getWindow(), &windowWidth, &windowHeight);
 
     // Calculate the starting point to render the PixelBuffer centered
     int startX = (windowWidth - pixelBuffer.getWidth() * pixelSize) / 2;

@@ -12,6 +12,7 @@
 #include "model/Canvas.h"
 #include "view/ui/CanvasStatusBar.h"
 #include "view/IDrawable.h"
+#include "view/RenderManager.h"
 
 class CanvasRenderer : public IDrawable {
 public:
@@ -21,7 +22,7 @@ public:
     * @param canvas Reference to a Canvas instance.
     * @param font TTF_Font used for rendering.
     */
-    explicit CanvasRenderer(Canvas& canvas, TTF_Font* font);
+    explicit CanvasRenderer(Canvas& canvas, TTF_Font* font, RenderManager& renderManager);
 
     /**
     * @brief Renders the Canvas using the provided SDL_Renderer.
@@ -45,4 +46,6 @@ private:
     * @brief CanvasStatusBar instance for rendering the status bar.
     */
     CanvasStatusBar statusBar;
+
+    RenderManager& renderManager;
 };

@@ -63,6 +63,11 @@ void RenderManager::addDrawable(std::shared_ptr<IDrawable> drawable) {
 	drawables.push_back(drawable);
 }
 
+SDL_Window* RenderManager::getWindow() const {
+	return window;
+}
+
+
 RenderManager::~RenderManager() {
 	// Clean up the renderer and window.
 	if (renderer != nullptr) {
