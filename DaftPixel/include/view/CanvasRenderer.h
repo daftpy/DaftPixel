@@ -48,4 +48,6 @@ private:
     CanvasStatusBar statusBar;
 
     RenderManager& renderManager;
+
+    int scaleFactor;
 };
