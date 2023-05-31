@@ -8,13 +8,15 @@
 
 class CanvasStatusBar : public IDrawable {
 public:
-	CanvasStatusBar(TTF_Font* font, Canvas& canvas) : 
+	CanvasStatusBar(TTF_Font* font, Canvas& canvas, RenderManager& renderManager) : 
 		font(font), 
-		canvas(canvas) {}
+		canvas(canvas),
+		renderManager(renderManager) {}
 	~CanvasStatusBar() {}
 	void render(SDL_Renderer* renderer) const override;
 
 private:
 	TTF_Font* font;
 	Canvas& canvas;
+	RenderManager& renderManager;
 };

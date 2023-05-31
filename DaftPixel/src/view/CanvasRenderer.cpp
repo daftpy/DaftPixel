@@ -7,7 +7,7 @@
 * @param font TTF_Font used for rendering.
 */
 CanvasRenderer::CanvasRenderer(Canvas& canvas, TTF_Font* font, RenderManager& renderManager) :
-    canvas(canvas), statusBar(font, canvas), font(font), renderManager(renderManager) {}
+    canvas(canvas), statusBar(font, canvas, renderManager), font(font), renderManager(renderManager) {}
 
 /**
 * @brief Renders the Canvas using the provided SDL_Renderer.

@@ -1,12 +1,15 @@
 #include "view/ui/CanvasStatusBar.h"
 
 void CanvasStatusBar::render(SDL_Renderer* renderer) const {
-    std::string canvasSize = std::to_string(canvas.getWidth()) + " x " + std::to_string(canvas.getHeight());
+    std::string canvasSize = "Canvas: " + std::to_string(canvas.getWidth()) + " x " + std::to_string(canvas.getHeight());
 
     int textWidth, textHeight;
     if (TTF_SizeText(font, canvasSize.c_str(), &textWidth, &textHeight) != 0) {
         std::cerr << "TTF_SizeText: " << TTF_GetError() << std::endl;
     }
+
+    int windowWidth, windowHeight;
+    SDL_GetWindowSize(renderManager.getWindow(), &windowWidth, &windowHeight);
 
     // The color of the text
     SDL_Color color = { 255, 255, 255 };  // white
@@ -18,7 +21,7 @@ void CanvasStatusBar::render(SDL_Renderer* renderer) const {
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
     // The position on the screen to render the text
-    SDL_Rect dstrect = { 10, 10, textWidth, textHeight };
+    SDL_Rect dstrect = { (windowWidth - textWidth) - 8, (windowHeight - textHeight) - 8, textWidth, textHeight };
 
     // Render the texture on the screen
     SDL_RenderCopy(renderer, texture, NULL, &dstrect);
