@@ -74,6 +74,23 @@ public:
 	*/
 	uint16_t getHeight() const;
 
+	#ifdef TESTING
+		void generateRandomPixels() {
+			for (uint16_t x = 0; x < this->getWidth(); ++x) {
+				for (uint16_t y = 0; y < this->getHeight(); ++y) {
+					// Generate random RGB values between 0 and 255.
+					uint8_t red = rand() % 256;
+					uint8_t green = rand() % 256;
+					uint8_t blue = rand() % 256;
+
+					// Set the pixel color.
+					this->at(x, y).set(red, green, blue);
+				}
+			}
+		}
+	#endif
+
+
 private:
 	uint16_t bufferWidth; ///< Width of the pixel buffer
 	uint16_t bufferHeight; ///< Height of the pixel buffer

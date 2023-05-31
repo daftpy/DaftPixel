@@ -58,13 +58,12 @@ public:
     */
     uint16_t getHeight() const;
 
-    // In the Canvas class:
-    #ifdef TESTING
-        std::pair<int, int> _testGetPixelBufferDimensions() const {
-            return std::make_pair(pixelBuffer->getWidth(), pixelBuffer->getHeight());
-        }
-    #endif
-
+    /**
+    * @brief Get a reference to the PixelBuffer.
+    *
+    * @return PixelBuffer& Reference to the PixelBuffer.
+    */
+    PixelBuffer& getPixelBuffer();
 
 private:
     /**

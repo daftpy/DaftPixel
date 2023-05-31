@@ -65,6 +65,16 @@ public:
     void setBlue(uint8_t b);
     void setAlpha(uint8_t a);
 
+    /**
+    * @brief Sets the color of the pixel.
+    *
+    * @param r The red component (0-255).
+    * @param g The green component (0-255).
+    * @param b The blue component (0-255).
+    * @param a The alpha component (0-255), defaulting to 255 (opaque).
+    */
+    void set(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
+
     // << operator overload to output RGBA values.
     friend std::ostream& operator<<(std::ostream& os, const Pixel& pixel);
 

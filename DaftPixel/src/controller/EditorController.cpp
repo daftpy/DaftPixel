@@ -27,8 +27,8 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false) {
 	std::cout << pixelBuffer.at(1, 1);
 
 	// More debug code
-	createNewCanvas(800, 600);
-
+	createNewCanvas(32, 32);
+	canvases.front()->getPixelBuffer().generateRandomPixels(); // only used for testing
 	CanvasController controller(*canvases.front());
 	std::shared_ptr<CanvasRenderer> canvasRenderer = std::make_shared<CanvasRenderer>(*canvases.front(), font);
 	renderManager.addDrawable(canvasRenderer);

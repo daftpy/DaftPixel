@@ -25,13 +25,16 @@ add_executable (DaftPixel
 "include/view/IDrawable.h" 
 "src/controller/CanvasController.cpp" 
 "include/controller/CanvasController.h"
-"src/model/Canvas.cpp" "src/view/CanvasRenderer.cpp" "include/view/CanvasRenderer.h")
+"src/model/Canvas.cpp" "src/view/CanvasRenderer.cpp" "include/view/CanvasRenderer.h" "src/view/ui/CanvasStatusBar.cpp")
 
-# Add include directories
+# Add include directories.
 target_include_directories(DaftPixel PRIVATE include)
 
-# Link SDL2 and SDL2_ttf to the target
+# Link SDL2 and SDL2_ttf to the target.
 target_link_libraries(DaftPixel PRIVATE SDL2::SDL2 SDL2_ttf::SDL2_ttf)
+
+# Conditionally adds the TESTING definition if we are using a Debug build configuration.
+target_compile_definitions(DaftPixel PRIVATE $<$<CONFIG:Debug>:TESTING>)
 
 # TODO: Add tests and install targets if needed.
 message(STATUS "SDL2_ttf_DIR: ${SDL2_ttf_DIR}")
