@@ -13,7 +13,7 @@
  */
 
 #include <gtest/gtest.h>
-#include <model/Canvas.h>
+#include <model/canvas/Canvas.h>
 
  /*
   * TEST: Default Constructor
