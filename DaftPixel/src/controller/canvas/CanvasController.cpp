@@ -1,4 +1,4 @@
-#include "controller/CanvasController.h"
+#include "controller/canvas/CanvasController.h"
 
 /**
 * @brief Constructs a new CanvasController instance with a reference to a Canvas.

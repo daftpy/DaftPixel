@@ -19,7 +19,7 @@
 #include "model/canvas/CanvasSurface.h"
 #include "model/PixelBuffer.h"
 #include "model/Pixel.h"
-#include "controller/CanvasController.h"
+#include "controller/canvas/CanvasController.h"
 #include "controller/CanvasRendererController.h"
 
 class EditorController {
