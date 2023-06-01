@@ -20,6 +20,7 @@
 #include "model/PixelBuffer.h"
 #include "model/Pixel.h"
 #include "controller/CanvasController.h"
+#include "controller/CanvasRendererController.h"
 
 class EditorController {
 public:
@@ -51,14 +52,14 @@ public:
     void createNewCanvas(uint16_t width, uint16_t height);
 
 private:
-    std::string editorName; ///< The name of the editor. This is displayed in the window title and doesn't affect the functionality of the application.
+    std::string editorName; ///< The name of the editor. This is displayed in the window title.
 
-    bool running; ///< A flag indicating whether the application is currently running. This is used to control the main application loop.
+    bool running; ///< @brief A flag indicating whether the application is currently running. This is used to control the main application loop.
 
     /**
      * @brief A vector containing unique pointers to Canvas objects.
      *
-     * This vector serves as a container of all Canvas objects created and managed by the EditorController.
+     * This vector serves as a container of all Canvas objects created and owned by the EditorController.
      * Any new Canvas that is created will be added to this list and can be accessed for rendering and editing.
      */
     std::vector<std::unique_ptr<Canvas>> canvases;

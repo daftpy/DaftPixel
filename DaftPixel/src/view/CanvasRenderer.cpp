@@ -1,4 +1,5 @@
 #include "view/CanvasRenderer.h"
+#include <iostream>
 
 /**
 * @brief Constructs a new CanvasRenderer instance with a reference to a Canvas and a TTF_Font.
@@ -8,6 +9,14 @@
 */
 CanvasRenderer::CanvasRenderer(Canvas& canvas, TTF_Font* font, RenderManager& renderManager) :
     canvas(canvas), statusBar(font, canvas, renderManager), font(font), renderManager(renderManager), scaleFactor(1) {}
+
+int8_t CanvasRenderer::getScaleFactor() {
+    return scaleFactor;
+}
+
+void CanvasRenderer::setScaleFactor(uint8_t scaleFactor) {
+    this->scaleFactor = scaleFactor;
+}
 
 /**
 * @brief Renders the Canvas using the provided SDL_Renderer.

@@ -67,6 +67,13 @@ public:
     */
     void addDrawable(std::shared_ptr<IDrawable> drawable);
 
+    /**
+    * @brief Returns a pointer to the SDL_Window managed by this RenderManager instance.
+    *
+    * This allows access to the underlying SDL_Window instance that the RenderManager is responsible for.
+    *
+    * @return SDL_Window* The pointer to the SDL_Window instance.
+    */
     SDL_Window* getWindow() const;
 
 private:
