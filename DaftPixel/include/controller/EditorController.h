@@ -16,7 +16,7 @@
 #include <SDL_ttf.h>
 #include <memory>
 #include "view/RenderManager.h"
-#include "model/Canvas.h"
+#include "model/canvas/Canvas.h"
 #include "model/PixelBuffer.h"
 #include "model/Pixel.h"
 #include "controller/CanvasController.h"

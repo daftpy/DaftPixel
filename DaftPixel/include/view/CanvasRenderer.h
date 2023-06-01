@@ -10,7 +10,7 @@
   */
 #pragma once
 
-#include "model/Canvas.h"
+#include "model/canvas/Canvas.h"
 #include "view/ui/CanvasStatusBar.h"
 #include "view/IDrawable.h"
 #include "view/RenderManager.h"

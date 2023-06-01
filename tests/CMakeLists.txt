@@ -27,7 +27,7 @@ set(TEST_SOURCES
 
   ${CMAKE_SOURCE_DIR}/DaftPixel/src/model/Pixel.cpp
   ${CMAKE_SOURCE_DIR}/DaftPixel/src/model/PixelBuffer.cpp
-  ${CMAKE_SOURCE_DIR}/DaftPixel/src/model/Canvas.cpp
+  "../DaftPixel/src/model/canvas/Canvas.cpp"
 )
 
 # Add test executable

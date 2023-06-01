@@ -4,7 +4,7 @@
 #include <string>
 #include "view/RenderManager.h"
 #include "view/IDrawable.h"
-#include "model/Canvas.h"
+#include "model/canvas/Canvas.h"
 
 class CanvasStatusBar : public IDrawable {
 public:

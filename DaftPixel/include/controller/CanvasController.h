@@ -11,7 +11,7 @@
 
 #pragma once
 #include <memory>
-#include "model/Canvas.h"
+#include "model/canvas/Canvas.h"
 
 class CanvasController {
 public:

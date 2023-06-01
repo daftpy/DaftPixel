@@ -1,4 +1,4 @@
-#include "model/Canvas.h"
+#include "model/canvas/Canvas.h"
 #include <stdexcept>
 
 // Creates a 32x32 Canvas if no height or width is given.
