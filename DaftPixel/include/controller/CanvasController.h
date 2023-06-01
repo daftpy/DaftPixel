@@ -11,7 +11,7 @@
 
 #pragma once
 #include <memory>
-#include "model/canvas/Canvas.h"
+#include "model/canvas/CanvasSurface.h"
 
 class CanvasController {
 public:
@@ -20,7 +20,7 @@ public:
     *
     * @param canvas Reference to a Canvas instance.
     */
-    explicit CanvasController(Canvas& canvas);
+    explicit CanvasController(CanvasSurface& canvas);
 
     /**
     * @brief Set the dimensions of the Canvas.
@@ -35,11 +35,11 @@ public:
     *
     * @return Canvas& Reference to the Canvas instance.
     */
-    Canvas& getCanvas();
+    CanvasSurface& getCanvas();
 
 private:
     /**
     * @brief Reference to a Canvas instance.
     */
-    Canvas& canvas;
+    CanvasSurface& canvas;
 };

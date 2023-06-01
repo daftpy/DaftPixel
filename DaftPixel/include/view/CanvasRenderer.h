@@ -10,7 +10,7 @@
   */
 #pragma once
 
-#include "model/canvas/Canvas.h"
+#include "model/canvas/CanvasSurface.h"
 #include "view/ui/CanvasStatusBar.h"
 #include "view/IDrawable.h"
 #include "view/RenderManager.h"
@@ -24,7 +24,7 @@ public:
     * @param font Pointer to a TTF_Font used for rendering text on the screen.
     * @param renderManager Reference to a RenderManager for handling rendering operations.
     */
-    explicit CanvasRenderer(Canvas& canvas, TTF_Font* font, RenderManager& renderManager);
+    explicit CanvasRenderer(CanvasSurface& canvas, TTF_Font* font, RenderManager& renderManager);
 
     /**
     * @brief Renders the Canvas using the provided SDL_Renderer.
@@ -49,7 +49,7 @@ public:
 
 private:
     TTF_Font* font; ///< Pointer to a TTF_Font used for rendering text on the screen.
-    Canvas& canvas; ///< Reference to a Canvas instance that this renderer will manage.
+    CanvasSurface& canvasSurface; ///< Reference to a Canvas instance that this renderer will manage.
     CanvasStatusBar statusBar; ///< CanvasStatusBar instance for rendering the status bar.
     RenderManager& renderManager; ///< Reference to a RenderManager for handling rendering operations.
     uint8_t scaleFactor; ///< The current scale factor of the CanvasRenderer.

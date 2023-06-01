@@ -5,7 +5,7 @@
 *
 * @param canvas Reference to a Canvas instance.
 */
-CanvasController::CanvasController(Canvas& canvas) : canvas(canvas) {
+CanvasController::CanvasController(CanvasSurface& canvas) : canvas(canvas) {
 	// Initialization if needed
 }
 
@@ -25,6 +25,6 @@ void CanvasController::setDimensions(uint16_t width, uint16_t height) {
 *
 * @return Canvas& Reference to the Canvas instance.
 */
-Canvas& CanvasController::getCanvas() {
+CanvasSurface& CanvasController::getCanvas() {
 	return canvas;
 }

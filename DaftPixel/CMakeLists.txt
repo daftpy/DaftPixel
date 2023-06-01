@@ -21,11 +21,11 @@ add_executable (DaftPixel
 "include/view/RenderManager.h" 
 "src/view/RenderManager.cpp" 
 "include/view/ui/CanvasStatusBar.h" 
-"include/model/canvas/Canvas.h" 
+"include/model/canvas/CanvasSurface.h" 
 "include/view/IDrawable.h" 
 "src/controller/CanvasController.cpp" 
 "include/controller/CanvasController.h"
-"src/model/canvas/Canvas.cpp" "src/view/CanvasRenderer.cpp" "include/view/CanvasRenderer.h" "src/view/ui/CanvasStatusBar.cpp" "include/controller/CanvasRendererController.h" "src/controller/CanvasRendererController.cpp")
+"src/model/canvas/CanvasSurface.cpp" "src/view/CanvasRenderer.cpp" "include/view/CanvasRenderer.h" "src/view/ui/CanvasStatusBar.cpp" "include/controller/CanvasRendererController.h" "src/controller/CanvasRendererController.cpp")
 
 # Add include directories.
 target_include_directories(DaftPixel PRIVATE include)

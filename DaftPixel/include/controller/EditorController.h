@@ -16,7 +16,7 @@
 #include <SDL_ttf.h>
 #include <memory>
 #include "view/RenderManager.h"
-#include "model/canvas/Canvas.h"
+#include "model/canvas/CanvasSurface.h"
 #include "model/PixelBuffer.h"
 #include "model/Pixel.h"
 #include "controller/CanvasController.h"
@@ -62,7 +62,7 @@ private:
      * This vector serves as a container of all Canvas objects created and owned by the EditorController.
      * Any new Canvas that is created will be added to this list and can be accessed for rendering and editing.
      */
-    std::vector<std::unique_ptr<Canvas>> canvases;
+    std::vector<std::unique_ptr<CanvasSurface>> canvases;
 
     RenderManager renderManager; ///< The RenderManager, which is responsible for drawing the Canvas objects and other UI elements to the screen.
 

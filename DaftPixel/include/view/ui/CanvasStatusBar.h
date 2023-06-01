@@ -4,11 +4,11 @@
 #include <string>
 #include "view/RenderManager.h"
 #include "view/IDrawable.h"
-#include "model/canvas/Canvas.h"
+#include "model/canvas/CanvasSurface.h"
 
 class CanvasStatusBar : public IDrawable {
 public:
-	CanvasStatusBar(TTF_Font* font, Canvas& canvas, RenderManager& renderManager) : 
+	CanvasStatusBar(TTF_Font* font, CanvasSurface& canvas, RenderManager& renderManager) : 
 		font(font), 
 		canvas(canvas),
 		renderManager(renderManager) {}
@@ -17,6 +17,6 @@ public:
 
 private:
 	TTF_Font* font;
-	Canvas& canvas;
+	CanvasSurface& canvas;
 	RenderManager& renderManager;
 };

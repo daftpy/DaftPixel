@@ -13,11 +13,11 @@
 #include <memory>
 #include "model/PixelBuffer.h"
 
-class Canvas {
+class CanvasSurface {
 public:
-    Canvas();
+    CanvasSurface();
 
-    Canvas(uint16_t width, uint16_t height);
+    CanvasSurface(uint16_t width, uint16_t height);
 
     /**
     * @brief Constructs a new Canvas instance with specified width and height.
@@ -25,7 +25,7 @@ public:
     * @param width Width of the Canvas.
     * @param height Height of the Canvas.
     */
-    Canvas(uint16_t width, uint16_t height, std::shared_ptr<PixelBuffer> pixelBuffer)
+    CanvasSurface(uint16_t width, uint16_t height, std::shared_ptr<PixelBuffer> pixelBuffer)
         : canvasWidth(width),
         canvasHeight(height),
         pixelBuffer(std::move(pixelBuffer)) {}

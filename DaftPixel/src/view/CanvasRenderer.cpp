@@ -4,11 +4,11 @@
 /**
 * @brief Constructs a new CanvasRenderer instance with a reference to a Canvas and a TTF_Font.
 *
-* @param canvas Reference to a Canvas instance.
+* @param canvasSurface Reference to a CanvasSurface instance.
 * @param font TTF_Font used for rendering.
 */
-CanvasRenderer::CanvasRenderer(Canvas& canvas, TTF_Font* font, RenderManager& renderManager) :
-    canvas(canvas), statusBar(font, canvas, renderManager), font(font), renderManager(renderManager), scaleFactor(1) {}
+CanvasRenderer::CanvasRenderer(CanvasSurface& canvasSurface, TTF_Font* font, RenderManager& renderManager) :
+    canvasSurface(canvasSurface), statusBar(font, canvasSurface, renderManager), font(font), renderManager(renderManager), scaleFactor(1) {}
 
 int8_t CanvasRenderer::getScaleFactor() {
     return scaleFactor;
@@ -19,14 +19,14 @@ void CanvasRenderer::setScaleFactor(uint8_t scaleFactor) {
 }
 
 /**
-* @brief Renders the Canvas using the provided SDL_Renderer.
+* @brief Renders the CanvasSurface using the provided SDL_Renderer.
 *
 * @param renderer SDL_Renderer used for rendering.
 */
 void CanvasRenderer::render(SDL_Renderer* renderer) const {
     statusBar.render(renderer);
 
-    auto& pixelBuffer = canvas.getPixelBuffer();
+    auto& pixelBuffer = canvasSurface.getPixelBuffer();
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(renderManager.getWindow(), &windowWidth, &windowHeight);

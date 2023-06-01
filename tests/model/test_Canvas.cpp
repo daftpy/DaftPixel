@@ -13,7 +13,7 @@
  */
 
 #include <gtest/gtest.h>
-#include <model/canvas/Canvas.h>
+#include <model/canvas/CanvasSurface.h>
 
  /*
   * TEST: Default Constructor
@@ -21,7 +21,7 @@
   * This test verifies that the default Canvas constructor creates a canvas of size 32x32.
   */
 TEST(CanvasTest, DefaultConstructor) {
-    Canvas canvas;
+    CanvasSurface canvas;
     EXPECT_EQ(canvas.getWidth(), 32);
     EXPECT_EQ(canvas.getHeight(), 32);
     EXPECT_EQ(canvas._testGetPixelBufferDimensions().first, 32);
@@ -34,7 +34,7 @@ TEST(CanvasTest, DefaultConstructor) {
  * This test verifies that we can set and get valid width and height for the Canvas.
  */
 TEST(CanvasTest, SetAndGetValidWidthAndHeight) {
-    Canvas canvas;
+    CanvasSurface canvas;
     EXPECT_NO_THROW(canvas.setWidth(10));
     EXPECT_EQ(canvas.getWidth(), 10);
     EXPECT_NO_THROW(canvas.setHeight(20));
@@ -48,7 +48,7 @@ TEST(CanvasTest, SetAndGetValidWidthAndHeight) {
  * in an exception.
  */
 TEST(CanvasTest, SetInvalidWidthAndHeight) {
-    Canvas canvas;
+    CanvasSurface canvas;
     EXPECT_THROW(canvas.setWidth(0), std::invalid_argument);
     EXPECT_THROW(canvas.setHeight(0), std::invalid_argument);
 }
@@ -60,7 +60,7 @@ TEST(CanvasTest, SetInvalidWidthAndHeight) {
  * the canvas object.
  */
 TEST(CanvasTest, VerifyPixelBufferDimensions) {
-    Canvas canvas;
+    CanvasSurface canvas;
     EXPECT_EQ(canvas.getWidth(), canvas._testGetPixelBufferDimensions().first);
     EXPECT_EQ(canvas.getHeight(), canvas._testGetPixelBufferDimensions().second);
 }
