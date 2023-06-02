@@ -14,6 +14,7 @@
 #include "view/canvas/ui/CanvasStatusBar.h"
 #include "view/IDrawable.h"
 #include "view/RenderManager.h"
+#include "model/canvas/RenderContext.h"
 
 class CanvasSurfaceView : public IDrawable {
 public:
@@ -24,7 +25,7 @@ public:
     * @param font Pointer to a TTF_Font used for rendering text on the screen.
     * @param renderManager Reference to a RenderManager for handling rendering operations.
     */
-    explicit CanvasSurfaceView(CanvasSurface& canvas, TTF_Font* font, RenderManager& renderManager);
+    explicit CanvasSurfaceView(CanvasSurface& canvas, TTF_Font* font, Canvas::RenderContext& renderContext);
 
     /**
     * @brief Renders the Canvas using the provided SDL_Renderer.
@@ -33,24 +34,10 @@ public:
     */
     void render(SDL_Renderer* renderer) const override;
 
-    /**
-    * @brief Gets the current scale factor of the CanvasSurfaceView.
-    *
-    * @return The current scale factor as an int8_t.
-    */
-    int8_t getScaleFactor();
-
-    /**
-    * @brief Sets the scale factor of the CanvasSurfaceView.
-    *
-    * @param scaleFactor The new scale factor as a uint8_t.
-    */
-    void setScaleFactor(uint8_t scaleFactor);
-
 private:
     TTF_Font* font; ///< Pointer to a TTF_Font used for rendering text on the screen.
     CanvasSurface& canvasSurface; ///< Reference to a Canvas instance that this renderer will manage.
     CanvasStatusBar statusBar; ///< CanvasStatusBar instance for rendering the status bar.
-    RenderManager& renderManager; ///< Reference to a RenderManager for handling rendering operations.
+    Canvas::RenderContext& renderContext; ///< Reference to a RenderManager for handling rendering operations.
     uint8_t scaleFactor; ///< The current scale factor of the CanvasSurfaceView.
 };

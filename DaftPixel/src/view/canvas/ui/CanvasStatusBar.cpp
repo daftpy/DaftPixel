@@ -9,7 +9,7 @@ void CanvasStatusBar::render(SDL_Renderer* renderer) const {
     }
 
     int windowWidth, windowHeight;
-    SDL_GetWindowSize(renderManager.getWindow(), &windowWidth, &windowHeight);
+    SDL_GetWindowSize(renderContext.renderManager.getWindow(), &windowWidth, &windowHeight);
 
     // The color of the text
     SDL_Color color = { 255, 255, 255 };  // white

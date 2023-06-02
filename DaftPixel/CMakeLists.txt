@@ -30,7 +30,7 @@ add_executable (DaftPixel
 "include/view/canvas/CanvasSurfaceView.h"
 "src/view/canvas/ui/CanvasStatusBar.cpp"
 "include/controller/canvas/CanvasRendererController.h"
-"src/controller/canvas/CanvasRendererController.cpp")
+"src/controller/canvas/CanvasRendererController.cpp" "include/model/canvas/RenderContext.h")
 
 # Add include directories.
 target_include_directories(DaftPixel PRIVATE include)
