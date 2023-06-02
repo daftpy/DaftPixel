@@ -1,4 +1,4 @@
-#include "view/ui/CanvasStatusBar.h"
+#include "view/canvas/ui/CanvasStatusBar.h"
 
 void CanvasStatusBar::render(SDL_Renderer* renderer) const {
     std::string canvasSize = "Canvas: " + std::to_string(canvas.getWidth()) + " x " + std::to_string(canvas.getHeight());

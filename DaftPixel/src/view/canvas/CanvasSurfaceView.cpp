@@ -1,20 +1,20 @@
-#include "view/CanvasRenderer.h"
+#include "view/canvas/CanvasSurfaceView.h"
 #include <iostream>
 
 /**
-* @brief Constructs a new CanvasRenderer instance with a reference to a Canvas and a TTF_Font.
+* @brief Constructs a new CanvasSurfaceView instance with a reference to a Canvas and a TTF_Font.
 *
 * @param canvasSurface Reference to a CanvasSurface instance.
 * @param font TTF_Font used for rendering.
 */
-CanvasRenderer::CanvasRenderer(CanvasSurface& canvasSurface, TTF_Font* font, RenderManager& renderManager) :
+CanvasSurfaceView::CanvasSurfaceView(CanvasSurface& canvasSurface, TTF_Font* font, RenderManager& renderManager) :
     canvasSurface(canvasSurface), statusBar(font, canvasSurface, renderManager), font(font), renderManager(renderManager), scaleFactor(1) {}
 
-int8_t CanvasRenderer::getScaleFactor() {
+int8_t CanvasSurfaceView::getScaleFactor() {
     return scaleFactor;
 }
 
-void CanvasRenderer::setScaleFactor(uint8_t scaleFactor) {
+void CanvasSurfaceView::setScaleFactor(uint8_t scaleFactor) {
     this->scaleFactor = scaleFactor;
 }
 
@@ -23,7 +23,7 @@ void CanvasRenderer::setScaleFactor(uint8_t scaleFactor) {
 *
 * @param renderer SDL_Renderer used for rendering.
 */
-void CanvasRenderer::render(SDL_Renderer* renderer) const {
+void CanvasSurfaceView::render(SDL_Renderer* renderer) const {
     statusBar.render(renderer);
 
     auto& pixelBuffer = canvasSurface.getPixelBuffer();

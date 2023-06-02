@@ -1,7 +1,7 @@
-#include "controller/CanvasRendererController.h"
+#include "controller/canvas/CanvasRendererController.h"
 #include <iostream>
 
-CanvasRendererController::CanvasRendererController(CanvasRenderer& canvasRenderer) :
+CanvasRendererController::CanvasRendererController(CanvasSurfaceView& canvasRenderer) :
 	canvasRenderer(canvasRenderer) {}
 
 void CanvasRendererController::changeScaleFactor(int8_t delta) {

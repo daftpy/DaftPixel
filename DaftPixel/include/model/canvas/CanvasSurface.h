@@ -1,6 +1,6 @@
 /**
 * @file Canvas.h
-* @brief Header file for the Canvas class
+* @brief Header file for the CanvasSurface class
 */
 
 /**

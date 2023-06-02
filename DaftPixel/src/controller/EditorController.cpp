@@ -1,6 +1,6 @@
 #include "controller/EditorController.h"
 #include <memory>
-#include "view/CanvasRenderer.h"
+#include "view/canvas/CanvasSurfaceView.h"
 
 EditorController::EditorController() : editorName("DaftPixel"), running(false) {
 	// Initialize SDL_ttf library
@@ -30,7 +30,7 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false) {
 	createNewCanvas(32, 32);
 	canvases.front()->getPixelBuffer().generateRandomPixels(); // only used for testing
 	CanvasSurfaceController surfaceController(*canvases.front());
-	std::shared_ptr<CanvasRenderer> canvasRenderer = std::make_shared<CanvasRenderer>(*canvases.front(), font, renderManager);
+	std::shared_ptr<CanvasSurfaceView> canvasRenderer = std::make_shared<CanvasSurfaceView>(*canvases.front(), font, renderManager);
 	CanvasRendererController crController(*canvasRenderer);
 	crController.changeScaleFactor(9);
 	renderManager.addDrawable(canvasRenderer);
