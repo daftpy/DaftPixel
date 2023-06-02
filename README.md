@@ -39,7 +39,7 @@ To build DaftPixel, follow these steps:
 
 The project is in the early stages of development. We have defined the primary components of the application and their roles. These components include the `EditorController`, `Canvas`, `Pixel`, `PixelBuffer`, and `CanvasSurfaceView`.
 
-Currently, `EditorController` is responsible for managing the application's lifecycle. `Canvas` represents the drawable area where pixels can be edited. `Pixel` serves as the basic unit in the application, representing a single pixel with color data. `PixelBuffer` forms an image of pixels, essentially a 2D grid of `Pixel` objects. `CanvasSurfaceView` is tasked with rendering the `Canvas` onto the screen.
+Currently, `EditorController` is responsible for managing the application's lifecycle. `CanvasSurface` represents the drawable area where pixels can be edited. `Pixel` serves as the basic unit in the application, representing a single pixel with color data. `PixelBuffer` forms an image of pixels, essentially a 2D grid of `Pixel` objects. `CanvasSurfaceView` is tasked with rendering the `CanvasSurface` onto the screen.
 
 We are in the process of implementing the primary functionalities of these components, and testing their integration. Once the basic editing features are implemented and tested, we'll focus on refining the user interface and enhancing the user experience.
 
