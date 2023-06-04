@@ -1,7 +1,6 @@
 #include "controller/EditorController.h"
 #include <memory>
 #include "view/canvas/CanvasSurfaceView.h"
-#include "model/canvas/RenderContext.h"
 
 EditorController::EditorController() : editorName("DaftPixel"), running(false), renderContext(nullptr) {
 	// Initialize SDL_ttf library

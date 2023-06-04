@@ -20,7 +20,7 @@
 #include "model/PixelBuffer.h"
 #include "model/Pixel.h"
 #include "controller/canvas/CanvasSurfaceController.h"
-#include "controller/canvas/CanvasRendererController.h"
+#include "model/canvas/RenderContext.h"
 
 class EditorController {
 public:
