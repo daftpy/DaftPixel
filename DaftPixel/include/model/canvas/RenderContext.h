@@ -19,12 +19,19 @@ namespace Canvas {
         RenderContext(RenderManager& renderManager, uint8_t scaleFactor)
             : renderManager(renderManager), scaleFactor(scaleFactor) {}
 
-
-        void changeScaleFactor(uint8_t delta) {
-            if (scaleFactor + delta <= 0) {
-                throw std::out_of_range("Scale factor must be greater than 0.");
+        void changeScaleFactor(int8_t delta) {
+            int8_t newScaleFactor = scaleFactor + delta;
+            try {
+                if (newScaleFactor <= 0) {
+                    throw std::out_of_range("Scale factor must be greater than 0.");
+                }
             }
-            scaleFactor += delta;
+            catch (const std::out_of_range& e) {
+                // Handle the exception (e.g., log an error message)
+                std::cerr << "Error: " << e.what() << std::endl;
+                return;
+            }
+            scaleFactor = newScaleFactor;
         }
     };
 }

@@ -67,4 +67,8 @@ private:
     RenderManager renderManager; ///< The RenderManager, which is responsible for drawing the Canvas objects and other UI elements to the screen.
 
     TTF_Font* font; ///< A pointer to the TTF_Font that is used for rendering text on the screen. The lifetime of the font object is managed by the EditorController.
+
+
+    // TEMPORARY DEBUG CODE
+    std::unique_ptr<Canvas::RenderContext> renderContext;
 };

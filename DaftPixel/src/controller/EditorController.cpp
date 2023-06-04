@@ -3,7 +3,7 @@
 #include "view/canvas/CanvasSurfaceView.h"
 #include "model/canvas/RenderContext.h"
 
-EditorController::EditorController() : editorName("DaftPixel"), running(false) {
+EditorController::EditorController() : editorName("DaftPixel"), running(false), renderContext(nullptr) {
 	// Initialize SDL_ttf library
 	if (TTF_Init() == -1) {
 		std::cerr << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << std::endl;
@@ -32,9 +32,10 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false) {
 	canvases.front()->getPixelBuffer().generateRandomPixels(); // only used for testing
 	CanvasSurfaceController surfaceController(*canvases.front());
 
-	Canvas::RenderContext renderContext(renderManager, 1);
+	// Still debug code
+	renderContext = std::make_unique< Canvas::RenderContext>(renderManager, 1);
 
-	std::shared_ptr<CanvasSurfaceView> canvasRenderer = std::make_shared<CanvasSurfaceView>(*canvases.front(), font, renderContext);
+	std::shared_ptr<CanvasSurfaceView> canvasRenderer = std::make_shared<CanvasSurfaceView>(*canvases.front(), font, *renderContext);
 
 	renderManager.addDrawable(canvasRenderer);
 };
@@ -55,6 +56,9 @@ void EditorController::createNewCanvas(uint16_t width, uint16_t height) {
 	canvases.push_back(std::move(newCanvas));
 }
 
+
+// TEMPORARY DEBUG CODE
+// TODO: InputManager
 void EditorController::handleEvents() {
 	SDL_Event event;
 
@@ -62,6 +66,16 @@ void EditorController::handleEvents() {
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT) {
 			running = false;
+		}
+		else if (event.type == SDL_KEYUP) { // A key has been pressed
+			switch (event.key.keysym.sym) {
+			case SDLK_EQUALS: // "+" key without Shift
+				renderContext->changeScaleFactor(static_cast<int8_t>(1));
+				break;
+			case SDLK_MINUS: // "-" key without Shift
+				renderContext->changeScaleFactor(static_cast<int8_t>(-1));
+				break;
+			}
 		}
 	}
 }
