@@ -8,13 +8,11 @@
 
 class CanvasStatusBar : public IDrawable {
 public:
-	CanvasStatusBar(TTF_Font* font, Canvas::RenderContext& renderContext) : 
-		font(font),
+	CanvasStatusBar(Canvas::RenderContext& renderContext) :
 		renderContext(renderContext) {}
 	~CanvasStatusBar() {}
 	void render(SDL_Renderer* renderer) const override;
 
 private:
-	TTF_Font* font;
 	Canvas::RenderContext& renderContext;
 };

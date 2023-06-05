@@ -32,9 +32,9 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	CanvasSurfaceController surfaceController(*canvases.front());
 
 	// Still debug code
-	renderContext = std::make_unique< Canvas::RenderContext>(*canvases.front(), renderManager.getWindow(), 1);
+	renderContext = std::make_unique< Canvas::RenderContext>(*canvases.front(), font, 1, renderManager.getWindow());
 
-	std::shared_ptr<CanvasSurfaceView> canvasRenderer = std::make_shared<CanvasSurfaceView>(font, *renderContext);
+	std::shared_ptr<CanvasSurfaceView> canvasRenderer = std::make_shared<CanvasSurfaceView>(*renderContext);
 
 	renderManager.addDrawable(canvasRenderer);
 };

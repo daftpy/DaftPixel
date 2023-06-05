@@ -21,11 +21,10 @@ public:
     /**
     * @brief Constructs a new CanvasSurfaceView instance with a reference to a Canvas, a TTF_Font, and a RenderManager.
     *
-    * @param canvas Reference to a Canvas instance that this renderer will manage.
-    * @param font Pointer to a TTF_Font used for rendering text on the screen.
-    * @param renderManager Reference to a RenderManager for handling rendering operations.
+    * @param renderContext reference to a RenderContext object which is responsible for maintaining a reference to the
+      relevant CanvasSurface and maintaing display characteristics such as scale factor, positioning, etc.
     */
-    explicit CanvasSurfaceView(TTF_Font* font, Canvas::RenderContext& renderContext);
+    explicit CanvasSurfaceView(Canvas::RenderContext& renderContext);
 
     /**
     * @brief Renders the Canvas using the provided SDL_Renderer.
@@ -35,7 +34,6 @@ public:
     void render(SDL_Renderer* renderer) const override;
 
 private:
-    TTF_Font* font; ///< Pointer to a TTF_Font used for rendering text on the screen.
     CanvasStatusBar statusBar; ///< CanvasStatusBar instance for rendering the status bar.
     Canvas::RenderContext& renderContext; ///< Reference to a RenderManager for handling rendering operations.
 };

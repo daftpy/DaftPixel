@@ -4,11 +4,11 @@
 /**
 * @brief Constructs a new CanvasSurfaceView instance with a reference to a Canvas and a TTF_Font.
 *
-* @param canvasSurface Reference to a CanvasSurface instance.
-* @param font TTF_Font used for rendering.
+* @param renderContext reference to RenderContext instance is responsible for maintaining
+* display characteristics for the CanvasSurfaceView such as scale factor, positioning, etc.
 */
-CanvasSurfaceView::CanvasSurfaceView(TTF_Font* font, Canvas::RenderContext& renderContext) :
-    statusBar(font, renderContext), font(font), renderContext(renderContext) {}
+CanvasSurfaceView::CanvasSurfaceView(Canvas::RenderContext& renderContext) :
+    statusBar(renderContext), renderContext(renderContext) {}
 
 /**
 * @brief Renders the CanvasSurface using the provided SDL_Renderer.
