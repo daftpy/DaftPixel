@@ -12,9 +12,6 @@ void CanvasStatusBar::render(SDL_Renderer* renderer) const {
         std::cerr << "TTF_SizeText: " << TTF_GetError() << std::endl;
     }
 
-    int windowWidth, windowHeight;
-    SDL_GetWindowSize(renderContext.renderManager.getWindow(), &windowWidth, &windowHeight);
-
     // The color of the text
     SDL_Color color = { 255, 255, 255 };  // white
 
@@ -25,7 +22,7 @@ void CanvasStatusBar::render(SDL_Renderer* renderer) const {
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
     // The position on the screen to render the text
-    SDL_Rect dstrect = { (windowWidth - textWidth) - 8, (windowHeight - textHeight) - 8, textWidth, textHeight };
+    SDL_Rect dstrect = { (renderContext.windowWidth - textWidth) - 8, (renderContext.windowHeight - textHeight) - 8, textWidth, textHeight };
 
     // Render the texture on the screen
     SDL_RenderCopy(renderer, texture, NULL, &dstrect);

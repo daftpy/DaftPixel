@@ -32,7 +32,7 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	CanvasSurfaceController surfaceController(*canvases.front());
 
 	// Still debug code
-	renderContext = std::make_unique< Canvas::RenderContext>(*canvases.front(), renderManager, 1);
+	renderContext = std::make_unique< Canvas::RenderContext>(*canvases.front(), renderManager.getWindow(), 1);
 
 	std::shared_ptr<CanvasSurfaceView> canvasRenderer = std::make_shared<CanvasSurfaceView>(font, *renderContext);
 
@@ -76,8 +76,24 @@ void EditorController::handleEvents() {
 				break;
 			}
 		}
+		else if (event.type == SDL_WINDOWEVENT) {
+			switch (event.window.event) {
+			case SDL_WINDOWEVENT_RESIZED:
+			{
+				int newWidth = event.window.data1;
+				int newHeight = event.window.data2;
+				// Update the window dimensions in the RenderContext
+				renderContext->windowWidth = newWidth;
+				renderContext->windowHeight = newHeight;
+			}
+			break;
+			default:
+				break;
+			}
+		}
 	}
 }
+
 
 void EditorController::run() {
 	// Run the main editor loop.

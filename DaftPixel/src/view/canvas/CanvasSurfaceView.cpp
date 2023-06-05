@@ -20,12 +20,9 @@ void CanvasSurfaceView::render(SDL_Renderer* renderer) const {
 
     auto& pixelBuffer = renderContext.canvasSurface.getPixelBuffer();
 
-    int windowWidth, windowHeight;
-    SDL_GetWindowSize(renderContext.renderManager.getWindow(), &windowWidth, &windowHeight);
-
     // Calculate the starting point to render the PixelBuffer centered
-    int startX = (windowWidth - pixelBuffer.getWidth() * renderContext.scaleFactor) / 2;
-    int startY = (windowHeight - pixelBuffer.getHeight() * renderContext.scaleFactor) / 2;
+    int startX = (renderContext.windowWidth - pixelBuffer.getWidth() * renderContext.scaleFactor) / 2;
+    int startY = (renderContext.windowHeight - pixelBuffer.getHeight() * renderContext.scaleFactor) / 2;
 
     for (uint16_t y = 0; y < pixelBuffer.getHeight(); y++) {
         for (uint16_t x = 0; x < pixelBuffer.getWidth(); x++) {

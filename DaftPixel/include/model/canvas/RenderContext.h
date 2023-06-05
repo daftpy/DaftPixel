@@ -9,7 +9,8 @@ namespace Canvas {
      */
     struct RenderContext {
         CanvasSurface& canvasSurface; ///< Reference to a CanvasSurface object.
-        RenderManager& renderManager; ///< Reference to a RenderManager object.
+        int32_t windowWidth; ///< Window width, used for scaling and positioning.
+        int32_t windowHeight; ///< Window height, used for scaling and positioning.
         uint8_t scaleFactor; ///< The current scale factor.
 
         /**
@@ -18,8 +19,10 @@ namespace Canvas {
          * @param renderManager Reference to a RenderManager object.
          * @param scaleFactor The scale factor to be used for rendering.
          */
-        RenderContext(CanvasSurface& canvasSurface, RenderManager& renderManager, uint8_t scaleFactor)
-            : canvasSurface(canvasSurface), renderManager(renderManager), scaleFactor(scaleFactor) {}
+        RenderContext(CanvasSurface& canvasSurface, SDL_Window* window, uint8_t scaleFactor)
+            : canvasSurface(canvasSurface), scaleFactor(scaleFactor) {
+            SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+        }
 
         void changeScaleFactor(int8_t delta) {
             int8_t newScaleFactor = scaleFactor + delta;
