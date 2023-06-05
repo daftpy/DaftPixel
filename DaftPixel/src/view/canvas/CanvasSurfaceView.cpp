@@ -7,8 +7,8 @@
 * @param canvasSurface Reference to a CanvasSurface instance.
 * @param font TTF_Font used for rendering.
 */
-CanvasSurfaceView::CanvasSurfaceView(CanvasSurface& canvasSurface, TTF_Font* font, Canvas::RenderContext& renderContext) :
-    canvasSurface(canvasSurface), statusBar(font, canvasSurface, renderContext), font(font), renderContext(renderContext), scaleFactor(1) {}
+CanvasSurfaceView::CanvasSurfaceView(TTF_Font* font, Canvas::RenderContext& renderContext) :
+    statusBar(font, renderContext), font(font), renderContext(renderContext), scaleFactor(1) {}
 
 /**
 * @brief Renders the CanvasSurface using the provided SDL_Renderer.
@@ -18,7 +18,7 @@ CanvasSurfaceView::CanvasSurfaceView(CanvasSurface& canvasSurface, TTF_Font* fon
 void CanvasSurfaceView::render(SDL_Renderer* renderer) const {
     statusBar.render(renderer);
 
-    auto& pixelBuffer = canvasSurface.getPixelBuffer();
+    auto& pixelBuffer = renderContext.canvasSurface.getPixelBuffer();
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(renderContext.renderManager.getWindow(), &windowWidth, &windowHeight);

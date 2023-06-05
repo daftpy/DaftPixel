@@ -1,7 +1,11 @@
 #include "view/canvas/ui/CanvasStatusBar.h"
 
 void CanvasStatusBar::render(SDL_Renderer* renderer) const {
-    std::string canvasSize = "Scale Factor: x" + std::to_string(renderContext.scaleFactor) + "   Canvas: " + std::to_string(canvas.getWidth()) + " x " + std::to_string(canvas.getHeight());
+    std::string canvasSize = "Scale Factor: x" + std::to_string(renderContext.scaleFactor);
+    canvasSize += "   Canvas: ";
+    canvasSize += std::to_string(renderContext.canvasSurface.getWidth());
+    canvasSize += " x ";
+    canvasSize += std::to_string(renderContext.canvasSurface.getHeight());
 
     int textWidth, textHeight;
     if (TTF_SizeText(font, canvasSize.c_str(), &textWidth, &textHeight) != 0) {

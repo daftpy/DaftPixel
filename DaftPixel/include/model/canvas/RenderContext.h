@@ -1,5 +1,6 @@
 #pragma once
 #include "view/RenderManager.h"
+#include "model/canvas/CanvasSurface.h"
 
 namespace Canvas {
     /**
@@ -7,6 +8,7 @@ namespace Canvas {
      * @brief This struct represents the context for rendering a Canvas.
      */
     struct RenderContext {
+        CanvasSurface& canvasSurface; ///< Reference to a CanvasSurface object.
         RenderManager& renderManager; ///< Reference to a RenderManager object.
         uint8_t scaleFactor; ///< The current scale factor.
 
@@ -16,8 +18,8 @@ namespace Canvas {
          * @param renderManager Reference to a RenderManager object.
          * @param scaleFactor The scale factor to be used for rendering.
          */
-        RenderContext(RenderManager& renderManager, uint8_t scaleFactor)
-            : renderManager(renderManager), scaleFactor(scaleFactor) {}
+        RenderContext(CanvasSurface& canvasSurface, RenderManager& renderManager, uint8_t scaleFactor)
+            : canvasSurface(canvasSurface), renderManager(renderManager), scaleFactor(scaleFactor) {}
 
         void changeScaleFactor(int8_t delta) {
             int8_t newScaleFactor = scaleFactor + delta;

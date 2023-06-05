@@ -25,7 +25,7 @@ public:
     * @param font Pointer to a TTF_Font used for rendering text on the screen.
     * @param renderManager Reference to a RenderManager for handling rendering operations.
     */
-    explicit CanvasSurfaceView(CanvasSurface& canvas, TTF_Font* font, Canvas::RenderContext& renderContext);
+    explicit CanvasSurfaceView(TTF_Font* font, Canvas::RenderContext& renderContext);
 
     /**
     * @brief Renders the Canvas using the provided SDL_Renderer.
@@ -36,7 +36,6 @@ public:
 
 private:
     TTF_Font* font; ///< Pointer to a TTF_Font used for rendering text on the screen.
-    CanvasSurface& canvasSurface; ///< Reference to a Canvas instance that this renderer will manage.
     CanvasStatusBar statusBar; ///< CanvasStatusBar instance for rendering the status bar.
     Canvas::RenderContext& renderContext; ///< Reference to a RenderManager for handling rendering operations.
     uint8_t scaleFactor; ///< The current scale factor of the CanvasSurfaceView.
