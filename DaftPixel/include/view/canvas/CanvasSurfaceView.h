@@ -38,5 +38,4 @@ private:
     TTF_Font* font; ///< Pointer to a TTF_Font used for rendering text on the screen.
     CanvasStatusBar statusBar; ///< CanvasStatusBar instance for rendering the status bar.
     Canvas::RenderContext& renderContext; ///< Reference to a RenderManager for handling rendering operations.
-    uint8_t scaleFactor; ///< The current scale factor of the CanvasSurfaceView.
 };

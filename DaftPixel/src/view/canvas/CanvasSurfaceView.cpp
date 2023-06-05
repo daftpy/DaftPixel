@@ -8,7 +8,7 @@
 * @param font TTF_Font used for rendering.
 */
 CanvasSurfaceView::CanvasSurfaceView(TTF_Font* font, Canvas::RenderContext& renderContext) :
-    statusBar(font, renderContext), font(font), renderContext(renderContext), scaleFactor(1) {}
+    statusBar(font, renderContext), font(font), renderContext(renderContext) {}
 
 /**
 * @brief Renders the CanvasSurface using the provided SDL_Renderer.
