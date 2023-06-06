@@ -21,6 +21,9 @@
 #include "model/Pixel.h"
 #include "controller/canvas/CanvasSurfaceController.h"
 #include "model/canvas/RenderContext.h"
+#include "manager/InputManager.h"
+#include "manager/KeyBindingManager.h"
+#include "model/Action.h"
 
 class EditorController {
 public:
@@ -71,4 +74,7 @@ private:
 
     // TEMPORARY DEBUG CODE
     std::unique_ptr<Canvas::RenderContext> renderContext;
+
+    std::unique_ptr<InputManager> inputManager;
+    KeyBindingManager keyBindingManager;
 };

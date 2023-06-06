@@ -16,6 +16,15 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 		// handle error
 	}
 
+	KeyBinding deacreaseKeyBinding(SDLK_MINUS, KMOD_NONE, Action::DecreaseScaleFactor);
+	KeyBinding increaseKeyBinding(SDLK_EQUALS, KMOD_NONE, Action::IncreaseScaleFactor);
+
+	// Initialize KeyBindingManager and bind keys to actions
+	keyBindingManager.addKeyBinding(increaseKeyBinding);
+	keyBindingManager.addKeyBinding(deacreaseKeyBinding);
+
+	inputManager = std::make_unique<InputManager>(keyBindingManager);
+
 	/*
 		Debug code below
 	*/
@@ -66,29 +75,20 @@ void EditorController::handleEvents() {
 		if (event.type == SDL_QUIT) {
 			running = false;
 		}
-		else if (event.type == SDL_KEYUP) { // A key has been pressed
-			switch (event.key.keysym.sym) {
-			case SDLK_EQUALS: // "+" key without Shift
+		else {
+			// Pass the event to the InputManager
+			inputManager->handleEvent(event);
+
+			// Check if actions have been triggered and respond accordingly
+			if (inputManager->isActionTriggered(Action::IncreaseScaleFactor)) {
+				std::cout << "inreasing scale factor" << std::endl;
 				renderContext->changeScaleFactor(static_cast<int8_t>(1));
-				break;
-			case SDLK_MINUS: // "-" key without Shift
+				inputManager->markActionAsHandled(Action::IncreaseScaleFactor);
+			}
+			else if (inputManager->isActionTriggered(Action::DecreaseScaleFactor)) {
+				std::cout << "decreasing scale factor" << std::endl;
 				renderContext->changeScaleFactor(static_cast<int8_t>(-1));
-				break;
-			}
-		}
-		else if (event.type == SDL_WINDOWEVENT) {
-			switch (event.window.event) {
-			case SDL_WINDOWEVENT_RESIZED:
-			{
-				int newWidth = event.window.data1;
-				int newHeight = event.window.data2;
-				// Update the window dimensions in the RenderContext
-				renderContext->windowWidth = newWidth;
-				renderContext->windowHeight = newHeight;
-			}
-			break;
-			default:
-				break;
+				inputManager->markActionAsHandled(Action::DecreaseScaleFactor);
 			}
 		}
 	}
