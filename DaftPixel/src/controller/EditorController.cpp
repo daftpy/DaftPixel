@@ -79,14 +79,16 @@ void EditorController::handleEvents() {
 			// Pass the event to the InputManager
 			inputManager->handleEvent(event);
 
+			
+
 			// Check if actions have been triggered and respond accordingly
 			if (inputManager->isActionTriggered(Action::IncreaseScaleFactor)) {
-				std::cout << "inreasing scale factor" << std::endl;
+				/*std::cout << "inreasing scale factor" << std::endl;*/
 				renderContext->changeScaleFactor(static_cast<int8_t>(1));
 				inputManager->markActionAsHandled(Action::IncreaseScaleFactor);
 			}
 			else if (inputManager->isActionTriggered(Action::DecreaseScaleFactor)) {
-				std::cout << "decreasing scale factor" << std::endl;
+				/*std::cout << "decreasing scale factor" << std::endl;*/
 				renderContext->changeScaleFactor(static_cast<int8_t>(-1));
 				inputManager->markActionAsHandled(Action::DecreaseScaleFactor);
 			}
