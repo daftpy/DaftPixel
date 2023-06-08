@@ -78,6 +78,7 @@ private:
     // TEMPORARY DEBUG CODE
     std::unique_ptr<Canvas::RenderContext> renderContext;
     std::unique_ptr<CommandManager> commandManager;
+    std::unique_ptr<CanvasSurfaceController> surfaceController;
     std::vector<Action> actions;
 
     std::unique_ptr<InputManager> inputManager;

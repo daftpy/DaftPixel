@@ -40,5 +40,13 @@ namespace Canvas {
             }
             scaleFactor = newScaleFactor;
         }
+
+        int getCanvasStartX() const {
+            return (windowWidth - canvasSurface.getWidth() * scaleFactor) / 2;
+        }
+
+        int getCanvasStartY() const {
+            return (windowHeight - canvasSurface.getHeight() * scaleFactor) / 2;
+        }
     };
 }

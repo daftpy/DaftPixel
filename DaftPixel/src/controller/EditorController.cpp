@@ -43,7 +43,7 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	// More debug code
 	createNewCanvas(32, 32);
 	canvases.front()->getPixelBuffer().generateRandomPixels(); // only used for testing
-	CanvasSurfaceController surfaceController(*canvases.front());
+	surfaceController = std::make_unique<CanvasSurfaceController>(*canvases.front());
 
 	// Still debug code
 	renderContext = std::make_unique< Canvas::RenderContext>(*canvases.front(), font, 1, renderManager.getWindow());
@@ -81,6 +81,23 @@ void EditorController::handleEvents() {
 		if (event.type == SDL_QUIT) {
 			running = false;
 		}
+		else if (event.type == SDL_MOUSEMOTION) {
+			// Get the new mouse position.
+			int mouseX = event.motion.x;
+			int mouseY = event.motion.y;
+
+			// Convert mouse coordinates to canvas coordinates
+			auto canvasCoords = surfaceController->pointerToCanvasCoords(mouseX, mouseY, renderContext->scaleFactor, renderContext->getCanvasStartX(), renderContext->getCanvasStartY());
+
+			// If the mouse is within the canvas
+			if (canvasCoords.has_value()) {
+				// Get the pixel at the mouse position
+				Pixel pixelAtMousePosition = surfaceController->getPixel(canvasCoords->first, canvasCoords->second);
+
+				// Print the pixel at mouse position
+				std::cout << "Pixel at mouse position: " << pixelAtMousePosition << "\n";
+			}
+		}
 		else {
 			// Pass the event to the InputManager
 			inputManager->handleEvent(event);
@@ -90,6 +107,7 @@ void EditorController::handleEvents() {
 		}
 	}
 }
+
 
 void EditorController::processActions() {
 	for (auto action : actions) {
