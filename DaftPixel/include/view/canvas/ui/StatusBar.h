@@ -4,7 +4,7 @@
 #include <string>
 #include "model/canvas/RenderContext.h"
 #include "view/IDrawable.h"
-#include "model/canvas/CanvasSurface.h"
+#include "model/canvas/Surface.h"
 
 /**
  * @namespace Canvas

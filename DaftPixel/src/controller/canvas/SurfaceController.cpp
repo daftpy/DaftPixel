@@ -5,7 +5,7 @@
 *
 * @param canvasSurface Reference to a CanvasSurface instance.
 */
-Canvas::Controller::SurfaceController::SurfaceController(CanvasSurface& canvasSurface) : canvasSurface(canvasSurface) {
+Canvas::Controller::SurfaceController::SurfaceController(Canvas::Surface& canvasSurface) : canvasSurface(canvasSurface) {
 	// Initialization if needed
 }
 
@@ -25,7 +25,7 @@ void Canvas::Controller::SurfaceController::setDimensions(uint16_t width, uint16
 *
 * @return CanvasSurface& Reference to the CanvasSurface instance.
 */
-CanvasSurface& Canvas::Controller::SurfaceController::getCanvasSurface() {
+Canvas::Surface& Canvas::Controller::SurfaceController::getCanvasSurface() {
 	return canvasSurface;
 }
 

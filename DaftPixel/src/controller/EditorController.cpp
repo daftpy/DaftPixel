@@ -65,7 +65,7 @@ EditorController::~EditorController() {
 
 void EditorController::createNewCanvas(uint16_t width, uint16_t height) {
 	// Create the new Canvas
-	std::unique_ptr<CanvasSurface> newCanvas = std::make_unique<CanvasSurface>(width, height);
+	std::unique_ptr<Canvas::Surface> newCanvas = std::make_unique<Canvas::Surface>(width, height);
 
 	// Add the new Canvas to the list of canvases
 	canvases.push_back(std::move(newCanvas));

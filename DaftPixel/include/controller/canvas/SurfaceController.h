@@ -11,7 +11,7 @@
 
 #pragma once
 #include <memory>
-#include "model/canvas/CanvasSurface.h"
+#include "model/canvas/Surface.h"
 #include "model/Pixel.h"
 #include <optional>
 
@@ -24,7 +24,7 @@ namespace Canvas {
             *
             * @param canvasSurface Reference to a CanvasSurface instance.
             */
-            explicit SurfaceController(CanvasSurface& canvas);
+            explicit SurfaceController(Canvas::Surface& canvas);
 
             /**
             * @brief Set the dimensions of the CanvasSurface.
@@ -39,7 +39,7 @@ namespace Canvas {
             *
             * @return Canvas& Reference to the CanvasSurface instance.
             */
-            CanvasSurface& getCanvasSurface();
+            Canvas::Surface& getCanvasSurface();
 
 
 
@@ -70,7 +70,7 @@ namespace Canvas {
             /**
             * @brief Reference to a CanvasSurface instance.
             */
-            CanvasSurface& canvasSurface;
+            Canvas::Surface& canvasSurface;
         };
 
     }
