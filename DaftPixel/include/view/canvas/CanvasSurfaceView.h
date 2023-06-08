@@ -11,7 +11,7 @@
 #pragma once
 
 #include "model/canvas/CanvasSurface.h"
-#include "view/canvas/ui/CanvasStatusBar.h"
+#include "view/canvas/ui/StatusBar.h"
 #include "view/IDrawable.h"
 #include "view/RenderManager.h"
 #include "model/canvas/RenderContext.h"
@@ -34,6 +34,6 @@ public:
     void render(SDL_Renderer* renderer) const override;
 
 private:
-    CanvasStatusBar statusBar; ///< CanvasStatusBar instance for rendering the status bar.
+    Canvas::Gui::StatusBar statusBar; ///< StatusBar instance for rendering the status bar.
     Canvas::RenderContext& renderContext; ///< Reference to a RenderManager for handling rendering operations.
 };

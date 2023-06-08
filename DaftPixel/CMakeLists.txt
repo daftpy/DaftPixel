@@ -20,7 +20,7 @@ add_executable (DaftPixel
 "src/model/PixelBuffer.cpp" 
 "include/view/RenderManager.h" 
 "src/view/RenderManager.cpp" 
-"include/view/canvas/ui/CanvasStatusBar.h" 
+"include/view/canvas/ui/StatusBar.h" 
 "include/model/canvas/CanvasSurface.h" 
 "include/view/IDrawable.h" 
 "src/controller/canvas/CanvasSurfaceController.cpp" 
@@ -28,7 +28,7 @@ add_executable (DaftPixel
 "src/model/canvas/CanvasSurface.cpp"
 "src/view/canvas/CanvasSurfaceView.cpp"
 "include/view/canvas/CanvasSurfaceView.h"
-"src/view/canvas/ui/CanvasStatusBar.cpp"
+"src/view/canvas/ui/StatusBar.cpp"
 "include/model/canvas/RenderContext.h" "include/manager/InputManager.h" "src/manager/InputManager.cpp" "include/manager/KeyBindingManager.h" "src/manager/KeyBindingManager.cpp" "include/model/Action.h" "include/manager/CommandManager.h" "src/manager/CommandManager.cpp" "src/model/canvas/RenderContext.cpp")
 
 # Add include directories.
