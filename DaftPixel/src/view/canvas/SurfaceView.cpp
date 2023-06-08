@@ -1,4 +1,4 @@
-#include "view/canvas/CanvasSurfaceView.h"
+#include "view/canvas/SurfaceView.h"
 #include <iostream>
 
 /**
@@ -7,7 +7,7 @@
 * @param renderContext reference to RenderContext instance is responsible for maintaining
 * display characteristics for the CanvasSurfaceView such as scale factor, positioning, etc.
 */
-CanvasSurfaceView::CanvasSurfaceView(Canvas::RenderContext& renderContext) :
+Canvas::View::SurfaceView::SurfaceView(Canvas::RenderContext& renderContext) :
     statusBar(renderContext), renderContext(renderContext) {}
 
 /**
@@ -15,7 +15,7 @@ CanvasSurfaceView::CanvasSurfaceView(Canvas::RenderContext& renderContext) :
 *
 * @param renderer SDL_Renderer used for rendering.
 */
-void CanvasSurfaceView::render(SDL_Renderer* renderer) const {
+void Canvas::View::SurfaceView::render(SDL_Renderer* renderer) const {
     statusBar.render(renderer);
 
     auto& pixelBuffer = renderContext.canvasSurface.getPixelBuffer();

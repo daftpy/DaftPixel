@@ -26,8 +26,8 @@ add_executable (DaftPixel
 "src/controller/canvas/SurfaceController.cpp" 
 "include/controller/canvas/SurfaceController.h"
 "src/model/canvas/CanvasSurface.cpp"
-"src/view/canvas/CanvasSurfaceView.cpp"
-"include/view/canvas/CanvasSurfaceView.h"
+"src/view/canvas/SurfaceView.cpp"
+"include/view/canvas/SurfaceView.h"
 "src/view/canvas/ui/StatusBar.cpp"
 "include/model/canvas/RenderContext.h" "include/manager/InputManager.h" "src/manager/InputManager.cpp" "include/manager/KeyBindingManager.h" "src/manager/KeyBindingManager.cpp" "include/model/Action.h" "include/manager/CommandManager.h" "src/manager/CommandManager.cpp" "src/model/canvas/RenderContext.cpp")
 

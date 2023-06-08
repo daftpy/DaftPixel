@@ -8,7 +8,7 @@
 
 /**
  * @namespace Canvas
- * @brief Main namespace for the project.
+ * @brief Main namespace for Canvas related classes.
  */
 namespace Canvas {
     /**

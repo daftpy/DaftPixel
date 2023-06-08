@@ -1,6 +1,6 @@
 #include "controller/EditorController.h"
 #include <memory>
-#include "view/canvas/CanvasSurfaceView.h"
+#include "view/canvas/SurfaceView.h"
 
 EditorController::EditorController() : editorName("DaftPixel"), running(false), renderContext(nullptr) {
 	// Initialize SDL_ttf library
@@ -50,7 +50,7 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 
 	commandManager = std::make_unique<CommandManager>(*renderContext);
 
-	std::shared_ptr<CanvasSurfaceView> canvasRenderer = std::make_shared<CanvasSurfaceView>(*renderContext);
+	std::shared_ptr<Canvas::View::SurfaceView> canvasRenderer = std::make_shared<Canvas::View::SurfaceView>(*renderContext);
 
 	renderManager.addDrawable(canvasRenderer);
 };
