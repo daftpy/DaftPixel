@@ -29,7 +29,7 @@ add_executable (DaftPixel
 "src/view/canvas/CanvasSurfaceView.cpp"
 "include/view/canvas/CanvasSurfaceView.h"
 "src/view/canvas/ui/CanvasStatusBar.cpp"
-"include/model/canvas/RenderContext.h" "include/manager/InputManager.h" "src/manager/InputManager.cpp" "include/manager/KeyBindingManager.h" "src/manager/KeyBindingManager.cpp" "include/model/Action.h")
+"include/model/canvas/RenderContext.h" "include/manager/InputManager.h" "src/manager/InputManager.cpp" "include/manager/KeyBindingManager.h" "src/manager/KeyBindingManager.cpp" "include/model/Action.h" "include/manager/CommandManager.h" "src/manager/CommandManager.cpp")
 
 # Add include directories.
 target_include_directories(DaftPixel PRIVATE include)

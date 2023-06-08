@@ -1,8 +1,8 @@
 #pragma once
 
 enum class Action {
-	None,
 	IncreaseScaleFactor,
-	DecreaseScaleFactor
+	DecreaseScaleFactor,
+	None
 	// TODO: More actions
 };

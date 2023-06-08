@@ -24,6 +24,7 @@
 #include "manager/InputManager.h"
 #include "manager/KeyBindingManager.h"
 #include "model/Action.h"
+#include "manager/CommandManager.h"
 
 class EditorController {
 public:
@@ -54,6 +55,8 @@ public:
     */
     void createNewCanvas(uint16_t width, uint16_t height);
 
+    void processActions();
+
 private:
     std::string editorName; ///< The name of the editor. This is displayed in the window title.
 
@@ -74,6 +77,8 @@ private:
 
     // TEMPORARY DEBUG CODE
     std::unique_ptr<Canvas::RenderContext> renderContext;
+    std::unique_ptr<CommandManager> commandManager;
+    std::vector<Action> actions;
 
     std::unique_ptr<InputManager> inputManager;
     KeyBindingManager keyBindingManager;

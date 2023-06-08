@@ -19,6 +19,11 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	KeyBinding deacreaseKeyBinding(SDLK_MINUS, KMOD_NONE, Action::DecreaseScaleFactor);
 	KeyBinding increaseKeyBinding(SDLK_EQUALS, KMOD_NONE, Action::IncreaseScaleFactor);
 
+	// Add actions to handle
+	for (int i = 0; i < static_cast<int>(Action::None); ++i) {
+		actions.push_back(static_cast<Action>(i));
+	}
+
 	// Initialize KeyBindingManager and bind keys to actions
 	keyBindingManager.addKeyBinding(increaseKeyBinding);
 	keyBindingManager.addKeyBinding(deacreaseKeyBinding);
@@ -43,6 +48,8 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	// Still debug code
 	renderContext = std::make_unique< Canvas::RenderContext>(*canvases.front(), font, 1, renderManager.getWindow());
 
+	commandManager = std::make_unique<CommandManager>(*renderContext);
+
 	std::shared_ptr<CanvasSurfaceView> canvasRenderer = std::make_shared<CanvasSurfaceView>(*renderContext);
 
 	renderManager.addDrawable(canvasRenderer);
@@ -64,7 +71,6 @@ void EditorController::createNewCanvas(uint16_t width, uint16_t height) {
 	canvases.push_back(std::move(newCanvas));
 }
 
-
 // TEMPORARY DEBUG CODE
 // TODO: InputManager
 void EditorController::handleEvents() {
@@ -79,23 +85,19 @@ void EditorController::handleEvents() {
 			// Pass the event to the InputManager
 			inputManager->handleEvent(event);
 
-			
-
-			// Check if actions have been triggered and respond accordingly
-			if (inputManager->isActionTriggered(Action::IncreaseScaleFactor)) {
-				/*std::cout << "inreasing scale factor" << std::endl;*/
-				renderContext->changeScaleFactor(static_cast<int8_t>(1));
-				inputManager->markActionAsHandled(Action::IncreaseScaleFactor);
-			}
-			else if (inputManager->isActionTriggered(Action::DecreaseScaleFactor)) {
-				/*std::cout << "decreasing scale factor" << std::endl;*/
-				renderContext->changeScaleFactor(static_cast<int8_t>(-1));
-				inputManager->markActionAsHandled(Action::DecreaseScaleFactor);
-			}
+			// Process actions
+			processActions();
 		}
 	}
 }
 
+void EditorController::processActions() {
+	for (auto action : actions) {
+		if (inputManager->isActionTriggered(action)) {
+			commandManager->executeCommand(action, *inputManager);
+		}
+	}
+}
 
 void EditorController::run() {
 	// Run the main editor loop.
