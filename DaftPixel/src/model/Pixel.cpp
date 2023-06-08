@@ -44,7 +44,7 @@ void Pixel::set(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Pixel& pixel) {
-    os << "Pixel(: " << static_cast<int>(pixel.red) << ", g: " << static_cast<int>(pixel.green)
+    os << "Pixel(r: " << static_cast<int>(pixel.red) << ", g: " << static_cast<int>(pixel.green)
         << ", b: " << static_cast<int>(pixel.blue) << ", a: " << static_cast<int>(pixel.alpha) << ")";
     return os;
 }
