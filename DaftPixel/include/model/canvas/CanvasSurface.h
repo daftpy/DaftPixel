@@ -1,12 +1,12 @@
 /**
-* @file Canvas.h
+* @file CanvasSurface.h
 * @brief Header file for the CanvasSurface class
 */
 
 /**
-* @class Canvas
+* @class CanvasSurface
 *
-* @brief This class represents a Canvas instance. Each Canvas object stores the width and height of the canvas.
+* @brief This class represents a CanvasSurface instance. Each CanvasSurface object stores the width and height of the CanvasSurface.
 */
 
 #pragma once
@@ -20,10 +20,10 @@ public:
     CanvasSurface(uint16_t width, uint16_t height);
 
     /**
-    * @brief Constructs a new Canvas instance with specified width and height.
+    * @brief Constructs a new CanvasSurface instance with specified width and height.
     *
-    * @param width Width of the Canvas.
-    * @param height Height of the Canvas.
+    * @param width Width of the CanvasSurface.
+    * @param height Height of the CanvasSurface.
     */
     CanvasSurface(uint16_t width, uint16_t height, std::shared_ptr<PixelBuffer> pixelBuffer)
         : canvasWidth(width),
@@ -31,30 +31,30 @@ public:
         pixelBuffer(std::move(pixelBuffer)) {}
 
     /**
-    * @brief Set the width of the Canvas.
+    * @brief Set the width of the CanvasSurface.
     *
-    * @param width Width of the Canvas.
+    * @param width Width of the CanvasSurface.
     */
     void setWidth(uint16_t width);
 
     /**
-    * @brief Get the width of the Canvas.
+    * @brief Get the width of the CanvasSurface.
     *
-    * @return uint16_t Width of the Canvas.
+    * @return uint16_t Width of the CanvasSurface.
     */
     uint16_t getWidth() const;
 
     /**
-    * @brief Set the height of the Canvas.
+    * @brief Set the height of the CanvasSurface.
     *
-    * @param height Height of the Canvas.
+    * @param height Height of the CanvasSurface.
     */
     void setHeight(uint16_t height);
 
     /**
-    * @brief Get the height of the Canvas.
+    * @brief Get the height of the CanvasSurface.
     *
-    * @return uint16_t Height of the Canvas.
+    * @return uint16_t Height of the CanvasSurface.
     */
     uint16_t getHeight() const;
 
@@ -75,12 +75,12 @@ public:
 
 private:
     /**
-    * @brief Width of the Canvas.
+    * @brief Width of the CanvasSurface.
     */
     uint16_t canvasWidth;
 
     /**
-    * @brief Height of the Canvas.
+    * @brief Height of the CanvasSurface.
     */
     uint16_t canvasHeight;
 
