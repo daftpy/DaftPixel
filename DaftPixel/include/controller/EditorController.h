@@ -19,7 +19,7 @@
 #include "model/canvas/CanvasSurface.h"
 #include "model/PixelBuffer.h"
 #include "model/Pixel.h"
-#include "controller/canvas/CanvasSurfaceController.h"
+#include "controller/canvas/SurfaceController.h"
 #include "model/canvas/RenderContext.h"
 #include "manager/InputManager.h"
 #include "manager/KeyBindingManager.h"
@@ -117,7 +117,7 @@ private:
     *
     * This object is responsible for handling interactions with the CanvasSurface.
     */
-    std::unique_ptr<CanvasSurfaceController> surfaceController;
+    std::unique_ptr<Canvas::Controller::SurfaceController> surfaceController;
 
     /**
     * @brief A unique pointer to the InputManager object.

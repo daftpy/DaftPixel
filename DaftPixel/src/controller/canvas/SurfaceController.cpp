@@ -1,11 +1,11 @@
-#include "controller/canvas/CanvasSurfaceController.h"
+#include "controller/canvas/SurfaceController.h"
 
 /**
 * @brief Constructs a new CanvasController instance with a reference to a CanvasSurface.
 *
 * @param canvasSurface Reference to a CanvasSurface instance.
 */
-CanvasSurfaceController::CanvasSurfaceController(CanvasSurface& canvasSurface) : canvasSurface(canvasSurface) {
+Canvas::Controller::SurfaceController::SurfaceController(CanvasSurface& canvasSurface) : canvasSurface(canvasSurface) {
 	// Initialization if needed
 }
 
@@ -15,7 +15,7 @@ CanvasSurfaceController::CanvasSurfaceController(CanvasSurface& canvasSurface) :
 * @param width Width of the CanvasSurface.
 * @param height Height of the CanvasSurface.
 */
-void CanvasSurfaceController::setDimensions(uint16_t width, uint16_t height) {
+void Canvas::Controller::SurfaceController::setDimensions(uint16_t width, uint16_t height) {
 	canvasSurface.setWidth(width);
 	canvasSurface.setHeight(height);
 }
@@ -25,11 +25,11 @@ void CanvasSurfaceController::setDimensions(uint16_t width, uint16_t height) {
 *
 * @return CanvasSurface& Reference to the CanvasSurface instance.
 */
-CanvasSurface& CanvasSurfaceController::getCanvasSurface() {
+CanvasSurface& Canvas::Controller::SurfaceController::getCanvasSurface() {
 	return canvasSurface;
 }
 
-std::optional<std::pair<int, int>> CanvasSurfaceController::pointerToCanvasCoords(int screenX, int screenY, float scaleFactor, int canvasStartX, int canvasStartY) {
+std::optional<std::pair<int, int>> Canvas::Controller::SurfaceController::pointerToCanvasCoords(int screenX, int screenY, float scaleFactor, int canvasStartX, int canvasStartY) {
     int canvasX = (screenX - canvasStartX) / scaleFactor;
     int canvasY = (screenY - canvasStartY) / scaleFactor;
 
@@ -42,6 +42,6 @@ std::optional<std::pair<int, int>> CanvasSurfaceController::pointerToCanvasCoord
 }
 
 
-Pixel CanvasSurfaceController::getPixel(int canvasX, int canvasY) {
+Pixel Canvas::Controller::SurfaceController::getPixel(int canvasX, int canvasY) {
 	return canvasSurface.getPixelBuffer().at(canvasX, canvasY);
 }

@@ -43,7 +43,7 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	// More debug code
 	createNewCanvas(32, 32);
 	canvases.front()->getPixelBuffer().generateRandomPixels(); // only used for testing
-	surfaceController = std::make_unique<CanvasSurfaceController>(*canvases.front());
+	surfaceController = std::make_unique<Canvas::Controller::SurfaceController>(*canvases.front());
 
 	// Still debug code
 	renderContext = std::make_unique< Canvas::RenderContext>(*canvases.front(), font, 1, renderManager.getWindow());
