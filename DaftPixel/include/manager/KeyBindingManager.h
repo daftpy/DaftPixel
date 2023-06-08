@@ -65,5 +65,8 @@ public:
     void removeKeyBinding(const KeyBinding& binding);
 
 private:
-    std::vector<KeyBinding> m_keyBindings; ///< List of key bindings
+    /**
+    * @brief A list of KeyBindings that have been added.
+    */
+    std::vector<KeyBinding> m_keyBindings;
 };

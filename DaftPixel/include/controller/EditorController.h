@@ -1,12 +1,12 @@
 /**
 * @file EditorController.h
-* @brief Header file for the EditorController class. This class is responsible for running the main application loop, handling events, managing canvases and rendering.
+* @brief Header file for the EditorController class. This class is responsible for running the main application loop, handling events, and managing canvases.
 */
 
 /**
 * @class EditorController
 *
-* @brief The EditorController class manages the application, running the main loop, handling events, managing Canvases, and overseeing rendering.
+* @brief The EditorController class manages the application, running the main loop, handling events, and managing Canvases.
 */
 
 #pragma once
@@ -58,9 +58,17 @@ public:
     void processActions();
 
 private:
-    std::string editorName; ///< The name of the editor. This is displayed in the window title.
+    /**
+    * @brief The name of the editor. Displayed in the window title.
+    */
+    std::string editorName;
 
-    bool running; ///< @brief A flag indicating whether the application is currently running. This is used to control the main application loop.
+    /**
+    * @brief A flag indicating whether the application is currently running.
+    *
+    * This is used to control the main application loop.
+    */
+    bool running;
 
     /**
      * @brief A vector containing unique pointers to Canvas objects.
@@ -70,17 +78,58 @@ private:
      */
     std::vector<std::unique_ptr<CanvasSurface>> canvases;
 
-    RenderManager renderManager; ///< The RenderManager, which is responsible for drawing the Canvas objects and other UI elements to the screen.
+    /**
+    * @brief The RenderManager is responsible for drawing the Canvas objects and other UI elements to the screen.
+    */
+    RenderManager renderManager;
 
-    TTF_Font* font; ///< A pointer to the TTF_Font that is used for rendering text on the screen. The lifetime of the font object is managed by the EditorController.
+    /**
+    * @brief A pointer to the TTF_Font used for rendering text on the screen.
+    *
+    * The lifetime of the font object is managed by the EditorController.
+    */
+    TTF_Font* font;
+
+    /**
+    * @brief A list of Actions that have been triggered and are waiting to be processed.
+    */
+    std::vector<Action> actions;
 
 
     // TEMPORARY DEBUG CODE
-    std::unique_ptr<Canvas::RenderContext> renderContext;
-    std::unique_ptr<CommandManager> commandManager;
-    std::unique_ptr<CanvasSurfaceController> surfaceController;
-    std::vector<Action> actions;
 
+    /**
+    * @brief A unique pointer to the RenderContext.
+    *
+    * This object is responsible for holding the current rendering context for a Canvas.
+    */
+    std::unique_ptr<Canvas::RenderContext> renderContext;
+
+    /**
+    * @brief A unique pointer to the CommandManager object.
+    *
+    * This object is responsible for managing the execution, undoing, and redoing of commands.
+    */
+    std::unique_ptr<CommandManager> commandManager;
+
+    /**
+    * @brief A unique pointer to the CanvasSurfaceController object.
+    *
+    * This object is responsible for handling interactions with the CanvasSurface.
+    */
+    std::unique_ptr<CanvasSurfaceController> surfaceController;
+
+    /**
+    * @brief A unique pointer to the InputManager object.
+    *
+    * This object is responsible for managing input from the user, such as keyboard and mouse events.
+    */
     std::unique_ptr<InputManager> inputManager;
+
+    /**
+    * @brief The KeyBindingManager object.
+    *
+    * This object is responsible for managing the key bindings that determine how user input is mapped to Actions.
+    */
     KeyBindingManager keyBindingManager;
 };

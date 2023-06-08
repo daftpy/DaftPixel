@@ -26,32 +26,12 @@ namespace Canvas {
             SDL_GetWindowSize(window, &windowWidth, &windowHeight);
         }
 
-        void updateWindowSize(int newWidth, int newHeight) {
-            windowWidth = newWidth;
-            windowHeight = newHeight;
-        }
+        void updateWindowSize(int newWidth, int newHeight);
 
-        void changeScaleFactor(int8_t delta) {
-            int8_t newScaleFactor = scaleFactor + delta;
-            try {
-                if (newScaleFactor <= 0) {
-                    throw std::out_of_range("Scale factor must be greater than 0.");
-                }
-            }
-            catch (const std::out_of_range& e) {
-                // Handle the exception (e.g., log an error message)
-                std::cerr << "Error: " << e.what() << std::endl;
-                return;
-            }
-            scaleFactor = newScaleFactor;
-        }
+        void changeScaleFactor(int8_t delta);
 
-        int getCanvasStartX() const {
-            return (windowWidth - canvasSurface.getWidth() * scaleFactor) / 2;
-        }
+        int getCanvasStartX() const;
 
-        int getCanvasStartY() const {
-            return (windowHeight - canvasSurface.getHeight() * scaleFactor) / 2;
-        }
+        int getCanvasStartY() const;
     };
 }
