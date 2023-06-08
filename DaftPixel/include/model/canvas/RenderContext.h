@@ -26,6 +26,11 @@ namespace Canvas {
             SDL_GetWindowSize(window, &windowWidth, &windowHeight);
         }
 
+        void updateWindowSize(int newWidth, int newHeight) {
+            windowWidth = newWidth;
+            windowHeight = newHeight;
+        }
+
         void changeScaleFactor(int8_t delta) {
             int8_t newScaleFactor = scaleFactor + delta;
             try {

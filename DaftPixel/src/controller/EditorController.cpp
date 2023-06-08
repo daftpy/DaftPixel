@@ -98,6 +98,12 @@ void EditorController::handleEvents() {
 				std::cout << "Pixel at mouse position: " << pixelAtMousePosition << "\n";
 			}
 		}
+		else if (event.type == SDL_WINDOWEVENT) {
+			if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+				// handle window resize event...
+				renderContext->updateWindowSize(event.window.data1, event.window.data2);
+			}
+		}
 		else {
 			// Pass the event to the InputManager
 			inputManager->handleEvent(event);
