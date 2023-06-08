@@ -5,6 +5,7 @@
 #include "model/canvas/RenderContext.h"
 #include "view/IDrawable.h"
 #include "model/canvas/Surface.h"
+#include "view/canvas/ui/InfoWidget.h"
 
 /**
  * @namespace Canvas
@@ -30,8 +31,7 @@ namespace Canvas {
              * @brief Construct a new StatusBar object.
              * @param renderContext Reference to the render context.
              */
-            StatusBar(Canvas::RenderContext& renderContext) :
-                renderContext(renderContext) {}
+            StatusBar(Canvas::RenderContext& renderContext);
 
             /**
              * @brief Destroy the StatusBar object.
@@ -44,8 +44,12 @@ namespace Canvas {
              */
             void render(SDL_Renderer* renderer) const override;
 
+            void updateWidgets();
+
         private:
             Canvas::RenderContext& renderContext; ///< @brief Reference to the render context.
+            InfoWidget canvasDimensionsWidget;
+            InfoWidget scaleFactorWidget;
         };
     }
 }

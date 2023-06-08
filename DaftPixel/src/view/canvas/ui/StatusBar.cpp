@@ -1,12 +1,24 @@
 #include "view/canvas/ui/StatusBar.h"
 
-void Canvas::Gui::StatusBar::render(SDL_Renderer* renderer) const {
-    std::string canvasSize = "Scale Factor: x" + std::to_string(renderContext.scaleFactor);
-    canvasSize += "   Canvas: ";
-    canvasSize += std::to_string(renderContext.canvasSurface.getWidth());
-    canvasSize += " x ";
-    canvasSize += std::to_string(renderContext.canvasSurface.getHeight());
+Canvas::Gui::StatusBar::StatusBar(Canvas::RenderContext& renderContext) :
+    renderContext(renderContext) {
 
+    // Set up the canvasDimensions widget
+    canvasDimensionsWidget.setName("Canvas");
+    canvasDimensionsWidget.widgetData = std::to_string(renderContext.canvasSurface.getWidth()) + " x " + std::to_string(renderContext.canvasSurface.getHeight());
+    canvasDimensionsWidget.padding = 8;
+
+
+    // Set up the scaleFactor widget
+    std::string scaleFactor = "Scale Factor: x" + std::to_string(renderContext.scaleFactor);
+    scaleFactorWidget.setName("Scale Factor");
+    scaleFactorWidget.widgetData = "x" + std::to_string(renderContext.scaleFactor);
+    scaleFactorWidget.padding = 8;
+    
+}
+
+void Canvas::Gui::StatusBar::render(SDL_Renderer* renderer) const {
+    std::string canvasSize = scaleFactorWidget.widgetName + scaleFactorWidget.widgetData + " " + canvasDimensionsWidget.widgetName + canvasDimensionsWidget.widgetData;
     int textWidth, textHeight;
     if (TTF_SizeText(renderContext.font, canvasSize.c_str(), &textWidth, &textHeight) != 0) {
         std::cerr << "TTF_SizeText: " << TTF_GetError() << std::endl;
@@ -30,4 +42,9 @@ void Canvas::Gui::StatusBar::render(SDL_Renderer* renderer) const {
     // Clean up
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+}
+
+void Canvas::Gui::StatusBar::updateWidgets() {
+    canvasDimensionsWidget.widgetData = std::to_string(renderContext.canvasSurface.getWidth()) + " x " + std::to_string(renderContext.canvasSurface.getHeight());
+    scaleFactorWidget.widgetData = "x" + std::to_string(renderContext.scaleFactor);
 }

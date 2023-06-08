@@ -25,6 +25,7 @@
 #include "manager/KeyBindingManager.h"
 #include "model/Action.h"
 #include "manager/CommandManager.h"
+#include "view/canvas/SurfaceView.h"
 
 class EditorController {
 public:
@@ -118,6 +119,13 @@ private:
     * This object is responsible for handling interactions with the CanvasSurface.
     */
     std::unique_ptr<Canvas::Controller::SurfaceController> surfaceController;
+
+    /**
+    * @brief A shared pointer to the SurfaceView object.
+    *
+    * This object is responsible for displaying the surface of the Canvas.
+    */
+    std::shared_ptr<Canvas::View::SurfaceView> surfaceView;
 
     /**
     * @brief A unique pointer to the InputManager object.

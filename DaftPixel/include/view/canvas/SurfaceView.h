@@ -53,6 +53,8 @@ namespace Canvas {
             */
             void render(SDL_Renderer* renderer) const override;
 
+            void updateWidgets();
+
         private:
             Canvas::Gui::StatusBar statusBar; ///< StatusBar instance for rendering the status bar.
             Canvas::RenderContext& renderContext; ///< Reference to a RenderContext for handling rendering operations.
