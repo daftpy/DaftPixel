@@ -67,6 +67,10 @@ SDL_Window* RenderManager::getWindow() const {
 	return window;
 }
 
+SDL_Renderer* RenderManager::getRenderer() const {
+	return renderer;
+}
+
 
 RenderManager::~RenderManager() {
 	// Clean up the renderer and window.

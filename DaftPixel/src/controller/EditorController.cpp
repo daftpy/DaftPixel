@@ -111,7 +111,6 @@ void EditorController::handleEvents() {
 			// Process actions
 			processActions();
 		}
-		surfaceView->updateWidgets();
 	}
 }
 
@@ -120,6 +119,7 @@ void EditorController::processActions() {
 	for (auto action : actions) {
 		if (inputManager->isActionTriggered(action)) {
 			commandManager->executeCommand(action, *inputManager);
+			surfaceView->updateWidgets(renderManager.getRenderer()); // Update widgets when an action is triggered
 		}
 	}
 }

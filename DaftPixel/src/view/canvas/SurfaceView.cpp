@@ -44,6 +44,7 @@ void Canvas::View::SurfaceView::render(SDL_Renderer* renderer) const {
     }
 }
 
-void Canvas::View::SurfaceView::updateWidgets() {
-    statusBar.updateWidgets();
+void Canvas::View::SurfaceView::updateWidgets(SDL_Renderer* renderer) {
+    statusBar.updateWidgets(renderer);
+    statusBar.updateTexture(renderer);
 }

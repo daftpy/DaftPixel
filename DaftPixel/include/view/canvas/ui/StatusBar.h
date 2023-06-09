@@ -44,12 +44,15 @@ namespace Canvas {
              */
             void render(SDL_Renderer* renderer) const override;
 
-            void updateWidgets();
+            void updateWidgets(SDL_Renderer* renderer);
+            void updateTexture(SDL_Renderer* renderer);
 
         private:
             Canvas::RenderContext& renderContext; ///< @brief Reference to the render context.
             InfoWidget canvasDimensionsWidget;
             InfoWidget scaleFactorWidget;
+
+            SDL_Texture* statusBarTexture = nullptr; // New member variable to hold the texture
         };
     }
 }

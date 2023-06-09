@@ -76,6 +76,8 @@ public:
     */
     SDL_Window* getWindow() const;
 
+    SDL_Renderer* getRenderer() const;
+
 private:
     /**
     * @brief The SDL_Renderer instance.
