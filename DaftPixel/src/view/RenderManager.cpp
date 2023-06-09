@@ -44,6 +44,8 @@ void RenderManager::render() {
 
 	// Update the screen with any rendering performed since the previous call.
 	SDL_RenderPresent(renderer);
+
+	std::cout << "Rendered." << std::endl;
 }
 
 void RenderManager::clear() {

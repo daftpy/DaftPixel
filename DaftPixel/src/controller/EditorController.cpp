@@ -102,6 +102,10 @@ void EditorController::handleEvents() {
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
 				// handle window resize event...
 				renderContext->updateWindowSize(event.window.data1, event.window.data2);
+
+				renderManager.clear();
+				renderManager.render();
+				renderManager.present();
 			}
 		}
 		else {
@@ -120,6 +124,10 @@ void EditorController::processActions() {
 		if (inputManager->isActionTriggered(action)) {
 			commandManager->executeCommand(action, *inputManager);
 			surfaceView->updateWidgets(renderManager.getRenderer()); // Update widgets when an action is triggered
+
+			renderManager.clear();
+			renderManager.render();
+			renderManager.present();
 		}
 	}
 }
@@ -127,10 +135,13 @@ void EditorController::processActions() {
 void EditorController::run() {
 	// Run the main editor loop.
 	running = true;
+
+	// Initial rendering draw
+	renderManager.clear();
+	renderManager.render();
+	renderManager.present();
+
 	while (running) {
 		handleEvents();
-		renderManager.clear();
-		renderManager.render();
-		renderManager.present();
 	}
 }
