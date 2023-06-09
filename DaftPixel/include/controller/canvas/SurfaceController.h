@@ -64,7 +64,7 @@ namespace Canvas {
             */
             Pixel getPixel(int canvasX, int canvasY);
 
-
+            void setPixel(int canvasX, int canvasY, const Pixel& pixel);
 
         private:
             /**

@@ -81,6 +81,26 @@ void EditorController::handleEvents() {
 		if (event.type == SDL_QUIT) {
 			running = false;
 		}
+		else if (event.type == SDL_MOUSEBUTTONDOWN) {
+			std::cout << "CLICK" << std::endl;
+			// Get the new mouse position.
+			int mouseX = event.motion.x;
+			int mouseY = event.motion.y;
+
+			// Convert mouse coordinates to canvas coordinates
+			auto canvasCoords = surfaceController->pointerToCanvasCoords(mouseX, mouseY, renderContext->scaleFactor, renderContext->getCanvasStartX(), renderContext->getCanvasStartY());
+
+			// If the mouse is within the canvas
+			if (canvasCoords.has_value()) {
+				// Set the pixel at the mouse position
+				Pixel pixel(255, 0, 0, 255); // Red pixel
+				surfaceController->setPixel(canvasCoords->first, canvasCoords->second, pixel);
+				std::cout << "PIXEL SET" << std::endl;
+				renderManager.clear();
+				renderManager.render();
+				renderManager.present();
+			}
+		}
 		else if (event.type == SDL_MOUSEMOTION) {
 			// Get the new mouse position.
 			int mouseX = event.motion.x;

@@ -45,3 +45,8 @@ std::optional<std::pair<int, int>> Canvas::Controller::SurfaceController::pointe
 Pixel Canvas::Controller::SurfaceController::getPixel(int canvasX, int canvasY) {
 	return canvasSurface.getPixelBuffer().at(canvasX, canvasY);
 }
+
+
+void Canvas::Controller::SurfaceController::setPixel(int canvasX, int canvasY, const Pixel& pixel) {
+    canvasSurface.getPixelBuffer().at(canvasX, canvasY) = pixel;
+}
