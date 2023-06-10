@@ -1,8 +1,8 @@
 #include "manager/InputManager.h"
 
 // Constructor for the InputManager class.
-// Takes in a reference to a KeyBindingManager object and initializes the action states.
-InputManager::InputManager(KeyBindingManager& keyBindingManager) : m_keyBindingManager(keyBindingManager)
+// Takes in a reference to a BindingManager object and initializes the action states.
+InputManager::InputManager(BindingManager& bindingManager) : m_bindingManager(bindingManager)
 {
     // Initialize action states
     // We start with all actions as inactive (false)
@@ -26,7 +26,7 @@ void InputManager::handleEvent(const SDL_Event& event) {
         Action action;
         // Get the action corresponding to the key event.
         // If there is a valid action, update the action states.
-        if (m_keyBindingManager.getAction(event.key.keysym, action)) {
+        if (m_bindingManager.getAction(event.key.keysym, action)) {
             m_lastActionStates[action] = m_actionStates[action];
             m_actionStates[action] = false; // The key was released, so the action is not currently active
         }
@@ -37,7 +37,7 @@ void InputManager::handleEvent(const SDL_Event& event) {
         Action action;
         // Get the action corresponding to the key event.
         // If there is a valid action, update the action states.
-        if (m_keyBindingManager.getAction(event.key.keysym, action)) {
+        if (m_bindingManager.getAction(event.key.keysym, action)) {
             m_lastActionStates[action] = m_actionStates[action];
             m_actionStates[action] = true; // The key was pressed, so the action is currently active
         }

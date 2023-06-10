@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <SDL.h>
 #include "manager/InputManager.h"
-#include "manager/KeyBindingManager.h"
+#include "manager/BindingManager.h"
 #include "model/Action.h"
 
 /**
@@ -14,9 +14,9 @@ class InputManager {
 public:
 	/**
 	 * @brief Constructs an InputManager object.
-	 * @param keyBindingManager A reference to a KeyBindingManager object.
+	 * @param bindingManager A reference to a BindingManager object.
 	 */
-	InputManager(KeyBindingManager& keyBindingManager);
+	InputManager(BindingManager& bindingManager);
 
 	/**
 	 * @brief Handles an SDL_Event and updates the action states.
@@ -53,9 +53,9 @@ public:
 
 private:
 	/**
-	 * @brief A reference to a KeyBindingManager object.
+	 * @brief A reference to a BindingManager object.
 	 */
-	KeyBindingManager& m_keyBindingManager;
+	BindingManager& m_bindingManager;
 
 	/**
 	 * @brief A map from actions to their current states.

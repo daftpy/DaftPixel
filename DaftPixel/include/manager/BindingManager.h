@@ -27,19 +27,19 @@ struct KeyBinding {
 };
 
 /**
- * @class KeyBindingManager
- * @brief Class managing key bindings.
+ * @class BindingManager
+ * @brief Class managing action bindings.
  *
- * This class holds a list of key bindings and provides functions
- * to add and remove key bindings, and to get an action associated
- * with a key press.
+ * This class holds a list of key and mouse bindings and provides functions
+ * to add and remove key and mouse bindings, and to get an action associated
+ * with a key or button press.
  */
-class KeyBindingManager {
+class BindingManager {
 public:
     /**
      * @brief Default constructor
      */
-    KeyBindingManager();
+    BindingManager();
 
     /**
      * @brief Fetches the action associated with a key press.

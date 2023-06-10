@@ -22,7 +22,7 @@
 #include "controller/canvas/SurfaceController.h"
 #include "model/canvas/RenderContext.h"
 #include "manager/InputManager.h"
-#include "manager/KeyBindingManager.h"
+#include "manager/BindingManager.h"
 #include "model/Action.h"
 #include "manager/CommandManager.h"
 #include "view/canvas/SurfaceView.h"
@@ -135,9 +135,9 @@ private:
     std::unique_ptr<InputManager> inputManager;
 
     /**
-    * @brief The KeyBindingManager object.
+    * @brief The BindingManager object.
     *
     * This object is responsible for managing the key bindings that determine how user input is mapped to Actions.
     */
-    KeyBindingManager keyBindingManager;
+    BindingManager bindingManager;
 };

@@ -23,11 +23,11 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 		actions.push_back(static_cast<Action>(i));
 	}
 
-	// Initialize KeyBindingManager and bind keys to actions
-	keyBindingManager.addKeyBinding(increaseKeyBinding);
-	keyBindingManager.addKeyBinding(deacreaseKeyBinding);
+	// Initialize BindingManager and bind keys to actions
+	bindingManager.addKeyBinding(increaseKeyBinding);
+	bindingManager.addKeyBinding(deacreaseKeyBinding);
 
-	inputManager = std::make_unique<InputManager>(keyBindingManager);
+	inputManager = std::make_unique<InputManager>(bindingManager);
 
 	/*
 		Debug code below
