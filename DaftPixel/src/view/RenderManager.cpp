@@ -38,6 +38,8 @@ void RenderManager::render() {
 	// Clear the current rendering target with the drawing color.
 	SDL_RenderClear(renderer);
 
+	updateLayouts();
+
 	for (const auto& drawable : drawables) {
 		drawable->render(renderer);
 	}

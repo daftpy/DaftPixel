@@ -114,7 +114,6 @@ void EditorController::handleEvents() {
 			if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
 				// Perform the painting operation...
 				commandManager->executeCommand(Action::PaintPixel, *inputManager, event, *surfaceController, *renderContext);
-				renderManager.updateLayouts(); // Update widgets when an action is triggered
 
 				renderManager.clear();
 				renderManager.render();
@@ -125,7 +124,6 @@ void EditorController::handleEvents() {
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
 				// handle window resize event...
 				renderContext->updateWindowSize(event.window.data1, event.window.data2);
-				renderManager.updateLayouts();
 
 				renderManager.clear();
 				renderManager.render();
@@ -151,8 +149,6 @@ void EditorController::processActions(const SDL_Event& event) {
 			std::cout << "action processed, should update layouts" << std::endl;
 		}
 	}
-	// Update layouts and render
-	renderManager.updateLayouts(); // Update widgets when an action is triggered
 
 	renderManager.clear();
 	renderManager.render();
