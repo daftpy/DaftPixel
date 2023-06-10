@@ -8,7 +8,7 @@
 * display characteristics for the CanvasSurfaceView such as scale factor, positioning, etc.
 */
 Canvas::View::SurfaceView::SurfaceView(Canvas::RenderContext& renderContext) :
-    statusBar(renderContext), renderContext(renderContext) {}
+    renderContext(renderContext) {}
 
 /**
 * @brief Renders the CanvasSurface using the provided SDL_Renderer.
@@ -16,7 +16,6 @@ Canvas::View::SurfaceView::SurfaceView(Canvas::RenderContext& renderContext) :
 * @param renderer SDL_Renderer used for rendering.
 */
 void Canvas::View::SurfaceView::render(SDL_Renderer* renderer) const {
-    statusBar.render(renderer);
 
     auto& pixelBuffer = renderContext.canvasSurface.getPixelBuffer();
 
@@ -42,9 +41,4 @@ void Canvas::View::SurfaceView::render(SDL_Renderer* renderer) const {
             SDL_RenderFillRect(renderer, &rect);
         }
     }
-}
-
-void Canvas::View::SurfaceView::updateWidgets(SDL_Renderer* renderer) {
-    statusBar.updateWidgets(renderer);
-    statusBar.updateTexture(renderer);
 }

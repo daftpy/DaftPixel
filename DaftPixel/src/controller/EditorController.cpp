@@ -1,5 +1,6 @@
 #include "controller/EditorController.h"
 #include <memory>
+#include "view/canvas/ui/Layout.h"
 
 EditorController::EditorController() : editorName("DaftPixel"), running(false), renderContext(nullptr) {
 	// Initialize SDL_ttf library
@@ -51,12 +52,12 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 
 	commandManager = std::make_unique<CommandManager>(*renderContext);
 
-	std::shared_ptr<Canvas::View::SurfaceView> canvasRenderer = std::make_shared<Canvas::View::SurfaceView>(*renderContext);
-	surfaceView = canvasRenderer;
+	std::shared_ptr<Canvas::Ui::Layout> canvasLayout = std::make_shared<Canvas::Ui::Layout>(*renderContext);
 
-	renderManager.addDrawable(canvasRenderer);
+	renderManager.addDrawable(canvasLayout);
+	renderManager.addLayout(canvasLayout);
 
-	surfaceView->updateWidgets(renderManager.getRenderer());
+	renderManager.updateLayouts();
 };
 
 EditorController::~EditorController() {
@@ -113,7 +114,7 @@ void EditorController::handleEvents() {
 			if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
 				// Perform the painting operation...
 				commandManager->executeCommand(Action::PaintPixel, *inputManager, event, *surfaceController, *renderContext);
-				surfaceView->updateWidgets(renderManager.getRenderer()); // Update widgets when an action is triggered
+				renderManager.updateLayouts(); // Update widgets when an action is triggered
 
 				renderManager.clear();
 				renderManager.render();
@@ -124,6 +125,7 @@ void EditorController::handleEvents() {
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
 				// handle window resize event...
 				renderContext->updateWindowSize(event.window.data1, event.window.data2);
+				renderManager.updateLayouts();
 
 				renderManager.clear();
 				renderManager.render();
@@ -142,16 +144,19 @@ void EditorController::handleEvents() {
 
 
 void EditorController::processActions(const SDL_Event& event) {
+	// Process actions
 	for (auto action : actions) {
 		if (inputManager->isActionTriggered(action)) {
 			commandManager->executeCommand(action, *inputManager, event, *surfaceController, *renderContext);
-			surfaceView->updateWidgets(renderManager.getRenderer()); // Update widgets when an action is triggered
-
-			renderManager.clear();
-			renderManager.render();
-			renderManager.present();
+			std::cout << "action processed, should update layouts" << std::endl;
 		}
 	}
+	// Update layouts and render
+	renderManager.updateLayouts(); // Update widgets when an action is triggered
+
+	renderManager.clear();
+	renderManager.render();
+	renderManager.present();
 }
 
 void EditorController::run() {

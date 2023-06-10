@@ -13,7 +13,8 @@
 #include <SDL.h>
 #include <iostream>
 #include <vector>
-#include "IDrawable.h"
+#include "view/IDrawable.h"
+#include "view/ILayout.h"
 
 class RenderManager {
 public:
@@ -67,6 +68,8 @@ public:
     */
     void addDrawable(std::shared_ptr<IDrawable> drawable);
 
+    void addLayout(std::shared_ptr<ILayout> layout);
+
     /**
     * @brief Returns a pointer to the SDL_Window managed by this RenderManager instance.
     *
@@ -77,6 +80,8 @@ public:
     SDL_Window* getWindow() const;
 
     SDL_Renderer* getRenderer() const;
+
+    void updateLayouts();
 
 private:
     /**
@@ -107,4 +112,6 @@ private:
      * Drawable objects can be added to this list through the `addDrawable` method.
      */
     std::vector<std::shared_ptr<IDrawable>> drawables;
+
+    std::vector<std::shared_ptr<ILayout>> layouts; ///< Vector of drawable objects, representing UI layouts.
 };

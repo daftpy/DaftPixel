@@ -65,6 +65,10 @@ void RenderManager::addDrawable(std::shared_ptr<IDrawable> drawable) {
 	drawables.push_back(drawable);
 }
 
+void RenderManager::addLayout(std::shared_ptr<ILayout> layout) {
+	layouts.push_back(layout);
+}
+
 SDL_Window* RenderManager::getWindow() const {
 	return window;
 }
@@ -86,4 +90,10 @@ RenderManager::~RenderManager() {
 
 	// Quit SDL when the RenderManager is destroyed.
 	SDL_Quit();
+}
+
+void RenderManager::updateLayouts() {
+	for (auto& layout : layouts) {
+		layout->updateWidgets(renderer);
+	}
 }

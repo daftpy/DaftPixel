@@ -5,7 +5,7 @@
  *
  * @param renderContext Reference to the render context.
  */
-Canvas::Gui::StatusBar::StatusBar(Canvas::RenderContext& renderContext) :
+Canvas::Ui::StatusBar::StatusBar(Canvas::RenderContext& renderContext) :
     renderContext(renderContext) {
 
     // Set up the canvasDimensions widget
@@ -29,8 +29,10 @@ Canvas::Gui::StatusBar::StatusBar(Canvas::RenderContext& renderContext) :
  *
  * @param renderer SDL_Renderer used for rendering.
  */
-void Canvas::Gui::StatusBar::render(SDL_Renderer* renderer) const {
+void Canvas::Ui::StatusBar::render(SDL_Renderer* renderer) const {
+    std::cout << "statusbar render" << std::endl;
     if (statusBarTexture) {
+        std::cout << "texture found" << std::endl;
         // The position on the screen to render the text
         int textWidth, textHeight;
         if (SDL_QueryTexture(statusBarTexture, NULL, NULL, &textWidth, &textHeight) != 0) {
@@ -48,7 +50,7 @@ void Canvas::Gui::StatusBar::render(SDL_Renderer* renderer) const {
  *
  * Updates the status bar widget data.
  */
-void Canvas::Gui::StatusBar::updateWidgets(SDL_Renderer* renderer) {
+void Canvas::Ui::StatusBar::updateWidgets(SDL_Renderer* renderer) {
     // Update the widget data
     canvasDimensionsWidget.widgetData = std::to_string(renderContext.canvasSurface.getWidth()) + " x " + std::to_string(renderContext.canvasSurface.getHeight());
     scaleFactorWidget.widgetData = "x" + std::to_string(renderContext.scaleFactor);
@@ -61,7 +63,7 @@ void Canvas::Gui::StatusBar::updateWidgets(SDL_Renderer* renderer) {
  *
  * @param renderer SDL_Renderer used for creating the texture.
  */
-void Canvas::Gui::StatusBar::updateTexture(SDL_Renderer* renderer) {
+void Canvas::Ui::StatusBar::updateTexture(SDL_Renderer* renderer) {
     std::cout << "Updated texture" << std::endl;
     // Update the texture
     std::string canvasSize = scaleFactorWidget.widgetName + scaleFactorWidget.widgetData + " " + canvasDimensionsWidget.widgetName + canvasDimensionsWidget.widgetData;
@@ -71,16 +73,22 @@ void Canvas::Gui::StatusBar::updateTexture(SDL_Renderer* renderer) {
 
     // Create an SDL_Surface with the text
     SDL_Surface* surface = TTF_RenderText_Solid(renderContext.font, canvasSize.c_str(), color);
-
-    // Clean up the old texture, if it exists
-    if (statusBarTexture) {
-        SDL_DestroyTexture(statusBarTexture);
-        statusBarTexture = nullptr;
+    if (surface == nullptr) {
+        std::cerr << "TTF_RenderText_Solid: " << TTF_GetError() << std::endl;
     }
+    else {
+        // Clean up the old texture, if it exists
+        if (statusBarTexture) {
+            SDL_DestroyTexture(statusBarTexture);
+        }
 
-    // Create an SDL_Texture from the SDL_Surface
-    statusBarTexture = SDL_CreateTextureFromSurface(renderer, surface);
+        // Create an SDL_Texture from the SDL_Surface
+        statusBarTexture = SDL_CreateTextureFromSurface(renderer, surface);
+        if (statusBarTexture == nullptr) {
+            std::cerr << "SDL_CreateTextureFromSurface: " << SDL_GetError() << std::endl;
+        }
 
-    // Clean up
-    SDL_FreeSurface(surface);
+        // Clean up
+        SDL_FreeSurface(surface);
+    }
 }

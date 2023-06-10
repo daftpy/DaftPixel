@@ -38,7 +38,11 @@ add_executable (DaftPixel
 "include/manager/CommandManager.h"
 "src/manager/CommandManager.cpp"
 "src/model/canvas/RenderContext.cpp"
-"include/view/canvas/ui/InfoWidget.h")
+"include/view/canvas/ui/InfoWidget.h"
+"include/view/ILayout.h"
+"src/view/canvas/ui/Layout.cpp"
+"include/view/ILayout.h"
+"include/view/IUpdatable.h")
 
 # Add include directories.
 target_include_directories(DaftPixel PRIVATE include)

@@ -16,7 +16,7 @@ namespace Canvas {
      * @namespace Gui
      * @brief Namespace for GUI related classes and functions.
      */
-    namespace Gui {
+    namespace Ui {
         /**
          * @class StatusBar
          * @brief Class representing a status bar in the GUI.
