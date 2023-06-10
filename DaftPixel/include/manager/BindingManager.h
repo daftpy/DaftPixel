@@ -27,6 +27,29 @@ struct KeyBinding {
 };
 
 /**
+ * @struct MouseBinding
+ * @brief Structure representing a mouse binding.
+ *
+ * This struct holds a mouse binding, consisting of a mouse button code,
+ * a key modifier and an associated action.
+ */
+struct MouseBinding {
+    Uint8 button; ///< The SDL mouse button code
+    SDL_Keymod modifier; ///< The SDL key modifier
+    Action action; ///< The action associated with the button and modifier
+
+    /**
+     * @brief Equality operator
+     *
+     * @param other The MouseBinding instance to compare with
+     * @return True if all members are equal, false otherwise
+     */
+    bool operator==(const MouseBinding& other) const {
+        return button == other.button && modifier == other.modifier && action == other.action;
+    }
+};
+
+/**
  * @class BindingManager
  * @brief Class managing action bindings.
  *
@@ -64,9 +87,37 @@ public:
      */
     void removeKeyBinding(const KeyBinding& binding);
 
+    /**
+     * @brief Fetches the action associated with a mouse button press.
+     *
+     * @param button The mouse button pressed by the user
+     * @param action The action associated with the button press
+     * @return True if a matching mouse binding is found, false otherwise
+     */
+    bool getMouseAction(const SDL_MouseButtonEvent&, Action& action);
+
+    /**
+     * @brief Adds a new mouse button binding.
+     *
+     * @param binding The mouse button binding to be added
+     */
+    void addMouseButtonBinding(const MouseBinding& binding);
+
+    /**
+     * @brief Removes a mouse button binding.
+     *
+     * @param binding The mouse button binding to be removed
+     */
+    void removeMouseButtonBinding(const MouseBinding& binding);
+
 private:
     /**
-    * @brief A list of KeyBindings that have been added.
-    */
+     * @brief A list of KeyBindings that have been added.
+     */
     std::vector<KeyBinding> m_keyBindings;
+
+    /**
+     * @brief A list of MouseBindings that have been added.
+     */
+    std::vector<MouseBinding> m_mouseBindings;
 };

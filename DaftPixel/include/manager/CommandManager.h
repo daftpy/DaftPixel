@@ -7,6 +7,7 @@
 #include "model/Action.h"
 #include "manager/InputManager.h"
 #include "model/canvas/RenderContext.h"
+#include "controller/canvas/SurfaceController.h"
 
  /**
   * @class CommandManager
@@ -32,8 +33,11 @@ public:
      *
      * @param action The action to be performed.
      * @param inputManager The InputManager that provides the input for the action.
+     * @param event The SDL_Event that represents the user event that triggered the action.
+     * @param surfaceController The SurfaceController that interfaces with the canvas.
+     * @param renderContext The RenderContext that this command operates on.
      */
-    void executeCommand(Action action, InputManager& inputManager);
+    void executeCommand(Action action, InputManager& inputManager, const SDL_Event& event, Canvas::Controller::SurfaceController surfaceController, Canvas::RenderContext& renderContext);
 
 private:
     /**

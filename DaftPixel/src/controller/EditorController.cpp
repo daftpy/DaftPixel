@@ -17,6 +17,7 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 
 	KeyBinding deacreaseKeyBinding(SDLK_MINUS, KMOD_NONE, Action::DecreaseScaleFactor);
 	KeyBinding increaseKeyBinding(SDLK_EQUALS, KMOD_NONE, Action::IncreaseScaleFactor);
+	MouseBinding paintPixelMouseBinding(SDL_MOUSEBUTTONDOWN, KMOD_NONE, Action::PaintPixel);
 
 	// Add actions to handle
 	for (int i = 0; i < static_cast<int>(Action::None); ++i) {
@@ -26,6 +27,7 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	// Initialize BindingManager and bind keys to actions
 	bindingManager.addKeyBinding(increaseKeyBinding);
 	bindingManager.addKeyBinding(deacreaseKeyBinding);
+	bindingManager.addMouseButtonBinding(paintPixelMouseBinding);
 
 	inputManager = std::make_unique<InputManager>(bindingManager);
 
@@ -65,6 +67,26 @@ EditorController::~EditorController() {
 	TTF_Quit();
 }
 
+#ifdef TESTING
+void EditorController::_testPrintMouseCoords(SDL_Event& event) const {
+	// Get the new mouse position.
+	int mouseX = event.motion.x;
+	int mouseY = event.motion.y;
+
+	// Convert mouse coordinates to canvas coordinates
+	auto canvasCoords = surfaceController->pointerToCanvasCoords(mouseX, mouseY, renderContext->scaleFactor, renderContext->getCanvasStartX(), renderContext->getCanvasStartY());
+
+	// If the mouse is within the canvas
+	if (canvasCoords.has_value()) {
+		// Get the pixel at the mouse position
+		Pixel pixelAtMousePosition = surfaceController->getPixel(canvasCoords->first, canvasCoords->second);
+
+		// Print the pixel at mouse position
+		std::cout << "Pixel at mouse position: " << pixelAtMousePosition << "\n";
+	}
+}
+#endif
+
 void EditorController::createNewCanvas(uint16_t width, uint16_t height) {
 	// Create the new Canvas
 	std::unique_ptr<Canvas::Surface> newCanvas = std::make_unique<Canvas::Surface>(width, height);
@@ -83,41 +105,19 @@ void EditorController::handleEvents() {
 		if (event.type == SDL_QUIT) {
 			running = false;
 		}
-		else if (event.type == SDL_MOUSEBUTTONDOWN) {
-			std::cout << "CLICK" << std::endl;
-			// Get the new mouse position.
-			int mouseX = event.motion.x;
-			int mouseY = event.motion.y;
+		else if (event.type == SDL_MOUSEMOTION) {
+			#ifdef TESTING
+			_testPrintMouseCoords(event);
+			#endif
+			// Check if the left mouse button (button 1) is being held down.
+			if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
+				// Perform the painting operation...
+				commandManager->executeCommand(Action::PaintPixel, *inputManager, event, *surfaceController, *renderContext);
+				surfaceView->updateWidgets(renderManager.getRenderer()); // Update widgets when an action is triggered
 
-			// Convert mouse coordinates to canvas coordinates
-			auto canvasCoords = surfaceController->pointerToCanvasCoords(mouseX, mouseY, renderContext->scaleFactor, renderContext->getCanvasStartX(), renderContext->getCanvasStartY());
-
-			// If the mouse is within the canvas
-			if (canvasCoords.has_value()) {
-				// Set the pixel at the mouse position
-				Pixel pixel(255, 0, 0, 255); // Red pixel
-				surfaceController->setPixel(canvasCoords->first, canvasCoords->second, pixel);
-				std::cout << "PIXEL SET" << std::endl;
 				renderManager.clear();
 				renderManager.render();
 				renderManager.present();
-			}
-		}
-		else if (event.type == SDL_MOUSEMOTION) {
-			// Get the new mouse position.
-			int mouseX = event.motion.x;
-			int mouseY = event.motion.y;
-
-			// Convert mouse coordinates to canvas coordinates
-			auto canvasCoords = surfaceController->pointerToCanvasCoords(mouseX, mouseY, renderContext->scaleFactor, renderContext->getCanvasStartX(), renderContext->getCanvasStartY());
-
-			// If the mouse is within the canvas
-			if (canvasCoords.has_value()) {
-				// Get the pixel at the mouse position
-				Pixel pixelAtMousePosition = surfaceController->getPixel(canvasCoords->first, canvasCoords->second);
-
-				// Print the pixel at mouse position
-				std::cout << "Pixel at mouse position: " << pixelAtMousePosition << "\n";
 			}
 		}
 		else if (event.type == SDL_WINDOWEVENT) {
@@ -135,16 +135,16 @@ void EditorController::handleEvents() {
 			inputManager->handleEvent(event);
 
 			// Process actions
-			processActions();
+			processActions(event);
 		}
 	}
 }
 
 
-void EditorController::processActions() {
+void EditorController::processActions(const SDL_Event& event) {
 	for (auto action : actions) {
 		if (inputManager->isActionTriggered(action)) {
-			commandManager->executeCommand(action, *inputManager);
+			commandManager->executeCommand(action, *inputManager, event, *surfaceController, *renderContext);
 			surfaceView->updateWidgets(renderManager.getRenderer()); // Update widgets when an action is triggered
 
 			renderManager.clear();

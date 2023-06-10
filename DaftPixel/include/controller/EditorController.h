@@ -56,7 +56,11 @@ public:
     */
     void createNewCanvas(uint16_t width, uint16_t height);
 
-    void processActions();
+    void processActions(const SDL_Event& event);
+
+#ifdef TESTING
+    void _testPrintMouseCoords(SDL_Event& event) const;
+#endif
 
 private:
     /**

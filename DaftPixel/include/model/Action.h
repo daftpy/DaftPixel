@@ -29,6 +29,15 @@ enum class Action {
     DecreaseScaleFactor,
 
     /**
+     * @brief Represents an action to apply color to a specific pixel on the canvas.
+     *
+     * When this action is triggered in the input manager (typically by a mouse click or mouse drag event),
+     * the command manager will execute a command to apply color to the pixel at the current mouse position.
+     * The specific color to be applied may be determined by the current paint color setting in the application.
+     */
+    PaintPixel,
+
+    /**
      * @brief Represents the absence of action. It must always come last in the enumeration.
      *
      * This is used when no action is triggered in the input manager.
