@@ -53,6 +53,8 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	surfaceView = canvasRenderer;
 
 	renderManager.addDrawable(canvasRenderer);
+
+	surfaceView->updateWidgets(renderManager.getRenderer());
 };
 
 EditorController::~EditorController() {
