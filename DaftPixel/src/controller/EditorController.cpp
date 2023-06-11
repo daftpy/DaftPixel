@@ -107,9 +107,18 @@ void EditorController::handleEvents() {
 			running = false;
 		}
 		else if (event.type == SDL_MOUSEMOTION) {
-			#ifdef TESTING
+			#ifdef TESTINGG
 			_testPrintMouseCoords(event);
 			#endif
+			auto canvasCoords = surfaceController->pointerToCanvasCoords(
+				event.motion.x, event.motion.y, renderContext->scaleFactor, renderContext->getCanvasStartX(), renderContext->getCanvasStartY()
+			);
+			if (canvasCoords.has_value()) {
+				// Get the pixel at the mouse position
+				Pixel pixelAtMousePosition = surfaceController->getPixel(canvasCoords->first, canvasCoords->second);
+
+				inputManager->setCurrentPixel(pixelAtMousePosition);
+			}
 			// Check if the left mouse button (button 1) is being held down.
 			if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
 				// Perform the painting operation...

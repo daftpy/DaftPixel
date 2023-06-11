@@ -84,3 +84,19 @@ void InputManager::markActionAsHandled(Action action) {
     m_lastActionStates.at(action) = false;
     m_actionStates.at(action) = false;
 }
+
+/**
+ * @brief Get the Current Pixel object
+ *
+ * This method returns the currently pointed pixel by the user. It returns an empty optional if no pixel is currently pointed.
+ *
+ * @return std::optional<Pixel> An optional object containing a Pixel value if a pixel is currently pointed by the user, or empty if no pixel is pointed.
+ */
+std::optional<Pixel> InputManager::getCurrentPixel() const {
+    return currentPixel;
+}
+
+void InputManager::setCurrentPixel(Pixel pixel) {
+    std::cout << "Current Pixel: " << pixel << std::endl;
+    currentPixel = pixel;
+}
