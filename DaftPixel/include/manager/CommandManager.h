@@ -24,7 +24,7 @@ public:
      *
      * @param renderContext The RenderContext that this CommandManager operates on.
      */
-    CommandManager(Canvas::RenderContext& renderContext);
+    CommandManager(Canvas::RenderContext& renderContext, InputManager& inputManager, Canvas::Controller::SurfaceController& surfaceController);
 
     /**
      * @brief Execute a command on the canvas.
@@ -37,11 +37,15 @@ public:
      * @param surfaceController The SurfaceController that interfaces with the canvas.
      * @param renderContext The RenderContext that this command operates on.
      */
-    void executeCommand(Action action, InputManager& inputManager, const SDL_Event& event, Canvas::Controller::SurfaceController surfaceController, Canvas::RenderContext& renderContext);
+    void executeCommand(Action action, const SDL_Event& event);
 
 private:
     /**
      * @brief The RenderContext that this CommandManager operates on.
      */
     Canvas::RenderContext& renderContext;
+
+    InputManager& inputManager;
+
+    Canvas::Controller::SurfaceController& surfaceController;
 };

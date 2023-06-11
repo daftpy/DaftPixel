@@ -1,8 +1,10 @@
 #include "manager/CommandManager.h"
 
-CommandManager::CommandManager(Canvas::RenderContext& renderContext) : renderContext(renderContext) {}
+CommandManager::CommandManager(
+    Canvas::RenderContext& renderContext, InputManager& inputManager, Canvas::Controller::SurfaceController& surfaceController
+) : renderContext(renderContext), inputManager(inputManager), surfaceController(surfaceController) {}
 
-void CommandManager::executeCommand(Action action, InputManager& inputManager, const SDL_Event& event, Canvas::Controller::SurfaceController surfaceController, Canvas::RenderContext& renderContext) {
+void CommandManager::executeCommand(Action action, const SDL_Event& event) {
     switch (action) {
     case Action::IncreaseScaleFactor:
         renderContext.changeScaleFactor(static_cast<int8_t>(1));
@@ -29,12 +31,13 @@ void CommandManager::executeCommand(Action action, InputManager& inputManager, c
         }
         break;
     }
+    case Action::SelectPixel:
+        break;
     case Action::None:
         // No action to be taken
         break;
         // Future actions
     }
-
 
 	// Mark the action as handled in the input manager
 	inputManager.markActionAsHandled(action);

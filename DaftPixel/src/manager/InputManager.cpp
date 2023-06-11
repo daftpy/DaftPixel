@@ -9,13 +9,15 @@ InputManager::InputManager(BindingManager& bindingManager) : m_bindingManager(bi
     m_actionStates[Action::IncreaseScaleFactor] = false;
     m_actionStates[Action::DecreaseScaleFactor] = false;
     m_actionStates[Action::PaintPixel] = false;
+    m_actionStates[Action::SelectPixel] = false;
     m_actionStates[Action::None] = false;
 
     // Initialize last action states
     // We start with all actions as inactive (false)
     m_lastActionStates[Action::IncreaseScaleFactor] = false;
     m_lastActionStates[Action::DecreaseScaleFactor] = false;
-    m_actionStates[Action::PaintPixel] = false;
+    m_lastActionStates[Action::PaintPixel] = false;
+    m_lastActionStates[Action::SelectPixel] = false;
     m_lastActionStates[Action::None] = false;
 }
 

@@ -48,9 +48,9 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	surfaceController = std::make_unique<Canvas::Controller::SurfaceController>(*canvases.front());
 
 	// Still debug code
-	renderContext = std::make_unique< Canvas::RenderContext>(*canvases.front(), font, 1, renderManager.getWindow());
+	renderContext = std::make_unique<Canvas::RenderContext>(*canvases.front(), font, 1, renderManager.getWindow());
 
-	commandManager = std::make_unique<CommandManager>(*renderContext);
+	commandManager = std::make_unique<CommandManager>(*renderContext, *inputManager, *surfaceController);
 
 	std::shared_ptr<Canvas::Ui::Layout> canvasLayout = std::make_shared<Canvas::Ui::Layout>(*renderContext);
 
@@ -122,7 +122,7 @@ void EditorController::handleEvents() {
 			// Check if the left mouse button (button 1) is being held down.
 			if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
 				// Perform the painting operation...
-				commandManager->executeCommand(Action::PaintPixel, *inputManager, event, *surfaceController, *renderContext);
+				commandManager->executeCommand(Action::PaintPixel, event);
 
 				renderManager.clear();
 				renderManager.render();
@@ -154,7 +154,7 @@ void EditorController::processActions(const SDL_Event& event) {
 	// Process actions
 	for (auto action : actions) {
 		if (inputManager->isActionTriggered(action)) {
-			commandManager->executeCommand(action, *inputManager, event, *surfaceController, *renderContext);
+			commandManager->executeCommand(action, event);
 			std::cout << "action processed, should update layouts" << std::endl;
 		}
 	}

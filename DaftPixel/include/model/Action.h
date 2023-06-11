@@ -37,6 +37,7 @@ enum class Action {
      */
     PaintPixel,
 
+    SelectPixel,
     /**
      * @brief Represents the absence of action. It must always come last in the enumeration.
      *
