@@ -54,8 +54,11 @@ public:
     void markActionAsHandled(Action action);
 
     /**
-     * @brief Get the current Pixel object that the user is hovering over.
-     * @return The current Pixel object.
+     * @brief Get the Current Pixel object
+     *
+     * This method returns the currently pointed pixel by the user. It returns an empty optional if no pixel is currently pointed.
+     *
+     * @return std::optional<Pixel> An optional object containing a Pixel value if a pixel is currently pointed by the user, or empty if no pixel is pointed.
      */
     std::optional<Pixel> getCurrentPixel() const;
 

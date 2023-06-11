@@ -59,3 +59,8 @@ void BindingManager::removeMouseButtonBinding(const MouseBinding& binding) {
         m_mouseBindings.erase(it);
     }
 }
+
+// Method to get all mouse bindings
+const std::vector<MouseBinding>& BindingManager::getMouseBindings() const {
+    return m_mouseBindings;
+}

@@ -112,6 +112,8 @@ public:
      */
     void removeMouseButtonBinding(const MouseBinding& binding);
 
+    const std::vector<MouseBinding>& getMouseBindings() const;
+
 private:
     /**
      * @brief A list of KeyBindings that have been added.

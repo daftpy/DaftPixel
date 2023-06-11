@@ -11,9 +11,13 @@ void CommandManager::executeCommand(Action action, const SDL_Event& event) {
     switch (action) {
     case Action::IncreaseScaleFactor:
         renderContext.changeScaleFactor(static_cast<int8_t>(1));
+        // Mark the action as handled in the input manager
+        inputManager.markActionAsHandled(action);
         break;
     case Action::DecreaseScaleFactor:
         renderContext.changeScaleFactor(static_cast<int8_t>(-1));
+        // Mark the action as handled in the input manager
+        inputManager.markActionAsHandled(action);
         break;
     case Action::PaintPixel:
     {
@@ -42,13 +46,12 @@ void CommandManager::executeCommand(Action action, const SDL_Event& event) {
 
             inputManager.setCurrentPixel(pixelAtMousePosition);
         }
+        // Mark the action as handled in the input manager
+        inputManager.markActionAsHandled(action);
         break;
     case Action::None:
         // No action to be taken
         break;
         // Future actions
     }
-
-	// Mark the action as handled in the input manager
-	inputManager.markActionAsHandled(action);
 }

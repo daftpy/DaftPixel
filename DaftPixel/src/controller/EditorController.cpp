@@ -108,20 +108,6 @@ void EditorController::handleEvents() {
 		if (event.type == SDL_QUIT) {
 			running = false;
 		}
-		else if (event.type == SDL_MOUSEMOTION) {
-			#ifdef TESTINGG
-			/*_testPrintMouseCoords(event);*/
-			#endif
-			// Check if the left mouse button (button 1) is being held down.
-			if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
-				// Perform the painting operation...
-				commandManager->executeCommand(Action::PaintPixel, event);
-
-				renderManager.clear();
-				renderManager.render();
-				renderManager.present();
-			}
-		}
 		else if (event.type == SDL_WINDOWEVENT) {
 			if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
 				// handle window resize event...
@@ -130,16 +116,15 @@ void EditorController::handleEvents() {
 				renderManager.clear();
 				renderManager.render();
 				renderManager.present();
-			}
-		}
-		else {
-			// Pass the event to the InputManager
-			inputManager->handleEvent(event);
-
-			// Process actions
-			processActions(event);
 		}
 	}
+
+		// Pass the event to the InputManager
+		inputManager->handleEvent(event);
+
+		// Process actions
+		processActions(event);
+}
 }
 
 
@@ -149,12 +134,12 @@ void EditorController::processActions(const SDL_Event& event) {
 		if (inputManager->isActionTriggered(action)) {
 			commandManager->executeCommand(action, event);
 			std::cout << "action processed, should update layouts" << std::endl;
+
+			renderManager.clear();
+			renderManager.render();
+			renderManager.present();
 		}
 	}
-
-	renderManager.clear();
-	renderManager.render();
-	renderManager.present();
 }
 
 void EditorController::run() {
