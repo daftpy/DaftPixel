@@ -1,7 +1,7 @@
 #include "view/canvas/ui/Layout.h"
 
 Canvas::Ui::Layout::Layout(RenderContext& renderContext) : renderContext(renderContext), 
-surfaceView(renderContext), statusBar(renderContext), layoutWidth(renderContext.windowWidth),
+surfaceView(renderContext), statusBar(renderContext, layoutWidth, layoutHeight), layoutWidth(renderContext.windowWidth),
 layoutHeight(renderContext.windowHeight) {
 	// TODO constructor
 }

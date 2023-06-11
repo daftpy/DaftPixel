@@ -24,12 +24,11 @@ namespace Canvas {
 			void updateWidgets(SDL_Renderer* renderer) override;
 
 		private:
+			int32_t& layoutWidth;
+			int32_t& layoutHeight;
 			Canvas::RenderContext& renderContext;
 			Canvas::View::SurfaceView surfaceView;
 			Canvas::Ui::StatusBar statusBar;
-
-			int32_t& layoutWidth;
-			int32_t& layoutHeight;
 		};
 	}
 }
