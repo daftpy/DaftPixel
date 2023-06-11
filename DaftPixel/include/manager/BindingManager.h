@@ -31,9 +31,10 @@ struct KeyBinding {
  * @brief Structure representing a mouse binding.
  *
  * This struct holds a mouse binding, consisting of a mouse button code,
- * a key modifier and an associated action.
+ * a mouse event type, a key modifier and an associated action.
  */
 struct MouseBinding {
+    SDL_EventType eventType; ///< The SDL event type (e.g., SDL_MOUSEBUTTONDOWN or SDL_MOUSEBUTTONUP)
     Uint8 button; ///< The SDL mouse button code
     SDL_Keymod modifier; ///< The SDL key modifier
     Action action; ///< The action associated with the button and modifier
@@ -45,9 +46,10 @@ struct MouseBinding {
      * @return True if all members are equal, false otherwise
      */
     bool operator==(const MouseBinding& other) const {
-        return button == other.button && modifier == other.modifier && action == other.action;
+        return eventType == other.eventType && button == other.button && modifier == other.modifier && action == other.action;
     }
 };
+
 
 /**
  * @class BindingManager

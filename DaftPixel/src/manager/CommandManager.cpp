@@ -5,6 +5,9 @@ CommandManager::CommandManager(
 ) : renderContext(renderContext), inputManager(inputManager), surfaceController(surfaceController) {}
 
 void CommandManager::executeCommand(Action action, const SDL_Event& event) {
+    auto canvasCoords = surfaceController.pointerToCanvasCoords(
+        event.motion.x, event.motion.y, renderContext.scaleFactor, renderContext.getCanvasStartX(), renderContext.getCanvasStartY()
+    );
     switch (action) {
     case Action::IncreaseScaleFactor:
         renderContext.changeScaleFactor(static_cast<int8_t>(1));
@@ -32,6 +35,13 @@ void CommandManager::executeCommand(Action action, const SDL_Event& event) {
         break;
     }
     case Action::SelectPixel:
+        std::cout << "Selecting?" << std::endl;
+        if (canvasCoords.has_value()) {
+            // Get the pixel at the mouse position
+            Pixel pixelAtMousePosition = surfaceController.getPixel(canvasCoords->first, canvasCoords->second);
+
+            inputManager.setCurrentPixel(pixelAtMousePosition);
+        }
         break;
     case Action::None:
         // No action to be taken

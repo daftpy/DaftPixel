@@ -18,7 +18,8 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 
 	KeyBinding deacreaseKeyBinding(SDLK_MINUS, KMOD_NONE, Action::DecreaseScaleFactor);
 	KeyBinding increaseKeyBinding(SDLK_EQUALS, KMOD_NONE, Action::IncreaseScaleFactor);
-	MouseBinding paintPixelMouseBinding(SDL_MOUSEBUTTONDOWN, KMOD_NONE, Action::PaintPixel);
+	MouseBinding paintPixelMouseBinding(SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT, KMOD_NONE, Action::PaintPixel);
+	MouseBinding selectPixelMouseBinding(SDL_MOUSEBUTTONDOWN, SDL_BUTTON_RIGHT, KMOD_NONE, Action::SelectPixel);
 
 	// Add actions to handle
 	for (int i = 0; i < static_cast<int>(Action::None); ++i) {
@@ -29,6 +30,7 @@ EditorController::EditorController() : editorName("DaftPixel"), running(false), 
 	bindingManager.addKeyBinding(increaseKeyBinding);
 	bindingManager.addKeyBinding(deacreaseKeyBinding);
 	bindingManager.addMouseButtonBinding(paintPixelMouseBinding);
+	bindingManager.addMouseButtonBinding(selectPixelMouseBinding);
 
 	inputManager = std::make_unique<InputManager>(bindingManager);
 
@@ -108,17 +110,8 @@ void EditorController::handleEvents() {
 		}
 		else if (event.type == SDL_MOUSEMOTION) {
 			#ifdef TESTINGG
-			_testPrintMouseCoords(event);
+			/*_testPrintMouseCoords(event);*/
 			#endif
-			auto canvasCoords = surfaceController->pointerToCanvasCoords(
-				event.motion.x, event.motion.y, renderContext->scaleFactor, renderContext->getCanvasStartX(), renderContext->getCanvasStartY()
-			);
-			if (canvasCoords.has_value()) {
-				// Get the pixel at the mouse position
-				Pixel pixelAtMousePosition = surfaceController->getPixel(canvasCoords->first, canvasCoords->second);
-
-				inputManager->setCurrentPixel(pixelAtMousePosition);
-			}
 			// Check if the left mouse button (button 1) is being held down.
 			if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
 				// Perform the painting operation...
