@@ -1,3 +1,4 @@
+#pragma once
 #include "model/canvas/RenderContext.h"
 #include "model/canvas/Surface.h"
 #include "view/canvas/SurfaceView.h"
