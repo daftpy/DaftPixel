@@ -4,6 +4,7 @@
 #pragma once
 
 #include <iostream>
-#include "controller/EditorController.h"
+//#include "controller/EditorController.h"
+#include "controller/editor/EditorController.h"
 
 // TODO: Reference additional headers your program requires here.

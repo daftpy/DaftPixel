@@ -21,7 +21,6 @@ void CommandManager::executeCommand(Action action, const SDL_Event& event) {
         break;
     case Action::PaintPixel:
     {
-        std::cout << "Painting pixel command" << std::endl;
         // Get the new mouse position.
         int mouseX = event.motion.x;
         int mouseY = event.motion.y;
@@ -34,12 +33,10 @@ void CommandManager::executeCommand(Action action, const SDL_Event& event) {
             // Set the pixel at the mouse position
             Pixel pixel(255, 0, 0, 255); // Red pixel
             surfaceController.setPixel(canvasCoords->first, canvasCoords->second, pixel);
-            std::cout << "PIXEL SET" << std::endl;
         }
         break;
     }
     case Action::SelectPixel:
-        std::cout << "Selecting?" << std::endl;
         if (canvasCoords.has_value()) {
             // Get the pixel at the mouse position
             Pixel pixelAtMousePosition = surfaceController.getPixel(canvasCoords->first, canvasCoords->second);

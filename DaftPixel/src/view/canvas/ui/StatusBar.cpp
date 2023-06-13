@@ -28,7 +28,6 @@ Canvas::Ui::StatusBar::StatusBar(Canvas::RenderContext& renderContext, int32_t& 
 void Canvas::Ui::StatusBar::render(SDL_Renderer* renderer) const {
     std::cout << "statusbar render" << std::endl;
     if (statusBarTexture) {
-        std::cout << "texture found" << std::endl;
         int textWidth, textHeight;
         if (SDL_QueryTexture(statusBarTexture, NULL, NULL, &textWidth, &textHeight) != 0) {
             std::cerr << "SDL_QueryTexture: " << SDL_GetError() << std::endl;
@@ -49,6 +48,7 @@ void Canvas::Ui::StatusBar::updateWidget(InfoWidget& widget, const std::string& 
 }
 
 void Canvas::Ui::StatusBar::updateWidgets(SDL_Renderer* renderer) {
+    std::cout << "updateWidgets: scaleFactor: " << std::to_string(renderContext.scaleFactor) << std::endl;
     updateWidget(canvasDimensionsWidget, std::to_string(renderContext.canvasSurface.getWidth()) + " x " + std::to_string(renderContext.canvasSurface.getHeight()));
     updateWidget(scaleFactorWidget, "x" + std::to_string(renderContext.scaleFactor));
 }

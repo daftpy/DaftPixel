@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[])
 {
-	EditorController Editor;
+	Editor::EditorController Editor;
 	SDL_SetMainReady();
 	Editor.run();
 

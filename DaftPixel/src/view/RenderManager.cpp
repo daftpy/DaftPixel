@@ -35,10 +35,10 @@ void RenderManager::render() {
 	// Set the render color (in this case, black).
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
+	updateLayouts();
+
 	// Clear the current rendering target with the drawing color.
 	SDL_RenderClear(renderer);
-
-	updateLayouts();
 
 	for (const auto& drawable : drawables) {
 		drawable->render(renderer);
@@ -95,6 +95,7 @@ RenderManager::~RenderManager() {
 }
 
 void RenderManager::updateLayouts() {
+	std::cout << "Updating layouts" << std::endl;
 	for (auto& layout : layouts) {
 		layout->updateWidgets(renderer);
 	}
