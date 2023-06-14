@@ -20,22 +20,22 @@
 namespace Editor {
 
 	/**
-	 * @class State
-	 * @brief The State class represents the current state of the pixel editor.
+	 * @class Context
+	 * @brief The Context class represents the current Context of the pixel editor.
 	 * It manages the key elements such as rendering, input, and commands. This class
 	 * is crucial in orchestrating the overall functionality of the pixel editor.
 	 */
-	class State {
+	class Context {
 	public:
 		/**
-		 * @brief Constructor for the State class.
+		 * @brief Constructor for the Context class.
 		 */
-		State();
+		Context();
 
 		/**
-		 * @brief Destructor for the State class.
+		 * @brief Destructor for the Context class.
 		 */
-		~State();
+		~Context();
 
 		/**
 		 * @brief Load the font from a file.
@@ -81,7 +81,7 @@ namespace Editor {
 
 		/**
 		 * @brief Check if the editor is currently running.
-		 * @return Reference to the boolean indicating the running state.
+		 * @return Reference to the boolean indicating the running Context.
 		 */
 		bool& isRunning();
 

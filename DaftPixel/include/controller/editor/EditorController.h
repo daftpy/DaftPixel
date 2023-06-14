@@ -4,7 +4,7 @@
 #include <SDL.h>
 
 // Include models
-#include "model/editor/State.h"
+#include "model/editor/Context.h"
 #include "model/Action.h"
 
 // Include views
@@ -51,7 +51,7 @@ namespace Editor {
 		/**
 		 * @brief Represents the current state of the pixel editor.
 		 */
-		Editor::State editorState;
+		Editor::Context editorContext;
 
 		/**
 		 * @brief The layout of the canvas to be rendered in the editor.

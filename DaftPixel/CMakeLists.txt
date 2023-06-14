@@ -42,8 +42,8 @@ add_executable (DaftPixel
 "src/view/canvas/ui/Layout.cpp"
 "include/view/ILayout.h"
 "include/view/IUpdatable.h"
-"include/model/editor/State.h"
-"src/model/editor/State.cpp"
+"include/model/editor/Context.h"
+"src/model/editor/Context.cpp"
 "include/controller/editor/EditorController.h"
 "src/controller/editor/EditorController.cpp")
 

@@ -2,17 +2,17 @@
 
 // EditorController constructor
 Editor::EditorController::EditorController()
-    : m_canvasLayout(std::make_shared<Canvas::Ui::Layout>(editorState.getRenderContext())),  // Initialize the Canvas Layout with the Render Context of the Editor State
+    : m_canvasLayout(std::make_shared<Canvas::Ui::Layout>(editorContext.getRenderContext())),  // Initialize the Canvas Layout with the Render Context of the Editor State
     m_running(false) {  // The Editor is not running initially
 
     // Fills the canvas with random pixel colors
-    editorState.getCanvasSurface().getPixelBuffer().generateRandomPixels();
+    editorContext.getCanvasSurface().getPixelBuffer().generateRandomPixels();
 
     // Add the Canvas Layout to the RenderManager. This will ensure it gets rendered.
-    editorState.getRenderManager().addDrawable(m_canvasLayout);
+    editorContext.getRenderManager().addDrawable(m_canvasLayout);
 
     // Add the Canvas Layout to the list of layouts that need to be updated during the rendering process.
-    editorState.getRenderManager().addLayout(m_canvasLayout);
+    editorContext.getRenderManager().addLayout(m_canvasLayout);
 
     // Populate the actions vector with all possible actions.
     for (int i = 0; i < static_cast<int>(Action::None); ++i) {
@@ -28,27 +28,27 @@ Editor::EditorController::EditorController()
     MouseBinding selectPixelMouseBinding(SDL_MOUSEBUTTONDOWN, SDL_BUTTON_RIGHT, KMOD_NONE, Action::SelectPixel);
 
     // Add key bindings to the Binding Manager
-    editorState.getBindingManager().addKeyBinding(deacreaseKeyBinding);
-    editorState.getBindingManager().addKeyBinding(increaseKeyBinding);
+    editorContext.getBindingManager().addKeyBinding(deacreaseKeyBinding);
+    editorContext.getBindingManager().addKeyBinding(increaseKeyBinding);
 
     // Add mouse button bindings to the Binding Manager
-    editorState.getBindingManager().addMouseButtonBinding(paintPixelMouseBinding);
-    editorState.getBindingManager().addMouseButtonBinding(selectPixelMouseBinding);
+    editorContext.getBindingManager().addMouseButtonBinding(paintPixelMouseBinding);
+    editorContext.getBindingManager().addMouseButtonBinding(selectPixelMouseBinding);
 
     // Update all layouts. This prepares them for rendering.
-    editorState.getRenderManager().updateLayouts();
+    editorContext.getRenderManager().updateLayouts();
 }
 
 // Process all user input actions
 void Editor::EditorController::processActions(const SDL_Event& event) {
     for (auto action : actions) {  // Loop over all possible actions
-        if (editorState.getInputManager().isActionTriggered(action)) {  // Check if the current action is triggered
-            editorState.getCommandManager().executeCommand(action, event);  // If so, execute the corresponding command
+        if (editorContext.getInputManager().isActionTriggered(action)) {  // Check if the current action is triggered
+            editorContext.getCommandManager().executeCommand(action, event);  // If so, execute the corresponding command
 
             // Render the state of the Editor after executing the command
-            editorState.getRenderManager().clear();
-            editorState.getRenderManager().render();
-            editorState.getRenderManager().present();
+            editorContext.getRenderManager().clear();
+            editorContext.getRenderManager().render();
+            editorContext.getRenderManager().present();
         }
     }
 }
@@ -62,14 +62,14 @@ void Editor::EditorController::handleEvents() {
         }
         else if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED) {
             // If the window is resized, update the window size in the Render Context and redraw the state of the Editor
-            editorState.getRenderContext().updateWindowSize(event.window.data1, event.window.data2);
-            editorState.getRenderManager().clear();
-            editorState.getRenderManager().render();
-            editorState.getRenderManager().present();
+            editorContext.getRenderContext().updateWindowSize(event.window.data1, event.window.data2);
+            editorContext.getRenderManager().clear();
+            editorContext.getRenderManager().render();
+            editorContext.getRenderManager().present();
         }
 
         // Pass the SDL event to the Input Manager for processing
-        editorState.getInputManager().handleEvent(event);
+        editorContext.getInputManager().handleEvent(event);
 
         // Process the actions based on the SDL event
         processActions(event);
@@ -78,16 +78,16 @@ void Editor::EditorController::handleEvents() {
 
 // The main run loop for the Editor
 void Editor::EditorController::run() {
-    m_running = editorState.isRunning();  // Check if the Editor is running
+    m_running = editorContext.isRunning();  // Check if the Editor is running
 
     if (!m_running) {  // If not, start running it
         m_running = true;
     }
 
     // Render the initial state of the Editor
-    editorState.getRenderManager().clear();
-    editorState.getRenderManager().render();
-    editorState.getRenderManager().present();
+    editorContext.getRenderManager().clear();
+    editorContext.getRenderManager().render();
+    editorContext.getRenderManager().present();
 
     // While the Editor is running, keep handling SDL events
     while (m_running) {

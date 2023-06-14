@@ -70,7 +70,7 @@ void InputManager::handleEvent(const SDL_Event& event) {
         // If mouse button is not pressed, stop the paint action
         else {
             if (m_actionStates[Action::PaintPixel]) {
-                m_lastActionStates[Action::PaintPixel] = m_actionStates[Action::PaintPixel];
+                m_lastActionStates[Action::PaintPixel] = false;
                 m_actionStates[Action::PaintPixel] = false;
             }
         }
