@@ -33,7 +33,7 @@ namespace Editor {
 		/**
 		 * @brief Constructor for the Context class.
 		 */
-		Context();
+		Context(RenderManager& renderManager, InputManager& inputManager);
 
 		/**
 		 * @brief Destructor for the Context class.
@@ -47,22 +47,10 @@ namespace Editor {
 		TTF_Font* loadFont();
 
 		/**
-		 * @brief Getter for InputManager.
-		 * @return Reference to InputManager.
-		 */
-		InputManager& getInputManager();
-
-		/**
 		 * @brief Getter for CommandManager.
 		 * @return Reference to CommandManager.
 		 */
 		CommandManager& getCommandManager();
-
-		/**
-		 * @brief Getter for RenderManager.
-		 * @return Reference to RenderManager.
-		 */
-		RenderManager& getRenderManager();
 
 		/**
 		 * @brief Getter for RenderContext.
@@ -77,16 +65,10 @@ namespace Editor {
 		Canvas::Surface& getCanvasSurface();
 
 		/**
-		 * @brief Getter for BindingManager.
-		 * @return Reference to BindingManager.
-		 */
-		BindingManager& getBindingManager();
-
-		/**
 		* @brief Getter for CanvasLayout.
 		* @return Reference to CanvasLayout.
 		*/
-		Canvas::Ui::Layout& getCanvasLayout();
+		std::shared_ptr<Canvas::Ui::Layout> getCanvasLayout();
 
 		/**
 		 * @brief Check if the editor is currently running.
@@ -98,13 +80,10 @@ namespace Editor {
 		int hoverPixelX = -1; ///< The x-coordinate of the hovered pixel.
 		int hoverPixelY = -1; ///< The y-coordinate of the hovered pixel.
 
-		RenderManager m_renderManager; ///< The RenderManager instance.
 		Canvas::Surface m_canvasSurface; ///< The CanvasSurface instance.
 		Canvas::Controller::SurfaceController m_surfaceController; ///< The SurfaceController instance.
 		TTF_Font* m_editorFont; ///< The font used in the editor.
 		Canvas::RenderContext m_renderContext; ///< The RenderContext instance.
-		BindingManager m_bindingManager; ///< The BindingManager instance.
-		InputManager m_inputManager; ///< The InputManager instance.
 		CommandManager m_commandManager; ///< The CommandManager instance.
 		bool m_running; ///< The running state of the editor.
 

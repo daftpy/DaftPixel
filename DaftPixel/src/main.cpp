@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 {
 	Application application;
 	SDL_SetMainReady();
-	application.Start();
+	application.run();
 
 	return 0;
 }

@@ -1,19 +1,18 @@
 #include "model/editor/Context.h"
 
 // Context constructor. Initializes various manager objects and resources required for the pixel editor.
-Editor::Context::Context() :
-    m_renderManager(800, 600), // initialize render manager with window size
+Editor::Context::Context(RenderManager& renderManager, InputManager& inputManager) :
+    //m_renderManager(800, 600), // initialize render manager with window size
     m_canvasSurface(32, 32), // initialize canvas surface with specified pixel grid size
     m_surfaceController(m_canvasSurface), // initialize surface controller with canvas surface reference
     m_editorFont(loadFont()), // load font resource
-    m_renderContext(m_canvasSurface, m_editorFont, 1, m_renderManager.getWindow()), // initialize render context
-    m_inputManager(m_bindingManager), // initialize input manager with reference to binding manager
-    m_commandManager(m_renderContext, m_inputManager, m_surfaceController), // initialize command manager
+    m_renderContext(m_canvasSurface, m_editorFont, 1, renderManager.getWindow()), // initialize render context
+    //m_inputManager(m_bindingManager), // initialize input manager with reference to binding manager
+    m_commandManager(m_renderContext, inputManager, m_surfaceController), // initialize command manager
     m_running(false), // initially, editor is not running
     m_canvasLayout(std::make_shared<Canvas::Ui::Layout>(m_renderContext))
 {
-    m_renderManager.addDrawable(m_canvasLayout);
-    m_renderManager.addLayout(m_canvasLayout);
+
 }
 
 // Context destructor. Frees resources and shuts down SDL_ttf library.
@@ -43,25 +42,21 @@ TTF_Font* Editor::Context::loadFont() {
 }
 
 // Getters for various manager objects and resources. Allow other parts of the application to interact with these resources.
-InputManager& Editor::Context::getInputManager() {
-    return m_inputManager;
-}
+//InputManager& Editor::Context::getInputManager() {
+//    return m_inputManager;
+//}
 
 CommandManager& Editor::Context::getCommandManager() {
     return m_commandManager;
-}
-
-RenderManager& Editor::Context::getRenderManager() {
-    return m_renderManager;
 }
 
 Canvas::Surface& Editor::Context::getCanvasSurface() {
     return m_canvasSurface;
 }
 
-BindingManager& Editor::Context::getBindingManager() {
-    return m_bindingManager;
-}
+//BindingManager& Editor::Context::getBindingManager() {
+//    return m_bindingManager;
+//}
 
 // Getter for running state. Allows other parts of the application to check if the editor is currently running.
 bool& Editor::Context::isRunning()
@@ -75,7 +70,7 @@ Canvas::RenderContext& Editor::Context::getRenderContext()
     return m_renderContext;
 }
 
-Canvas::Ui::Layout& Editor::Context::getCanvasLayout()
+std::shared_ptr<Canvas::Ui::Layout> Editor::Context::getCanvasLayout()
 {
-    return *m_canvasLayout;
+    return m_canvasLayout;
 }

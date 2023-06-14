@@ -30,38 +30,11 @@ namespace Editor {
 		 */
 		EditorController(Editor::Context& editorContext);
 
-		/**
-		 * @brief Processes triggered actions from the user.
-		 *
-		 * @param event The SDL event associated with the triggered action.
-		 */
-		void processActions(const SDL_Event& event);
-
-		/**
-		 * @brief Runs the editor by rendering the initial state, and then enters a loop to handle user events.
-		 */
-		void run();
-
-		/**
-		 * @brief Handles all incoming SDL events and processes actions accordingly.
-		 */
-		void handleEvents();
-
 	private:
 		/**
 		 * @brief Represents the current state of the pixel editor.
 		 */
 		Editor::Context& m_editorContext;
-
-		/**
-		 * @brief Flag to keep track of whether the editor is currently running or not.
-		 */
-		bool m_running;
-
-		/**
-		 * @brief A list of Actions that have been triggered and are waiting to be processed.
-		 */
-		std::vector<Action> actions;
 	};
 
 }  // namespace Editor
