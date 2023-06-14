@@ -1,5 +1,6 @@
 #include "manager/BindingManager.h"
 #include <iostream>
+#include <string>
 
 // Constructor
 BindingManager::BindingManager() {};
@@ -36,11 +37,13 @@ void BindingManager::removeKeyBinding(const KeyBinding& binding) {
 
 bool BindingManager::getMouseAction(const SDL_MouseButtonEvent& mouseEvent, Action& action) {
     for (const auto& binding : m_mouseBindings) {
+        std::cout << "Checking: eventType = " << binding.eventType << ", button = " << std::to_string(binding.button) << std::endl;
         if (binding.eventType == mouseEvent.type && binding.button == mouseEvent.button) {
             action = binding.action;
             return true;
         }
     }
+    std::cout << "No matching binding found for: eventType = " << mouseEvent.type << ", button = " << std::to_string(mouseEvent.button) << std::endl;
     return false;
 }
 

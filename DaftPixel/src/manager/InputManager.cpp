@@ -1,4 +1,5 @@
 #include "manager/InputManager.h"
+#include <string>
 
 // InputManager constructor
 // Initializes all possible actions to inactive (false) state
@@ -70,18 +71,35 @@ void InputManager::handleEvent(const SDL_Event& event) {
         // If mouse button is not pressed, stop the paint action
         else {
             if (m_actionStates[Action::PaintPixel]) {
-                m_lastActionStates[Action::PaintPixel] = false;
-                m_actionStates[Action::PaintPixel] = false;
+                std::cout << "Paint handled!!!!" << std::endl;
+                markActionAsHandled(Action::PaintPixel);
             }
         }
         break;
         // If mouse button down or up event
     case SDL_MOUSEBUTTONDOWN:
-    case SDL_MOUSEBUTTONUP:
         if (m_bindingManager.getMouseAction(event.button, action)) {
-            // Set last state to current state and current state based on whether button is down (true) or up (false)
+            // Update the action state
             m_lastActionStates[action] = m_actionStates[action];
-            m_actionStates[action] = (event.type == SDL_MOUSEBUTTONDOWN) ? true : false;
+            m_actionStates[action] = true;
+        }
+        break;
+    case SDL_MOUSEBUTTONUP:
+        std::cout << "Mouse button up: " << std::to_string(event.button.button) << std::endl;
+
+        if (m_bindingManager.getMouseAction(event.button, action)) {
+            // Update the action state
+            m_lastActionStates[action] = m_actionStates[action];
+            m_actionStates[action] = false;
+
+            // Debug: print the action considered
+            std::cout << "Mouse button up: action = " << static_cast<int>(action) << std::endl;
+
+            // Check if left button is released and action is PaintPixel
+            if (event.button.button == SDL_BUTTON_LEFT && action == Action::PaintPixel) {
+                markActionAsHandled(Action::PaintPixel);  // <-- Mark the PaintPixel action as handled
+                std::cout << "Paint action handled." << std::endl;
+            }
         }
         break;
     }

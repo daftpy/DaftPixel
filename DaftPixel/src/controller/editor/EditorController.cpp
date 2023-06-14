@@ -25,6 +25,7 @@ Editor::EditorController::EditorController()
 
     // Create mouse button bindings for actions
     MouseBinding paintPixelMouseBinding(SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT, KMOD_NONE, Action::PaintPixel);
+    MouseBinding stopPaintPixelMouseBinding(SDL_MOUSEBUTTONUP, SDL_BUTTON_LEFT, KMOD_NONE, Action::PaintPixel);
     MouseBinding selectPixelMouseBinding(SDL_MOUSEBUTTONDOWN, SDL_BUTTON_RIGHT, KMOD_NONE, Action::SelectPixel);
 
     // Add key bindings to the Binding Manager
@@ -33,6 +34,7 @@ Editor::EditorController::EditorController()
 
     // Add mouse button bindings to the Binding Manager
     editorContext.getBindingManager().addMouseButtonBinding(paintPixelMouseBinding);
+    editorContext.getBindingManager().addMouseButtonBinding(stopPaintPixelMouseBinding);
     editorContext.getBindingManager().addMouseButtonBinding(selectPixelMouseBinding);
 
     // Update all layouts. This prepares them for rendering.
