@@ -1,8 +1,14 @@
 #include "manager/CommandManager.h"
 
 CommandManager::CommandManager(
-    Canvas::RenderContext& renderContext, InputManager& inputManager, Canvas::Controller::SurfaceController& surfaceController
-) : renderContext(renderContext), inputManager(inputManager), surfaceController(surfaceController) {}
+    Canvas::RenderContext& renderContext,
+    InputManager& inputManager,
+    Canvas::Controller::SurfaceController& surfaceController,
+    std::optional<Pixel>& currentPixel) : 
+    renderContext(renderContext),
+    inputManager(inputManager),
+    surfaceController(surfaceController),
+    m_currentPixel(currentPixel) {}
 
 void CommandManager::executeCommand(Action action, const SDL_Event& event) {
     auto canvasCoords = surfaceController.pointerToCanvasCoords(
@@ -41,7 +47,7 @@ void CommandManager::executeCommand(Action action, const SDL_Event& event) {
             // Get the pixel at the mouse position
             Pixel pixelAtMousePosition = surfaceController.getPixel(canvasCoords->first, canvasCoords->second);
 
-            inputManager.setCurrentPixel(pixelAtMousePosition);
+            m_currentPixel = pixelAtMousePosition;
         }
         // Mark the action as handled in the input manager
         inputManager.markActionAsHandled(action);

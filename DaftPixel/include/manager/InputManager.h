@@ -53,21 +53,6 @@ public:
      */
     void markActionAsHandled(Action action);
 
-    /**
-     * @brief Get the Current Pixel object
-     *
-     * This method returns the currently pointed pixel by the user. It returns an empty optional if no pixel is currently pointed.
-     *
-     * @return std::optional<Pixel> An optional object containing a Pixel value if a pixel is currently pointed by the user, or empty if no pixel is pointed.
-     */
-    std::optional<Pixel> getCurrentPixel() const;
-
-    /**
-     * @brief Set the current Pixel object that the user is hovering over.
-     * @param pixel The new current Pixel object.
-     */
-    void setCurrentPixel(Pixel pixel);
-
 private:
     /**
      * @brief A reference to a BindingManager object.
@@ -83,9 +68,4 @@ private:
      * @brief A map from actions to their states in the last frame.
      */
     std::unordered_map<Action, bool> m_lastActionStates;
-
-    /**
-     * @brief An optional Pixel object representing the current Pixel that the user is hovering over. It can be empty if no Pixel is currently being hovered over.
-     */
-    std::optional<Pixel> currentPixel;
 };

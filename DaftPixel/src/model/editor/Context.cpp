@@ -8,7 +8,7 @@ Editor::Context::Context(RenderManager& renderManager, InputManager& inputManage
     m_editorFont(loadFont()), // load font resource
     m_renderContext(m_canvasSurface, m_editorFont, 1, renderManager.getWindow()), // initialize render context
     //m_inputManager(m_bindingManager), // initialize input manager with reference to binding manager
-    m_commandManager(m_renderContext, inputManager, m_surfaceController), // initialize command manager
+    m_commandManager(m_renderContext, inputManager, m_surfaceController, m_currentPixel), // initialize command manager
     m_running(false), // initially, editor is not running
     m_canvasLayout(std::make_shared<Canvas::Ui::Layout>(m_renderContext))
 {
@@ -73,4 +73,9 @@ Canvas::RenderContext& Editor::Context::getRenderContext()
 std::shared_ptr<Canvas::Ui::Layout> Editor::Context::getCanvasLayout()
 {
     return m_canvasLayout;
+}
+
+// Returns the current pixel under the mouse pointer
+std::optional<Pixel> Editor::Context::getCurrentPixel() const {
+    return m_currentPixel;
 }

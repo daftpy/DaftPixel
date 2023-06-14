@@ -47,6 +47,10 @@ void Application::processActions(const SDL_Event& event) {
 		if (m_inputManager.isActionTriggered(action)) {  // Check if the current action is triggered
 			m_editorContext.getCommandManager().executeCommand(action, event);  // If so, execute the corresponding command
 
+			if (m_editorContext.getCurrentPixel().has_value()) {
+				std::cout << "ACTION TRIGGERED. CURRENT PIXEL: " << * m_editorContext.getCurrentPixel() << std::endl;
+			}
+
 			// Render the state of the Editor after executing the command
 			m_renderManager.clear();
 			m_renderManager.render();

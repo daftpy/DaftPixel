@@ -129,15 +129,3 @@ void InputManager::markActionAsHandled(Action action) {
     m_lastActionStates.at(action) = false;
     m_actionStates.at(action) = false;
 }
-
-// Returns the current pixel under the mouse pointer
-std::optional<Pixel> InputManager::getCurrentPixel() const {
-    return currentPixel;
-}
-
-// Sets the current pixel under the mouse pointer
-void InputManager::setCurrentPixel(Pixel pixel) {
-    // Outputs current pixel information to the console
-    std::cout << "Current Pixel: " << pixel << std::endl;
-    currentPixel = pixel;
-}

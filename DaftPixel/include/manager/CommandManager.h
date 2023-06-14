@@ -24,7 +24,11 @@ public:
      *
      * @param renderContext The RenderContext that this CommandManager operates on.
      */
-    CommandManager(Canvas::RenderContext& renderContext, InputManager& inputManager, Canvas::Controller::SurfaceController& surfaceController);
+    CommandManager(
+        Canvas::RenderContext& renderContext,
+        InputManager& inputManager,
+        Canvas::Controller::SurfaceController& surfaceController,
+        std::optional<Pixel>& currentPixel);
 
     /**
      * @brief Execute a command on the canvas.
@@ -48,4 +52,6 @@ private:
     InputManager& inputManager;
 
     Canvas::Controller::SurfaceController& surfaceController;
+
+    std::optional<Pixel>& m_currentPixel;
 };
