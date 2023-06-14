@@ -2,6 +2,7 @@
 
 // Context constructor. Initializes various manager objects and resources required for the pixel editor.
 Editor::Context::Context(RenderManager& renderManager, InputManager& inputManager) :
+    m_currentPixel(Pixel(0, 0, 0)),
     //m_renderManager(800, 600), // initialize render manager with window size
     m_canvasSurface(32, 32), // initialize canvas surface with specified pixel grid size
     m_surfaceController(m_canvasSurface), // initialize surface controller with canvas surface reference
@@ -76,6 +77,6 @@ std::shared_ptr<Canvas::Ui::Layout> Editor::Context::getCanvasLayout()
 }
 
 // Returns the current pixel under the mouse pointer
-std::optional<Pixel> Editor::Context::getCurrentPixel() const {
+Pixel Editor::Context::getCurrentPixel() const {
     return m_currentPixel;
 }

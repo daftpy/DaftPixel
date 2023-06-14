@@ -4,7 +4,7 @@ CommandManager::CommandManager(
     Canvas::RenderContext& renderContext,
     InputManager& inputManager,
     Canvas::Controller::SurfaceController& surfaceController,
-    std::optional<Pixel>& currentPixel) : 
+    Pixel& currentPixel) : 
     renderContext(renderContext),
     inputManager(inputManager),
     surfaceController(surfaceController),
@@ -38,7 +38,7 @@ void CommandManager::executeCommand(Action action, const SDL_Event& event) {
         if (canvasCoords.has_value()) {
             // Set the pixel at the mouse position
             Pixel pixel(255, 0, 0, 255); // Red pixel
-            surfaceController.setPixel(canvasCoords->first, canvasCoords->second, pixel);
+            surfaceController.setPixel(canvasCoords->first, canvasCoords->second, m_currentPixel);
         }
         break;
     }

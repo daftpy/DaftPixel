@@ -28,7 +28,7 @@ public:
         Canvas::RenderContext& renderContext,
         InputManager& inputManager,
         Canvas::Controller::SurfaceController& surfaceController,
-        std::optional<Pixel>& currentPixel);
+        Pixel& currentPixel);
 
     /**
      * @brief Execute a command on the canvas.
@@ -53,5 +53,5 @@ private:
 
     Canvas::Controller::SurfaceController& surfaceController;
 
-    std::optional<Pixel>& m_currentPixel;
+    Pixel& m_currentPixel;
 };

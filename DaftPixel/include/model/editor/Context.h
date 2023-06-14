@@ -77,7 +77,7 @@ namespace Editor {
 		bool& isRunning();
 
 		// Returns the current pixel under the mouse pointer
-		std::optional<Pixel> getCurrentPixel() const;
+		Pixel getCurrentPixel() const;
 
 
 	private:
@@ -87,7 +87,7 @@ namespace Editor {
 		/**
 		* @brief An optional Pixel object representing the current Pixel that the user is hovering over. It can be empty if no Pixel is currently being hovered over.
 		*/
-		std::optional<Pixel> m_currentPixel;
+		Pixel m_currentPixel;
 
 		Canvas::Surface m_canvasSurface; ///< The CanvasSurface instance.
 		Canvas::Controller::SurfaceController m_surfaceController; ///< The SurfaceController instance.
