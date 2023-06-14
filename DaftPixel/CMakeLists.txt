@@ -45,7 +45,7 @@ add_executable (DaftPixel
 "include/model/editor/Context.h"
 "src/model/editor/Context.cpp"
 "include/controller/editor/EditorController.h"
-"src/controller/editor/EditorController.cpp")
+"src/controller/editor/EditorController.cpp" "include/application.h" "src/application.cpp" "src/view/editor/EditorView.cpp")
 
 # Add include directories.
 target_include_directories(DaftPixel PRIVATE include)

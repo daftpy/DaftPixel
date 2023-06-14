@@ -17,6 +17,9 @@
 // Include controllers
 #include "controller/canvas/SurfaceController.h"
 
+// Include views
+#include "view/canvas/ui/Layout.h"
+
 namespace Editor {
 
 	/**
@@ -80,6 +83,12 @@ namespace Editor {
 		BindingManager& getBindingManager();
 
 		/**
+		* @brief Getter for CanvasLayout.
+		* @return Reference to CanvasLayout.
+		*/
+		Canvas::Ui::Layout& getCanvasLayout();
+
+		/**
 		 * @brief Check if the editor is currently running.
 		 * @return Reference to the boolean indicating the running Context.
 		 */
@@ -98,6 +107,11 @@ namespace Editor {
 		InputManager m_inputManager; ///< The InputManager instance.
 		CommandManager m_commandManager; ///< The CommandManager instance.
 		bool m_running; ///< The running state of the editor.
+
+		/**
+		 * @brief The layout of the canvas to be rendered in the editor.
+		 */
+		std::shared_ptr<Canvas::Ui::Layout> m_canvasLayout;
 
 		/**
 		 * @brief A list of Actions that have been triggered and are waiting to be processed.

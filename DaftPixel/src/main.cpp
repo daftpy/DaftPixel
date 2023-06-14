@@ -3,12 +3,13 @@
 #define SDL_MAIN_HANDLED
 #include "../include/main.h"
 #include <SDL.h>
+#include "application.h"
 
 int main(int argc, char* argv[])
 {
-	Editor::EditorController Editor;
+	Application application;
 	SDL_SetMainReady();
-	Editor.run();
+	application.Start();
 
 	return 0;
 }

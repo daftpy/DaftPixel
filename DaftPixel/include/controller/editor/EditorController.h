@@ -28,7 +28,7 @@ namespace Editor {
 		/**
 		 * @brief Constructs a new EditorController object.
 		 */
-		EditorController();
+		EditorController(Editor::Context& editorContext);
 
 		/**
 		 * @brief Processes triggered actions from the user.
@@ -51,12 +51,7 @@ namespace Editor {
 		/**
 		 * @brief Represents the current state of the pixel editor.
 		 */
-		Editor::Context editorContext;
-
-		/**
-		 * @brief The layout of the canvas to be rendered in the editor.
-		 */
-		std::shared_ptr<Canvas::Ui::Layout> m_canvasLayout;
+		Editor::Context& m_editorContext;
 
 		/**
 		 * @brief Flag to keep track of whether the editor is currently running or not.

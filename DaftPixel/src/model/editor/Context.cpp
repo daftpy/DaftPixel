@@ -9,8 +9,11 @@ Editor::Context::Context() :
     m_renderContext(m_canvasSurface, m_editorFont, 1, m_renderManager.getWindow()), // initialize render context
     m_inputManager(m_bindingManager), // initialize input manager with reference to binding manager
     m_commandManager(m_renderContext, m_inputManager, m_surfaceController), // initialize command manager
-    m_running(false) // initially, editor is not running
+    m_running(false), // initially, editor is not running
+    m_canvasLayout(std::make_shared<Canvas::Ui::Layout>(m_renderContext))
 {
+    m_renderManager.addDrawable(m_canvasLayout);
+    m_renderManager.addLayout(m_canvasLayout);
 }
 
 // Context destructor. Frees resources and shuts down SDL_ttf library.
@@ -70,4 +73,9 @@ bool& Editor::Context::isRunning()
 Canvas::RenderContext& Editor::Context::getRenderContext()
 {
     return m_renderContext;
+}
+
+Canvas::Ui::Layout& Editor::Context::getCanvasLayout()
+{
+    return *m_canvasLayout;
 }
