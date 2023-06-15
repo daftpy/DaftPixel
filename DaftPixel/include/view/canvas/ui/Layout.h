@@ -24,6 +24,8 @@ namespace Canvas {
 			*/
 			void updateWidgets(SDL_Renderer* renderer) override;
 
+			Canvas::View::SurfaceView& getSurfaceView();
+
 		private:
 			int32_t& layoutWidth;
 			int32_t& layoutHeight;

@@ -10,7 +10,11 @@ void Canvas::Ui::Layout::render(SDL_Renderer* renderer) const {
 }
 
 void Canvas::Ui::Layout::updateWidgets(SDL_Renderer* renderer) {
-	std::cout << "UPDATED WIDGETS" << std::endl;
 	statusBar.updateWidgets(renderer);
 	statusBar.updateTexture(renderer);
+}
+
+Canvas::View::SurfaceView& Canvas::Ui::Layout::getSurfaceView()
+{
+	return surfaceView;
 }

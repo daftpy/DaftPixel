@@ -4,7 +4,7 @@
 Editor::Context::Context(RenderManager& renderManager, InputManager& inputManager) :
     m_currentPixel(Pixel(0, 0, 0)),
     //m_renderManager(800, 600), // initialize render manager with window size
-    m_canvasSurface(32, 32), // initialize canvas surface with specified pixel grid size
+    m_canvasSurface(800, 600), // initialize canvas surface with specified pixel grid size
     m_surfaceController(m_canvasSurface), // initialize surface controller with canvas surface reference
     m_editorFont(loadFont()), // load font resource
     m_renderContext(m_canvasSurface, m_editorFont, 1, renderManager.getWindow()), // initialize render context

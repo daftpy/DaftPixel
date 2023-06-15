@@ -11,7 +11,6 @@ RenderManager::RenderManager(uint16_t windowWidth, uint16_t windowHeight) :
 		std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
 		return;
 	}
-	std::cout << "SDL Initialized." << std::endl;
 
 	// Create an SDL window.
 	window = SDL_CreateWindow(
@@ -22,66 +21,55 @@ RenderManager::RenderManager(uint16_t windowWidth, uint16_t windowHeight) :
 		windowHeight,
 		SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 	);
-	std::cout << "Window created." << std::endl;
 
-	// Create an SDL renderer.
+	// Create an SDL renderer for hardware-accelerated rendering.
 	renderer = SDL_CreateRenderer(
 		window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
 	);
-	std::cout << "Render Manager initialized." << std::endl;
 }
 
 void RenderManager::render() {
-	// Set the render color (in this case, black).
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
+	// Update layouts and render all registered drawable objects
 	updateLayouts();
-
-	// Clear the current rendering target with the drawing color.
-	SDL_RenderClear(renderer);
 
 	for (const auto& drawable : drawables) {
 		drawable->render(renderer);
 	}
-
-	// Update the screen with any rendering performed since the previous call.
-	SDL_RenderPresent(renderer);
-
-	std::cout << "Rendered." << std::endl;
 }
 
 void RenderManager::clear() {
-	// Set the render color (in this case, black).
+	// Set the render color to black and clear the current rendering target.
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-	// Clear the current rendering target with the drawing color.
 	SDL_RenderClear(renderer);
 }
 
 void RenderManager::present() {
-	// Update the screen with any rendering performed since the previous call.
+	// Update the screen with any rendering performed since the last call to present.
 	SDL_RenderPresent(renderer);
 }
 
 void RenderManager::addDrawable(std::shared_ptr<IDrawable> drawable) {
+	// Add a drawable object to the list of drawable objects
 	drawables.push_back(drawable);
 }
 
 void RenderManager::addLayout(std::shared_ptr<ILayout> layout) {
+	// Add a layout to the list of layouts
 	layouts.push_back(layout);
 }
 
 SDL_Window* RenderManager::getWindow() const {
+	// Return the window object
 	return window;
 }
 
 SDL_Renderer* RenderManager::getRenderer() const {
+	// Return the renderer object
 	return renderer;
 }
 
-
 RenderManager::~RenderManager() {
-	// Clean up the renderer and window.
+	// Destroy the renderer and window, then quit SDL upon destruction of RenderManager.
 	if (renderer != nullptr) {
 		SDL_DestroyRenderer(renderer);
 	}
@@ -90,12 +78,11 @@ RenderManager::~RenderManager() {
 		SDL_DestroyWindow(window);
 	}
 
-	// Quit SDL when the RenderManager is destroyed.
 	SDL_Quit();
 }
 
 void RenderManager::updateLayouts() {
-	std::cout << "Updating layouts" << std::endl;
+	// Iterate over all layouts, updating each widget contained within them
 	for (auto& layout : layouts) {
 		layout->updateWidgets(renderer);
 	}

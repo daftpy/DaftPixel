@@ -14,9 +14,9 @@ find_package(SDL2_ttf REQUIRED)
 add_executable (DaftPixel 
 "src/main.cpp" 
 "include/model/Pixel.h"
-"src/model/Pixel.cpp" 
+ 
 "include/model/PixelBuffer.h" 
-"src/model/PixelBuffer.cpp" 
+ 
 "include/view/RenderManager.h" 
 "src/view/RenderManager.cpp" 
 "include/view/canvas/ui/StatusBar.h" 

@@ -8,7 +8,12 @@
 * display characteristics for the CanvasSurfaceView such as scale factor, positioning, etc.
 */
 Canvas::View::SurfaceView::SurfaceView(Canvas::RenderContext& renderContext) :
-    renderContext(renderContext) {}
+    renderContext(renderContext), canvasTexture(nullptr) {
+}
+
+Canvas::View::SurfaceView::~SurfaceView() {
+    SDL_DestroyTexture(canvasTexture);
+}
 
 /**
 * @brief Renders the CanvasSurface using the provided SDL_Renderer.
@@ -16,29 +21,53 @@ Canvas::View::SurfaceView::SurfaceView(Canvas::RenderContext& renderContext) :
 * @param renderer SDL_Renderer used for rendering.
 */
 void Canvas::View::SurfaceView::render(SDL_Renderer* renderer) const {
-
     auto& pixelBuffer = renderContext.canvasSurface.getPixelBuffer();
 
-    // Calculate the starting point to render the PixelBuffer centered
+    // Lock texture for update
+    void* mPixels;
+    int mPitch;
+    SDL_LockTexture(canvasTexture, NULL, &mPixels, &mPitch);
+
+    // Get the address of the first pixel in the pixelBuffer
+    const uint32_t* pixelBufferData = pixelBuffer.getPixelData();
+
+    // Copy the entire pixel buffer data to mPixels
+    memcpy(mPixels, pixelBufferData, pixelBuffer.getWidth() * pixelBuffer.getHeight() * sizeof(uint32_t));
+
+    // Unlock texture
+    SDL_UnlockTexture(canvasTexture);
+
+    // Calculate the starting point to render the texture centered
     int startX = (renderContext.windowWidth - pixelBuffer.getWidth() * renderContext.scaleFactor) / 2;
     int startY = (renderContext.windowHeight - pixelBuffer.getHeight() * renderContext.scaleFactor) / 2;
 
-    for (uint16_t y = 0; y < pixelBuffer.getHeight(); y++) {
-        for (uint16_t x = 0; x < pixelBuffer.getWidth(); x++) {
-            Pixel pixel = pixelBuffer.at(x, y);
+    std::cout << "WINDOW WIDTH: " << std::to_string(renderContext.windowWidth);
+    std::cout << "START X: " << std::to_string(startX) << " START Y: " << std::to_string(startY) << std::endl;
 
-            // Create the SDL_Rect for the pixel
-            SDL_Rect rect;
-            rect.x = startX + x * renderContext.scaleFactor;
-            rect.y = startY + y * renderContext.scaleFactor;
-            rect.w = renderContext.scaleFactor;
-            rect.h = renderContext.scaleFactor;
+    // Define the rendering quad with respect to scale factor
+    SDL_Rect renderQuad = {
+        startX,
+        startY,
+        pixelBuffer.getWidth() * renderContext.scaleFactor,
+        pixelBuffer.getHeight() * renderContext.scaleFactor
+    };
 
-            // Set the draw color to the pixel's color
-            SDL_SetRenderDrawColor(renderer, pixel.getRed(), pixel.getGreen(), pixel.getBlue(), pixel.getAlpha());
+    // Render the updated texture
+    SDL_RenderCopy(renderer, canvasTexture, NULL, &renderQuad);
+}
 
-            // Draw the pixel
-            SDL_RenderFillRect(renderer, &rect);
-        }
-    }
+
+void Canvas::View::SurfaceView::setupTexture(SDL_Renderer* renderer) {
+    // Access the pixelBuffer width and height
+    auto& pixelBuffer = renderContext.canvasSurface.getPixelBuffer();
+    int width = pixelBuffer.getWidth();
+    int height = pixelBuffer.getHeight();
+
+    // Create a texture of the same dimensions as the pixelBuffer
+    canvasTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+
+    // Set the blend mode of the texture to allow for transparent pixels
+    SDL_SetTextureBlendMode(canvasTexture, SDL_BLENDMODE_BLEND);
+
+    // Note: Add error handling here. SDL_CreateTexture could fail and return nullptr.
 }
